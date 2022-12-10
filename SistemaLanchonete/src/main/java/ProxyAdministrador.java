@@ -1,15 +1,16 @@
 import br.com.lanchonete.pessoas.*;
 import java.util.Scanner;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class ProxyAdministrador {
+    
     
     
     //Construtor
     public ProxyAdministrador() {
     }
     
-    //Vetor estático de colaboradores
+    //CADASTRO DE COLABORADORES
     private static final Colaborador Colaboradores[] = new Colaborador[15];
 
     public Colaborador[] getColaboradores() {
@@ -60,14 +61,17 @@ public class ProxyAdministrador {
     }
     
     
-    //Cadastro de clientes
-    private static final LinkedList<Cliente> Clientes = new LinkedList<>();
+       
+    
+    //CADASTRO DE CLIENTES
+    private static final ArrayList<Cliente> Clientes = new ArrayList<>();
 
-    public LinkedList<Cliente> getClientes() {
+    
+    public ArrayList<Cliente> getClientes() {
         return Clientes;
     }
 
-    public static void setClientes(LinkedList<Cliente> Clientes, Cliente Cl) {
+    public static void setClientes(ArrayList<Cliente> Clientes, Cliente Cl) {
         ProxyAdministrador.Clientes.add(Cl);
     }
     
@@ -100,6 +104,121 @@ public class ProxyAdministrador {
         Cliente cl = new Cliente(nomeCliente, sobrenomeCliente, CPF, enderecoCliente, telefoneCliente);
         ProxyAdministrador.setClientes(Clientes, cl);
     }
+   
+
+    //PESQUISA O CLIENTE NOS CLIENTES CADASTRADOS E O RETORNA SE ESTIVER
+    public Cliente validaCliente(String CPF){
+        
+        String CPFCliente = CPF;
+        Cliente attCliente = new Cliente();
+        attCliente = null; 
+        
+        for (int i = 0; i <= ProxyAdministrador.Clientes.size(); i++){
+            if (CPFCliente.equals(ProxyAdministrador.Clientes.get(i).getCPF())){
+                attCliente = ProxyAdministrador.Clientes.get(i);
+                break; 
+            }
+ 
+        }
+        return attCliente; 
+    }
     
+    public void excluirCliente (String CPF){
+       String CPFCliente = CPF;
+       for (int i = 0; i <= ProxyAdministrador.Clientes.size(); i++){
+           if (CPFCliente.equals(ProxyAdministrador.Clientes.get(i).getCPF())){
+               ProxyAdministrador.Clientes.remove(i);              
+               break;
+        }
+    }
+ }
+    public void modificarCliente(String CPF){
+           
+        /*System.out.println("Insira o CPF do cliente: ");
+        Scanner input = new Scanner(System.in);
+        String CPF = input.nextLine();*/
+         
+        Scanner inputSwitch = new Scanner(System.in);
+        
+        if (validaCliente(CPF) != null){
+           
+            System.out.println("""
+                               Escolha uma opção: 
+                               1 - Alterar Nome 
+                               2 - Alterar Sobrenome 
+                               3 - Alterar CPF
+                               4 - Alterar Endereço
+                               5 - Alterar Telefone
+                               6 - fechar
+                                """);
+            
+            int i = inputSwitch.nextInt();
+            Scanner inputDado = new Scanner (System.in);
+            
+            
+                switch(i){
+                    case 1 -> {
+                        System.out.println("Digite o novo nome: ");
+                        String dado = inputDado.nextLine();
+
+                        validaCliente(CPF).setNomePessoa(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        modificarCliente(CPF);
+                        break;
+                    }
+                
+                    case 2 ->{
+                        System.out.println("Digite o novo sobrenome: ");
+                        String dado = inputDado.nextLine();
+
+                        validaCliente(CPF).setSobrenomePessoa(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        modificarCliente(CPF);
+                        break;
+                    }
+                
+                    case 3 ->{
+                        System.out.println("Digite o novo CPF: ");
+                        String dado = inputDado.nextLine();
+
+                        validaCliente(CPF).setCPF(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        modificarCliente(dado);
+                        break;
+                    }
+                    case 4 -> {
+                        System.out.println("Digite o novo endereço: ");
+                        String dado = inputDado.nextLine();
+
+                        validaCliente(CPF).setEnderecoCliente(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        modificarCliente(CPF);
+                        break;
+                    }
+                    case 5 -> {
+                        System.out.println("Digite o novo telefone: ");
+                        String dado = inputDado.nextLine();
+
+                        validaCliente(CPF).setTelefoneCliente(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        modificarCliente(CPF);
+                        break;
+                    }
+
+                    case 6 -> {
+                        break;
+                    }
+                
+                    default -> {
+                        System.out.println("Opção inválida");
+                    }
+                }  
+        }
+        else {System.out.println("CPF inválido!");}
+        
+    }
 }
+            
+        
+
 

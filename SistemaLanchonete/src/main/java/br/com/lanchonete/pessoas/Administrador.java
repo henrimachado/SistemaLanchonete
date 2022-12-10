@@ -6,12 +6,13 @@ public final class Administrador extends Usuario{
  
     //Construtor
 
-    private Administrador(String nomePessoa, String sobrenomePessoa, String CPF, String loginUsuario, String senhaUsuario) {
+
+    public Administrador(String nomePessoa, String sobrenomePessoa, String CPF, String loginUsuario, String senhaUsuario) {
         super(nomePessoa, sobrenomePessoa, CPF, loginUsuario, senhaUsuario);
         setAdmCount(admCount);
     }
 
-    private Administrador() {
+    public Administrador() {
         super();
     }
 
@@ -19,13 +20,20 @@ public final class Administrador extends Usuario{
         return admCount;
     }
 
+
     public static void setAdmCount(int admCount) {
         Administrador.admCount = admCount + 1;
     }
 
-  
-
+    @Override
+    public String toString() {
+        String text;
+        text = "{Nome:" + getNomePessoa() + "\tSobrenome: " + getSobrenomePessoa() + 
+                "\tCPF: " + getCPF() + "\tEmail: " + getLoginUsuario() + 
+                "\tSenha: " + getSenhaUsuario() + "}";
+        return text; 
 }
+    }
     
    
    

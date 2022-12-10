@@ -1,11 +1,13 @@
 
 package br.com.lanchonete.pessoas;
 
+import java.util.ArrayList;
+import br.com.lanchonete.produtos.*;
 
 public class Cliente extends Pessoa {
     private String enderecoCliente;
     private String telefoneCliente; 
-    
+    private ArrayList<Pedido> pedidosCliente = new ArrayList<>();
     //private Pedido vetor de pedido 
 
     //Construtor parametrizado
@@ -18,6 +20,14 @@ public class Cliente extends Pessoa {
     //Construtor padrão
     public Cliente (){
         super();
+    }
+
+    public ArrayList<Pedido> getPedidosCliente() {
+        return pedidosCliente;
+    }
+
+    public void setPedidosCliente(ArrayList<Pedido> pedidosCliente) {
+        this.pedidosCliente = pedidosCliente;
     }
     
     

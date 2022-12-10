@@ -1,14 +1,14 @@
 
 package br.com.lanchonete.produtos;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Pedido {
     private String dataPedido; 
     private String horaPedido;
     private String horaEntregaPedido; 
     private String statusPedido;
-    private LinkedList<Produto> listaProdutos = new LinkedList<>();
+    private ArrayList<Produto> listaProdutos = new ArrayList<>();
     
 
     
@@ -22,6 +22,14 @@ public class Pedido {
 
     //Construtor Padrão
     public Pedido() {
+    }
+
+    public ArrayList<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(ArrayList<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
     }
 
     public String getDataPedido() {
