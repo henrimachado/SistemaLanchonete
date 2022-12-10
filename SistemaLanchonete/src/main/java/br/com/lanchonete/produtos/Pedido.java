@@ -8,7 +8,10 @@ public class Pedido {
     private String horaPedido;
     private String horaEntregaPedido;
     private String statusPedido;
-    private ArrayList<Produto> listaProdutos = new ArrayList<>();
+    private static int numPedido = 0; 
+    private int idPedido;
+    
+    private ArrayList<Integer> listaProdutos = new ArrayList<>();
 
     //Construtor Parametrizado 
     public Pedido(String dataPedido, String horaPedido, String horaEntregaPedido, String statusPedido) {
@@ -22,12 +25,29 @@ public class Pedido {
     public Pedido() {
     }
 
-    public ArrayList<Produto> getListaProdutos() {
+    public static int getNumPedido() {
+        return numPedido;
+    }
+
+    public static void setNumPedido(int idPedido) {
+        Pedido.numPedido = numPedido + 1;
+    }
+
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido() {
+        this.idPedido = Pedido.getNumPedido();
+    }
+
+    
+    public ArrayList<Integer> getListaProdutos() {
         return listaProdutos;
     }
 
-    public void setListaProdutos(ArrayList<Produto> listaProdutos) {
-        this.listaProdutos = listaProdutos;
+    public void setListaProdutos(Integer idProduto) {
+        this.listaProdutos.add(idProduto);
     }
 
     public String getDataPedido() {

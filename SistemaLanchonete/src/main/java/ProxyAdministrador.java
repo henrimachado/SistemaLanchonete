@@ -11,6 +11,9 @@ public class ProxyAdministrador {
     public ProxyAdministrador() {
     }
 
+    
+    
+    
     //MANIPULAÇÃO DE COLABORADORES
     //Questão 01 - O sistema deve armazenar de forma estática 15 colaboradores
     private static final Colaborador Colaboradores[] = new Colaborador[15];
@@ -179,6 +182,10 @@ public class ProxyAdministrador {
         }
     }
 
+    
+    
+    
+    
     //MANIPULAÇÃO DE CLIENTES
     //Questão 8 - Clientes e pedidos devem ser salvos de forma dinâmica
     private static final ArrayList<Cliente> Clientes = new ArrayList<>();
@@ -224,7 +231,7 @@ public class ProxyAdministrador {
     }
 
     //CONSULTA DE CLIENTES NO BANCO DE CLIENTES
-    public Cliente consultaCliente(String CPF) {
+    public static Cliente consultaCliente(String CPF) {
 
         String CPFCliente = CPF;
         Cliente attCliente = new Cliente();
@@ -352,6 +359,11 @@ public class ProxyAdministrador {
         }
     }
 
+    
+    
+    
+    
+    
     //PRODUTOS
     //LISTA DE PRODUTOS
     private static ArrayList<Produto> listaProdutos = new ArrayList<>();
@@ -524,6 +536,12 @@ public class ProxyAdministrador {
         }
     }
     
+    
+    
+    
+    
+    //ADMINISTRADORES
     //Acessar Administrador
+    
     //Modificar admnistrador 
 }
