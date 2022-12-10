@@ -1,12 +1,13 @@
 package br.com.lanchonete.produtos;
 
 import java.util.ArrayList;
+import java.time.*;
 
 public class Pedido {
 
-    private String dataPedido;
-    private String horaPedido;
-    private String horaEntregaPedido;
+    private LocalDate dataPedido;
+    private LocalTime horaPedido;
+    private LocalTime horaEntregaPedido;
     private String statusPedido;
     private static int numPedido = 0; 
     private int idPedido;
@@ -14,12 +15,14 @@ public class Pedido {
     private ArrayList<Integer> listaProdutos = new ArrayList<>();
 
     //Construtor Parametrizado 
-    public Pedido(String dataPedido, String horaPedido, String horaEntregaPedido, String statusPedido) {
+
+    public Pedido(LocalDate dataPedido, LocalTime horaPedido, LocalTime horaEntregaPedido) {
         this.dataPedido = dataPedido;
         this.horaPedido = horaPedido;
         this.horaEntregaPedido = horaEntregaPedido;
-        this.statusPedido = statusPedido;
+
     }
+
 
     //Construtor Padrão
     public Pedido() {
@@ -50,27 +53,27 @@ public class Pedido {
         this.listaProdutos.add(idProduto);
     }
 
-    public String getDataPedido() {
+    public LocalDate getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(String dataPedido) {
+    public void setDataPedido(LocalDate dataPedido) {
         this.dataPedido = dataPedido;
     }
 
-    public String getHoraPedido() {
+    public LocalTime getHoraPedido() {
         return horaPedido;
     }
 
-    public void setHoraPedido(String horaPedido) {
+    public void setHoraPedido(LocalTime horaPedido) {
         this.horaPedido = horaPedido;
     }
 
-    public String getHoraEntregaPedido() {
+    public LocalTime getHoraEntregaPedido() {
         return horaEntregaPedido;
     }
 
-    public void setHoraEntregaPedido(String horaEntregaPedido) {
+    public void setHoraEntregaPedido(LocalTime horaEntregaPedido) {
         this.horaEntregaPedido = horaEntregaPedido;
     }
 

@@ -26,7 +26,7 @@ public class Cliente extends Pessoa {
         return pedidosCliente;
     }
 
-    public void setPedidosCliente(ArrayList<Pedido> pedidosCliente, Pedido novoPedido) {
+    public void setPedidosCliente(Pedido novoPedido) {
         this.pedidosCliente.add(0, novoPedido);
     }
 

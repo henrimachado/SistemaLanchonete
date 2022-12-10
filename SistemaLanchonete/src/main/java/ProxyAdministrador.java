@@ -188,7 +188,7 @@ public class ProxyAdministrador {
     
     //MANIPULAÇÃO DE CLIENTES
     //Questão 8 - Clientes e pedidos devem ser salvos de forma dinâmica
-    private static final ArrayList<Cliente> Clientes = new ArrayList<>();
+    protected static final ArrayList<Cliente> Clientes = new ArrayList<>();
 
     //Getter
     public ArrayList<Cliente> getClientes() {
