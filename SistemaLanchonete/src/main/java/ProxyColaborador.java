@@ -45,9 +45,9 @@ public class ProxyColaborador {
             int i = input.nextInt();
             switch (i) {
                 case 1 -> {
-                    int j = 0;
+                    int j = 1;
 
-                    while (j == 0) {
+                    while (j == 1) {
                         System.out.printf("Insira o Id do adicional: ");
                         Integer idAdicional = input.nextInt();
                         novoPedido.setListaProdutos(idAdicional);
@@ -59,6 +59,7 @@ public class ProxyColaborador {
                                             """);
                         j = input.nextInt();
                     }
+                    break;
 
                 }
 
@@ -88,7 +89,7 @@ public class ProxyColaborador {
 
         switch (i) {
             case 1 -> {
-                Scanner inputMin = new Scanner(System.in);
+                /*Scanner inputMin = new Scanner(System.in);
                 Scanner inputMax = new Scanner(System.in);
                 String intMin, intMax;
                 System.out.println("Insira o intervalo (REPRESENTAÇÃO ANO-MÊS-DIA em número):\n DE: ");
@@ -98,13 +99,48 @@ public class ProxyColaborador {
 
                 LocalDate dataMin = LocalDate.parse(intMin);
                 LocalDate dataMax = LocalDate.parse(intMax);
+                */
+                
+                String diaMin;
+                String diaMax;
+                String mesMin; 
+                String mesMax; 
+                String anoMin;
+                String anoMax;
+                
+                System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
+                
+                input = new Scanner(System.in);
+                System.out.printf("Dia: ");
+                diaMin = input.nextLine();
+                
+                System.out.printf("Mes: ");
+                mesMin = input.nextLine();
+                
+                System.out.printf("Ano: ");
+                anoMin = input.nextLine();
 
-                for (int k = 0; i < ProxyAdministrador.Clientes.size(); i++) {
+                System.out.println("ATÉ\n");
+                
+                System.out.printf("Dia:");
+                diaMax = input.nextLine();
+                
+                System.out.printf("Mês: ");
+                mesMax = input.nextLine();
+                
+                System.out.printf("Ano: ");
+                anoMax = input.nextLine();
+                
+                
+                LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
+                LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
+                
+                for (int k = 0; k < ProxyAdministrador.Clientes.size(); k++) {
                     for (int j = 0; j < ProxyAdministrador.Clientes.get(k).getPedidosCliente().size(); j++) {
-                        if ((ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isEqual(dataMin)
-                                || ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isAfter(dataMin))
-                                && (ProxyAdministrador.Clientes.get(i).getPedidosCliente().get(j).getDataPedido().isEqual(dataMax)
-                                || ProxyAdministrador.Clientes.get(i).getPedidosCliente().get(j).getDataPedido().isBefore(dataMax))) {
+                        if (((ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isEqual(dataMin))
+                                || (ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isAfter(dataMin))) && 
+                                ((ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isEqual(dataMax))||
+                                (ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isBefore(dataMax)))) {
                             System.out.println("Cliente: " + ProxyAdministrador.Clientes.get(k).getNomePessoa() + " " + ProxyAdministrador.Clientes.get(k).getSobrenomePessoa()
                                     + "\nEndereço: " + ProxyAdministrador.Clientes.get(k).getEnderecoCliente()
                                     + "\nTelefone: " + ProxyAdministrador.Clientes.get(k).getTelefoneCliente()

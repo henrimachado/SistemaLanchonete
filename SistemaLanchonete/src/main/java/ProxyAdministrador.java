@@ -1,7 +1,6 @@
 
 import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.Produto;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
