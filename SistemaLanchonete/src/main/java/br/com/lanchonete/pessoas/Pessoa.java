@@ -1,25 +1,23 @@
-
 package br.com.lanchonete.pessoas;
 
-
 public abstract class Pessoa {
-    private String nomePessoa; 
-    private String sobrenomePessoa;
-    private String CPF; 
 
+    private String nomePessoa;
+    private String sobrenomePessoa;
+    private String CPF;
 
     //Construtor com parâmetros
-    public Pessoa(String nomePessoa, String sobrenomePessoa, String CPF){
+    public Pessoa(String nomePessoa, String sobrenomePessoa, String CPF) {
         this.nomePessoa = nomePessoa;
         this.sobrenomePessoa = sobrenomePessoa;
-        this.CPF = CPF; 
+        this.CPF = CPF;
     }
-    
+
     //Construtor padrão 
-    public Pessoa(){
-        
+    public Pessoa() {
+
     }
-    
+
     public String getNomePessoa() {
         return nomePessoa;
     }
@@ -43,11 +41,10 @@ public abstract class Pessoa {
     public void setCPF(String CPF) {
         this.CPF = CPF;
     }
-    
-   
+
     //Verificar se deve ser sobrescrito de fato
     @Override
-    public String toString(){
+    public String toString() {
         return "Pessoa";
     }
 }

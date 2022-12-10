@@ -1,12 +1,10 @@
-
 package br.com.lanchonete.pessoas;
 
-public final class Administrador extends Usuario{
+public final class Administrador extends Usuario {
+
     private static int admCount;
- 
+
     //Construtor
-
-
     public Administrador(String nomePessoa, String sobrenomePessoa, String CPF, String loginUsuario, String senhaUsuario) {
         super(nomePessoa, sobrenomePessoa, CPF, loginUsuario, senhaUsuario);
         setAdmCount(admCount);
@@ -20,7 +18,6 @@ public final class Administrador extends Usuario{
         return admCount;
     }
 
-
     public static void setAdmCount(int admCount) {
         Administrador.admCount = admCount + 1;
     }
@@ -28,12 +25,9 @@ public final class Administrador extends Usuario{
     @Override
     public String toString() {
         String text;
-        text = "{Nome:" + getNomePessoa() + "\tSobrenome: " + getSobrenomePessoa() + 
-                "\tCPF: " + getCPF() + "\tEmail: " + getLoginUsuario() + 
-                "\tSenha: " + getSenhaUsuario() + "}";
-        return text; 
-}
+        text = "{Nome:" + getNomePessoa() + "\tSobrenome: " + getSobrenomePessoa()
+                + "\tCPF: " + getCPF() + "\tEmail: " + getLoginUsuario()
+                + "\tSenha: " + getSenhaUsuario() + "}";
+        return text;
     }
-    
-   
-   
+}

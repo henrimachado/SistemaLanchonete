@@ -1,24 +1,23 @@
-
 package br.com.lanchonete.pessoas;
 
+public abstract class Usuario extends Pessoa {
 
-public abstract class  Usuario extends Pessoa {
-    private String loginUsuario; 
-    private String senhaUsuario; 
+    private String loginUsuario;
+    private String senhaUsuario;
 
     //Construtor Padrão
-    public Usuario(String nomePessoa, String sobrenomePessoa, String CPF, String loginUsuario, String senhaUsuario){
-        super(nomePessoa,sobrenomePessoa,CPF);
-        
+    public Usuario(String nomePessoa, String sobrenomePessoa, String CPF, String loginUsuario, String senhaUsuario) {
+        super(nomePessoa, sobrenomePessoa, CPF);
+
         this.loginUsuario = loginUsuario;
         this.senhaUsuario = senhaUsuario;
-    }  
-    
+    }
+
     //Construtor padrão
-    public Usuario (){
+    public Usuario() {
         super();
     }
-    
+
     public String getLoginUsuario() {
         return loginUsuario;
     }
@@ -35,5 +34,4 @@ public abstract class  Usuario extends Pessoa {
         this.senhaUsuario = senhaUsuario;
     }
 
-    
 }

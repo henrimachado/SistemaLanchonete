@@ -1,13 +1,12 @@
-
 package br.com.lanchonete.produtos;
 
-
 public class Produto {
-    private String nomeProduto; 
+
+    private String nomeProduto;
     private double valorProduto;
-    private int idProduto; 
+    private int idProduto;
     private String descricaoProduto;
-   
+
     //Construtor parametrizado
     public Produto(String nomeProduto, double valorProduto, int idProduto, String descricaoProduto) {
         this.nomeProduto = nomeProduto;
@@ -15,11 +14,11 @@ public class Produto {
         this.idProduto = idProduto;
         this.descricaoProduto = descricaoProduto;
     }
-    
+
     //Construtor Padrão
-    public Produto(){
-    }  
-    
+    public Produto() {
+    }
+
     public String getNomeProduto() {
         return nomeProduto;
     }
@@ -56,7 +55,5 @@ public class Produto {
     public String toString() {
         return "Produto{" + "nomeProduto=" + nomeProduto + ", valorProduto=" + valorProduto + ", idProduto=" + idProduto + ", descricaoProduto=" + descricaoProduto + '}';
     }
-    
-    
-    
+
 }

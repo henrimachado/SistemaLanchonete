@@ -1,24 +1,24 @@
-
 package br.com.lanchonete.pessoas;
 
 import java.util.ArrayList;
 import br.com.lanchonete.produtos.*;
 
 public class Cliente extends Pessoa {
+
     private String enderecoCliente;
-    private String telefoneCliente; 
+    private String telefoneCliente;
     private ArrayList<Pedido> pedidosCliente = new ArrayList<>();
     //private Pedido vetor de pedido 
 
     //Construtor parametrizado
-    public Cliente(String nomePessoa, String sobrenomePessoa, String CPF, String enderecoCliente, String telefoneCliente){
+    public Cliente(String nomePessoa, String sobrenomePessoa, String CPF, String enderecoCliente, String telefoneCliente) {
         super(nomePessoa, sobrenomePessoa, CPF);
         this.enderecoCliente = enderecoCliente;
         this.telefoneCliente = telefoneCliente;
-    }            
-     
+    }
+
     //Construtor padrão
-    public Cliente (){
+    public Cliente() {
         super();
     }
 
@@ -29,8 +29,7 @@ public class Cliente extends Pessoa {
     public void setPedidosCliente(ArrayList<Pedido> pedidosCliente) {
         this.pedidosCliente = pedidosCliente;
     }
-    
-    
+
     public String getEnderecoCliente() {
         return enderecoCliente;
     }
@@ -46,12 +45,12 @@ public class Cliente extends Pessoa {
     public void setTelefoneCliente(String telefoneCliente) {
         this.telefoneCliente = telefoneCliente;
     }
-    
+
     @Override
-    public String toString(){
-        String text = "Nome: " + getNomePessoa() + "\nSobrenome: " + getSobrenomePessoa() + "\nCPF: " + 
-                getCPF() + "\nEndereço: " + getEnderecoCliente() + "\nTelefone: " + getTelefoneCliente();
+    public String toString() {
+        String text = "Nome: " + getNomePessoa() + "\nSobrenome: " + getSobrenomePessoa() + "\nCPF: "
+                + getCPF() + "\nEndereço: " + getEnderecoCliente() + "\nTelefone: " + getTelefoneCliente();
         return text;
-               
+
     }
 }

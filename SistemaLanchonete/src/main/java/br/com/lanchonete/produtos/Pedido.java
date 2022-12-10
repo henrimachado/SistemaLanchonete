@@ -1,19 +1,17 @@
-
 package br.com.lanchonete.produtos;
 
 import java.util.ArrayList;
 
 public class Pedido {
-    private String dataPedido; 
+
+    private String dataPedido;
     private String horaPedido;
-    private String horaEntregaPedido; 
+    private String horaEntregaPedido;
     private String statusPedido;
     private ArrayList<Produto> listaProdutos = new ArrayList<>();
-    
 
-    
     //Construtor Parametrizado 
-    public Pedido(String dataPedido, String horaPedido, String horaEntregaPedido, String statusPedido) {    
+    public Pedido(String dataPedido, String horaPedido, String horaEntregaPedido, String statusPedido) {
         this.dataPedido = dataPedido;
         this.horaPedido = horaPedido;
         this.horaEntregaPedido = horaEntregaPedido;
@@ -68,8 +66,5 @@ public class Pedido {
     public String toString() {
         return "Pedido{" + "dataPedido=" + dataPedido + ", horaPedido=" + horaPedido + ", horaEntregaPedido=" + horaEntregaPedido + ", statusPedido=" + statusPedido + '}';
     }
-    
-    
-    
-   
+
 }
