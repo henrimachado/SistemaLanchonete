@@ -1,3 +1,4 @@
+
 import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.*;
 import java.util.Scanner;
@@ -9,8 +10,8 @@ import java.io.IOException;
 public class SistemaLanchonete {
 
     public static void main(String[] args) throws IOException {
-        
-       /*      
+
+        /*      
        Administrador admMain = new Administrador();
        admMain.setCPF("123");
        admMain.setLoginUsuario("email@gmail.com");
@@ -19,14 +20,10 @@ public class SistemaLanchonete {
        admMain.setSenhaUsuario("123senha");
        
        jsonDump.dumpAdministrador(admMain);
-       */
-       
-       Administrador admMain = jsonDump.assimilateAdministrador();
-        System.out.println(admMain);
-        }
-    
-       
-       
         
-}
+        Administrador admMain = jsonDump.assimilateAdministrador();
+       System.out.println(admMain);
+         */
+    }
 
+}

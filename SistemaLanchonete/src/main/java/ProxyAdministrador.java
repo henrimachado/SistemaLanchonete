@@ -143,6 +143,7 @@ public class ProxyAdministrador {
 
                 default -> {
                     System.out.println("Opção inválida");
+                    modificarColaborador(CPF);
                 }
             }
         } else {
@@ -194,6 +195,26 @@ public class ProxyAdministrador {
         return Clientes;
     }
 
+    private static int qntClientesPrivate;
+    protected static int qntClientesProtected;
+
+    public static int getQntClientesPrivate() {
+        return qntClientesPrivate;
+    }
+
+    public static void setQntClientesPrivate() {
+        ProxyAdministrador.qntClientesPrivate = qntClientesPrivate + 1;
+    }
+
+    public static int getQntClientesProtected() {
+        return qntClientesProtected;
+    }
+
+    public static void setQntClientesProtected() {
+        qntClientesProtected++;
+    }
+    
+    
     //Setter
     public static void setClientes(ArrayList<Cliente> Clientes, Cliente Cl) {
         ProxyAdministrador.Clientes.add(Cl);
@@ -227,6 +248,12 @@ public class ProxyAdministrador {
 
         Cliente cl = new Cliente(nomeCliente, sobrenomeCliente, CPF, enderecoCliente, telefoneCliente);
         ProxyAdministrador.setClientes(Clientes, cl);
+        
+        //Manipulação com membro devidamente encapsulado, requer o uso de um método para tanto
+        setQntClientesPrivate();
+        
+        //Manipulação com membro protected. Permite o acesso direto à variável;
+        qntClientesProtected++;
     }
 
     //CONSULTA DE CLIENTES NO BANCO DE CLIENTES
@@ -332,6 +359,7 @@ public class ProxyAdministrador {
 
                 default -> {
                     System.out.println("Opção inválida");
+                    modificarCliente(CPF);
                 }
             }
         } else {
@@ -365,7 +393,7 @@ public class ProxyAdministrador {
     
     //PRODUTOS
     //LISTA DE PRODUTOS
-    private static ArrayList<Produto> listaProdutos = new ArrayList<>();
+    public static ArrayList<Produto> listaProdutos = new ArrayList<>();
 
     //Controle da id dos produtos
     private static int numProdutos = 0;
@@ -379,7 +407,7 @@ public class ProxyAdministrador {
     }
 
     //getter da lista de produtos
-    public ArrayList<Produto> getListaProdutos() {
+    public static ArrayList<Produto> getListaProdutos() {
         return listaProdutos;
     }
 
@@ -391,7 +419,7 @@ public class ProxyAdministrador {
     //Cadastro produto 
     public void cadastroProduto() {
         String nomeProduto;
-        double valorProduto;
+        float valorProduto;
         String descricaoProduto;
         int idProduto;
 
@@ -405,7 +433,7 @@ public class ProxyAdministrador {
         descricaoProduto = input.nextLine();
 
         System.out.printf("Digite o valor do produto: ");
-        valorProduto = input.nextDouble();
+        valorProduto = input.nextFloat();
 
         idProduto = ProxyAdministrador.getNumProdutos();
 
@@ -435,7 +463,7 @@ public class ProxyAdministrador {
     }
 
     //CONSULTA PRODUTO
-    public Produto consultaProduto(int idProduto) {
+    public static Produto consultaProduto(int idProduto) {
         Produto attProduto = new Produto();
         attProduto = null;
 
@@ -488,7 +516,7 @@ public class ProxyAdministrador {
 
                 case 3 -> {
                     System.out.printf("Digite o novo CPF: ");
-                    double dado = inputDado.nextDouble();
+                    float dado = inputDado.nextFloat();
 
                     consultaProduto(idProduto).setValorProduto(dado);
                     System.out.println("Alteração realizada com sucesso!");
@@ -502,6 +530,7 @@ public class ProxyAdministrador {
 
                 default -> {
                     System.out.println("Opção inválida");
+                    modificarProduto(idProduto);
                 }
             }
         } else {

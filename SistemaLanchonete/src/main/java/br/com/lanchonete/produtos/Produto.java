@@ -3,12 +3,12 @@ package br.com.lanchonete.produtos;
 public class Produto {
 
     private String nomeProduto;
-    private double valorProduto;
+    private float valorProduto;
     private int idProduto;
     private String descricaoProduto;
 
     //Construtor parametrizado
-    public Produto(String nomeProduto, double valorProduto, int idProduto, String descricaoProduto) {
+    public Produto(String nomeProduto, float valorProduto, int idProduto, String descricaoProduto) {
         this.nomeProduto = nomeProduto;
         this.valorProduto = valorProduto;
         this.idProduto = idProduto;
@@ -27,11 +27,11 @@ public class Produto {
         this.nomeProduto = nomeProduto;
     }
 
-    public double getValorProduto() {
+    public float getValorProduto() {
         return valorProduto;
     }
 
-    public void setValorProduto(double valorProduto) {
+    public void setValorProduto(float valorProduto) {
         this.valorProduto = valorProduto;
     }
 

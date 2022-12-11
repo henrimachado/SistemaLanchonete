@@ -8,7 +8,7 @@ public class Pedido {
     private String dataPedido;
     private String horaPedido;
     private String horaEntregaPedido;
-    private String statusPedido;
+    private int statusPedido;
     private float valorTotalPedido;
     private static int numPedido = 0; 
     private int idPedido;
@@ -78,11 +78,11 @@ public class Pedido {
         this.horaEntregaPedido = horaEntregaPedido;
     }
 
-    public String getStatusPedido() {
+    public int getStatusPedido() {
         return statusPedido;
     }
 
-    public void setStatusPedido(String statusPedido) {
+    public void setStatusPedido(int statusPedido) {
         this.statusPedido = statusPedido;
     }
 
@@ -97,7 +97,15 @@ public class Pedido {
    
     @Override
     public String toString() {
-        return "Pedido{" + "dataPedido=" + dataPedido + ", horaPedido=" + horaPedido + ", horaEntregaPedido=" + horaEntregaPedido + ", statusPedido=" + statusPedido + '}';
+        String text;
+        String adicionais = "";
+        for (int i = 1;  i < getListaProdutos().size(); i++){
+            adicionais = adicionais + ", " + Integer.toString(getListaProdutos().get(i));
+        }
+        text = "[" + getIdPedido() + "]   Data: " + getDataPedido() + "   Hora: " + getHoraPedido() + "   Entrega: " +
+                getHoraEntregaPedido() + "   IdProduto: " + getListaProdutos().get(0) + "   IdAdicionais: " + adicionais +
+                "    Valor total: " + getValorTotalPedido() + "   Status: " + getStatusPedido();
+        return text;
     }
 
 }
