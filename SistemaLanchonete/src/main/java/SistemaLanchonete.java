@@ -10,18 +10,19 @@ public class SistemaLanchonete {
 
     public static void main(String[] args) throws IOException {
         
-              
-        ProxyAdministrador menuAdm = new ProxyAdministrador();
-        ProxyColaborador menuColab = new ProxyColaborador();
-        /*
-        menuAdm.cadastroColaborador();
-        jsonDump.dumpColaborador(menuAdm.getColaboradores()[0]);
-        */
-        
-        menuAdm.cadastroCliente();
-        menuColab.cadastroPedido();
-        menuColab.cadastroPedido();
-        menuColab.listarPedidos();
+       /*      
+       Administrador admMain = new Administrador();
+       admMain.setCPF("123");
+       admMain.setLoginUsuario("email@gmail.com");
+       admMain.setNomePessoa("Pedro");
+       admMain.setSobrenomePessoa("Victor");
+       admMain.setSenhaUsuario("123senha");
+       
+       jsonDump.dumpAdministrador(admMain);
+       */
+       
+       Administrador admMain = jsonDump.assimilateAdministrador();
+        System.out.println(admMain);
         }
     
        
