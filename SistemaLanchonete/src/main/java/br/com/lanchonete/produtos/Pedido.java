@@ -5,9 +5,9 @@ import java.time.*;
 
 public class Pedido {
 
-    private LocalDate dataPedido;
-    private LocalTime horaPedido;
-    private LocalTime horaEntregaPedido;
+    private String dataPedido;
+    private String horaPedido;
+    private String horaEntregaPedido;
     private String statusPedido;
     private float valorTotalPedido;
     private static int numPedido = 0; 
@@ -17,7 +17,7 @@ public class Pedido {
 
     //Construtor Parametrizado 
 
-    public Pedido(LocalDate dataPedido, LocalTime horaPedido, LocalTime horaEntregaPedido) {
+    public Pedido(String dataPedido, String horaPedido, String horaEntregaPedido) {
         this.dataPedido = dataPedido;
         this.horaPedido = horaPedido;
         this.horaEntregaPedido = horaEntregaPedido;
@@ -33,7 +33,7 @@ public class Pedido {
         return numPedido;
     }
 
-    public static void setNumPedido(int idPedido) {
+    public static void setNumPedido() {
         Pedido.numPedido = numPedido + 1;
     }
 
@@ -54,27 +54,27 @@ public class Pedido {
         this.listaProdutos.add(idProduto);
     }
 
-    public LocalDate getDataPedido() {
+    public String getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(LocalDate dataPedido) {
+    public void setDataPedido(String dataPedido) {
         this.dataPedido = dataPedido;
     }
 
-    public LocalTime getHoraPedido() {
+    public String getHoraPedido() {
         return horaPedido;
     }
 
-    public void setHoraPedido(LocalTime horaPedido) {
+    public void setHoraPedido(String horaPedido) {
         this.horaPedido = horaPedido;
     }
 
-    public LocalTime getHoraEntregaPedido() {
+    public String getHoraEntregaPedido() {
         return horaEntregaPedido;
     }
 
-    public void setHoraEntregaPedido(LocalTime horaEntregaPedido) {
+    public void setHoraEntregaPedido(String horaEntregaPedido) {
         this.horaEntregaPedido = horaEntregaPedido;
     }
 
@@ -94,11 +94,11 @@ public class Pedido {
         this.valorTotalPedido = valorTotalPedido;
     }
 
-    
-    
+   
     @Override
     public String toString() {
         return "Pedido{" + "dataPedido=" + dataPedido + ", horaPedido=" + horaPedido + ", horaEntregaPedido=" + horaEntregaPedido + ", statusPedido=" + statusPedido + '}';
     }
 
 }
+

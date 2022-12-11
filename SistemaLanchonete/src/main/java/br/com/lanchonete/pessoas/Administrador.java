@@ -1,5 +1,6 @@
 package br.com.lanchonete.pessoas;
 
+
 public final class Administrador extends Usuario {
 
     private static int admCount;

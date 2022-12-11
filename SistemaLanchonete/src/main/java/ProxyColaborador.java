@@ -31,7 +31,8 @@ public class ProxyColaborador {
 
             Pedido novoPedido = new Pedido();
             novoPedido.setIdPedido();
-
+            Pedido.setNumPedido();
+            
             System.out.print("Insira a ID do produto principal do pedido: ");
             Integer idProduto = input.nextInt();
             novoPedido.setListaProdutos(idProduto);
@@ -68,9 +69,9 @@ public class ProxyColaborador {
                 }
             }
 
-            novoPedido.setDataPedido(LocalDate.now());
-            novoPedido.setHoraPedido(LocalTime.now());
-            novoPedido.setHoraEntregaPedido(LocalTime.now().plusMinutes(50));
+            novoPedido.setDataPedido(LocalDate.now().toString());
+            novoPedido.setHoraPedido(LocalTime.now().toString());
+            novoPedido.setHoraEntregaPedido(LocalTime.now().plusMinutes(50).toString());
 
             Cl.setPedidosCliente(novoPedido);
         }
@@ -137,15 +138,14 @@ public class ProxyColaborador {
                 
                 for (int k = 0; k < ProxyAdministrador.Clientes.size(); k++) {
                     for (int j = 0; j < ProxyAdministrador.Clientes.get(k).getPedidosCliente().size(); j++) {
-                        if (((ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isEqual(dataMin))
-                                || (ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isAfter(dataMin))) && 
-                                ((ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isEqual(dataMax))||
-                                (ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().isBefore(dataMax)))) {
+                        LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
+                        LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
+                        if (((dataPedido.isEqual(dataMin)) || (dataPedido.isAfter(dataMin))) && ((dataPedido.isEqual(dataMax))||(dataPedido.isBefore(dataMax)))) {
                             System.out.println("Cliente: " + ProxyAdministrador.Clientes.get(k).getNomePessoa() + " " + ProxyAdministrador.Clientes.get(k).getSobrenomePessoa()
                                     + "\nEndereço: " + ProxyAdministrador.Clientes.get(k).getEnderecoCliente()
                                     + "\nTelefone: " + ProxyAdministrador.Clientes.get(k).getTelefoneCliente()
                                     + "\nPedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getIdPedido()
-                                    + "\nData Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido().format(localDateFormatter)
+                                    + "\nData Pedido: " + dataPrint.format(localDateFormatter)
                                     + "\nHora Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido()
                                     + "\nStatus Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getStatusPedido());
                         }
