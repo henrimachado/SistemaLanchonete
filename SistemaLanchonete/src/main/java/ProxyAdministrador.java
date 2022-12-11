@@ -15,7 +15,7 @@ public class ProxyAdministrador {
     private static final Colaborador Colaboradores[] = new Colaborador[15];
 
     //GETTER DO ARRAY DE COLABORADORES
-    public Colaborador[] getColaboradores() {
+    public static Colaborador[] getColaboradores() {
         return Colaboradores;
     }
 

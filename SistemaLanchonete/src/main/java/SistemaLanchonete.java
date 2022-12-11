@@ -11,24 +11,60 @@ import java.util.Locale;
 public class SistemaLanchonete {
 
     public static void main(String[] args) throws IOException {
+        //https://www.arquivodecodigos.com.br/dicas/2445-java-definindo-o-locale-padrAo-da-jvm.html
         Locale locale = new Locale("pt","BR");
         Locale.setDefault(locale);
         
-        /*      
-        Administrador admMain = new Administrador();
-        admMain.setCPF("123");
-        admMain.setLoginUsuario("email@gmail.com");
-        admMain.setNomePessoa("Pedro");
-        admMain.setSobrenomePessoa("Victor");
-        admMain.setSenhaUsuario("123senha");
+        /*     
+        Administrador adm1 = new Administrador();
+        adm1.setCPF("123");
+        adm1.setLoginUsuario("email@gmail.com");
+        adm1.setNomePessoa("Pedro");
+        adm1.setSobrenomePessoa("Victor");
+        adm1.setSenhaUsuario("123senha");
        
-        jsonDump.dumpAdministrador(admMain);
+        jsonDump.dumpAdministrador(adm1);
         
-        Administrador admMain = jsonDump.assimilateAdministrador();
-        System.out.println(admMain);
-         */
+        Administrador adm2 = jsonDump.assimilateAdministrador();
+        System.out.println(adm1);
+        */
     }
 
+    //Função login
+    public static Usuario loginSistema() throws IOException{
+        Administrador adm = jsonDump.assimilateAdministrador();
+        Scanner input = new Scanner(System.in);
+        System.out.println("Digite seu login: ");
+        String loginUsuario = input.nextLine();
+        System.out.println("Digite sua senha: ");{
+        String senhaUsuario = input.nextLine();
+        
+        Usuario usuarioAtual = null;
+        
+        if(loginUsuario.equals(adm.getLoginUsuario())){
+            if(senhaUsuario.equals(adm.getSenhaUsuario())){
+                usuarioAtual = adm;
+            }
+        }
+        
+        else{
+            for (int i = 0; i < 15; i++){
+                if(senhaUsuario.equals(ProxyAdministrador.getColaboradores()[i].getLoginUsuario())){
+                    if(loginUsuario.equals(ProxyAdministrador.getColaboradores()[i].getSenhaUsuario())){
+                        usuarioAtual = ProxyAdministrador.getColaboradores()[i];
+                    }
+                }
+            }
+        }
+        
+        if(usuarioAtual == null){
+            System.out.println("Login inválido. Tente novamente");
+        }
+        return usuarioAtual;
+        
+    }
+        
+    }
     //Menu do administrador
     public static void menuAdministrador() {
 
