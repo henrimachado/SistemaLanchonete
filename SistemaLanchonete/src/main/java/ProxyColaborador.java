@@ -266,14 +266,14 @@ public class ProxyColaborador {
         }
         System.out.println("Digite o ID do pedido que deseja alterar ");
         int idPedido = input.nextInt();
-        */
+         */
         Scanner input = new Scanner(System.in);
         if (consultarPedido(idPedido, Cl) != null) {
             Pedido modPedido = consultarPedido(idPedido, Cl);
             System.out.println("DADOS DO PEDIDO\n------------------------\n");
-            System.out.println("Id: " + modPedido.getIdPedido() + "    Data:" + modPedido.getDataPedido() + "     Hora: " + modPedido.getHoraPedido() +
-                    "    Hora de entrega: " + modPedido.getHoraEntregaPedido() + "    Valor total: " + modPedido.getValorTotalPedido() + "     Status: " + modPedido.getStatusPedido() +
-                     "\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+            System.out.println("Id: " + modPedido.getIdPedido() + "    Data:" + modPedido.getDataPedido() + "     Hora: " + modPedido.getHoraPedido()
+                    + "    Hora de entrega: " + modPedido.getHoraEntregaPedido() + "    Valor total: " + modPedido.getValorTotalPedido() + "     Status: " + modPedido.getStatusPedido()
+                    + "\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Hora de Entrega do Pedido 
@@ -283,19 +283,19 @@ public class ProxyColaborador {
                                5 - Fechar
                                 """);
             int i = input.nextInt();
-            switch(i){
-                case 1 ->{
+            switch (i) {
+                case 1 -> {
                     System.out.println("Entre com a novo horário de entrega: ");
                     System.out.printf("Hora: ");
                     String novaHora = input.nextLine();
                     System.out.printf("Minutos: ");
                     String novoMin = input.nextLine();
-                    
-                    modPedido.setHoraEntregaPedido(novaHora + ":" + novoMin + ":" + "00"); 
+
+                    modPedido.setHoraEntregaPedido(novaHora + ":" + novoMin + ":" + "00");
                     System.out.println("Alteração realizada com sucesso!");
                     modificarPedido(idPedido, Cl);
                 }
-                case 2->{
+                case 2 -> {
                     System.out.println("""
                                Insira o código do novo status do pedido:  
                                1 - Aceito 
@@ -309,43 +309,42 @@ public class ProxyColaborador {
                     System.out.println("Alteração realizada com sucesso!");
                     modificarPedido(idPedido, Cl);
                 }
-                case 3 ->{
+                case 3 -> {
                     System.out.printf("Insira o Id do item que deseja adicionar: ");
                     int novoItem = input.nextInt();
-                    
+
                     modPedido.setListaProdutos(novoItem);
                     modPedido.setValorTotalPedido(modPedido.getValorTotalPedido() + ProxyAdministrador.consultaProduto(novoItem).getValorProduto());
                     System.out.printf("Alteração realizada com sucesso!");
                     modificarPedido(idPedido, Cl);
                 }
-                case 4 ->{
+                case 4 -> {
                     System.out.println("Insira o Id do item que deseja remover: ");
                     int removerItem = input.nextInt();
                     int f = 0;
-                    for (int r = 0; r <= modPedido.getListaProdutos().size(); r++){
+                    for (int r = 0; r <= modPedido.getListaProdutos().size(); r++) {
                         f++;
-                        if (modPedido.getListaProdutos().get(r) == removerItem){
+                        if (modPedido.getListaProdutos().get(r) == removerItem) {
                             modPedido.getListaProdutos().remove(r);
                             modPedido.setValorTotalPedido(modPedido.getValorTotalPedido() - ProxyAdministrador.consultaProduto(removerItem).getValorProduto());
                             System.out.printf("Alteração realizada com sucesso!");
                             break;
+                        } else if (f > modPedido.getListaProdutos().size()) {
+                            System.out.println("Id inválido ou o produto não está associado a esse pedido. Tente novamente");
+                            break;
                         }
-                        else if (f > modPedido.getListaProdutos().size()){
-                        System.out.println("Id inválido ou o produto não está associado a esse pedido. Tente novamente");
-                        break;
-                        }
-                    modificarPedido(idPedido, Cl);
+                        modificarPedido(idPedido, Cl);
                     }
                 }
                 case 5 -> {
                     break;
                 }
-                
-                default ->{
+
+                default -> {
                     System.out.println("Opção inválida, tente novamente.");
                     modificarPedido(idPedido, Cl);
                 }
-                
+
             }
         }
 
@@ -362,34 +361,63 @@ public class ProxyColaborador {
         }
         return attPedido;
     }
-    
-    public void excluirPedido(){
+
+    public void excluirPedido() {
         System.out.printf("Digite o CPF do cliente: ");
         Scanner input = new Scanner(System.in);
         String CPF = input.nextLine();
-        
+
         Cliente Cl = ProxyAdministrador.consultaCliente(CPF);
-        
-        if (Cl != null){
+
+        if (Cl != null) {
             System.out.println("\nPEDIDOS CADASTRADOS\n--------------------------\n");
-            for(int i = 0; i < Cl.getPedidosCliente().size(); i++){
+            for (int i = 0; i < Cl.getPedidosCliente().size(); i++) {
                 LocalDate dataPedido = LocalDate.parse(Cl.getPedidosCliente().get(i).getDataPedido());
-                System.out.println("Id: " + Cl.getPedidosCliente().get(i).getIdPedido() +
-                        "    Data: " + Cl.getPedidosCliente().get(i).getDataPedido() +
-                        "    Hora: " + dataPedido.format(localDateFormatter));
+                System.out.println("Id: " + Cl.getPedidosCliente().get(i).getIdPedido()
+                        + "    Data: " + Cl.getPedidosCliente().get(i).getDataPedido()
+                        + "    Hora: " + dataPedido.format(localDateFormatter));
             }
-            
+
             System.out.printf("\nDigite o ID do pedido que deseja remover: ");
             int idRemPedido = input.nextInt();
-            
-            for (int p = 0; p < Cl.getPedidosCliente().size(); p++){
-                if (Cl.getPedidosCliente().get(p).getIdPedido() == idRemPedido){
+
+            for (int p = 0; p < Cl.getPedidosCliente().size(); p++) {
+                if (Cl.getPedidosCliente().get(p).getIdPedido() == idRemPedido) {
                     Cl.getPedidosCliente().remove(p);
                     System.out.println("Pedido removido com sucesso.");
                 }
             }
         }
-        
-        
+
     }
+
+    /*
+    public static void modificarColabSenha(Colaborador Col) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("");
+        System.out.println("Digite a sua senha anterior: ");
+        String senhaAnt = input.nextLine();
+        System.out.println("Digite a nova senha: ");
+        String novaSenha = input.nextLine();
+        System.out.println("Confirme a nova senha: ");
+        String confirmSenha = input.nextLine();
+
+        if (Col.getSenhaUsuario().equals(senhaAnt)) {
+            if (novaSenha.equals(confirmSenha)) {
+                Col.setSenhaUsuario(novaSenha);
+                System.out.println("Alteração realizada com sucesso!");
+                //Chamar o menu novamente
+                break;
+            } else {
+                System.out.println("Senhas diferentes. Tente novamente.");
+                //Chamar o menu novamente
+                break;
+            }
+        } else {
+            System.out.println("Senha antiga não confere. Tente novamente");
+            //Chamar o menu novamente
+            break;
+        }
+    }
+     */
 }
