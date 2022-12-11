@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.time.*;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.Locale;
 
 public class SistemaLanchonete {
 
     public static void main(String[] args) throws IOException {
-
+        Locale locale = new Locale("pt","BR");
+        Locale.setDefault(locale);
+        
         /*      
         Administrador admMain = new Administrador();
         admMain.setCPF("123");
@@ -31,13 +34,16 @@ public class SistemaLanchonete {
 
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("\nEscolha uma opção do menu: "
-                + "\n1 -  Colaboradores          "
-                + "\n1 -  Cliente                "
-                + "\n2 -  Produtos               "
-                + "\n3 -  Relatorios             "
-                + "\n4 -  Administrador          "
-                + "\n5 -  Finalizar Sistema\n    ");
+        System.out.println("""
+                           
+                           Escolha uma opções do menu: 
+                           1 -  Colaboradores          
+                           1 -  Cliente                
+                           2 -  Produtos               
+                           3 -  Relatorios             
+                           4 -  Administrador          
+                           5 -  Finalizar Sistema
+                               """);
 
         int i = inputSwitch.nextInt();
         switch (i) {
@@ -75,11 +81,14 @@ public class SistemaLanchonete {
 
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("\nEscolha uma opção do menu: "
-                + "\n1 -  Perfil                 "
-                + "\n2 -  Pedidos                "
-                + "\n3 -  Relatorios             "
-                + "\n5 -  Finalizar Sistema\n    ");
+        System.out.println("""
+                           
+                           Escolha uma opções do menu: 
+                           1 -  Perfil                 
+                           2 -  Pedidos                
+                           3 -  Relatórios             
+                           5 -  Finalizar Sistema
+                               """);
 
         int i = inputSwitch.nextInt();
         switch (i) {
@@ -108,12 +117,15 @@ public class SistemaLanchonete {
     public static void menuOpcaoColaboradorAdmin() {
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("\nDigite  o número da opção: "
-                + "\n1 - Cadastrar colaborador   "
-                + "\n2 - Editar    colaborador   "
-                + "\n3 - Consultar colaborador   "
-                + "\n4 - Remover   colaborador   "
-                + "\n5 - Menu princial\n         ");
+        System.out.println("""
+                           
+                           Digite  o número da opção: 
+                           1 - Cadastrar colaborador   
+                           2 - Editar    colaborador   
+                           3 - Consultar colaborador   
+                           4 - Remover   colaborador   
+                           5 - Menu princial
+                                    """);
 
         int i = inputSwitch.nextInt();
         switch (i) {
@@ -146,9 +158,12 @@ public class SistemaLanchonete {
     public static void menuOpcaoColaboradorColab() {
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("\nDigite  o número da opção: "
-                + "\n1 - Alterar senha           "
-                + "\n2 - Menu princial\n         ");
+        System.out.println("""
+                           
+                           Digite  o número da opção: 
+                           1 - Alterar senha           
+                           2 - Menu princial
+                                    """);
 
         int i = inputSwitch.nextInt();
         switch (i) {
@@ -169,12 +184,15 @@ public class SistemaLanchonete {
     public static void menuOpcaoProduto() {
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("\nDigite  o número da opção: "
-                + "\n1 - Cadastrar Produto       "
-                + "\n2 - Editar    Produto       "
-                + "\n3 - Consultar Produto       "
-                + "\n4 - Remover   Produto       "
-                + "\n5 - Menu princial\n         ");
+        System.out.println("""
+                           
+                           Digite  o número da opção: 
+                           1 - Cadastrar Produto       
+                           2 - Editar    Produto       
+                           3 - Consultar Produto       
+                           4 - Remover   Produto       
+                           5 - Menu princial
+                                    """);
 
         int i = inputSwitch.nextInt();
         switch (i) {
@@ -207,13 +225,16 @@ public class SistemaLanchonete {
     public static void menuOpcaoRelatorio() {
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("Insira a opção desejada:          "
-                + "\n\n1 - Relatorio de clientes      "
-                + "\n2 -   Relatorio de colaboradores "
-                + "\n3 -   Relatorio de produtos      "
-                + "\n4 -   Relatorio de pedido        "
-                + "\n5 -   Estatistica de venda       "
-                + "\n6 -   Menu princial\n            ");
+        System.out.println("""
+                           Insira a opção desejada:          
+                           
+                           1 -   Relatorio de clientes      
+                           2 -   Relatorio de colaboradores 
+                           3 -   Relatorio de produtos      
+                           4 -   Relatorio de pedido        
+                           5 -   Estatistica de venda       
+                           6 -   Menu princial
+                                       """);
 
         int i = inputSwitch.nextInt();
         switch (i) {
@@ -264,10 +285,13 @@ public class SistemaLanchonete {
     public static void menuOpcaoAdmin() {
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("\nDigite  o número da opção: "
-                + "\n1 - Dados admin             "
-                + "\n2 - Alterar dados admin     "
-                + "\n4 - Menu princial\n         ");
+        System.out.println("""
+                           
+                           Digite  o número da opção: 
+                           1 - Dados admin             
+                           2 - Alterar dados admin     
+                           4 - Menu princial
+                                    """);
 
         int i = inputSwitch.nextInt();
         switch (i) {
@@ -292,13 +316,16 @@ public class SistemaLanchonete {
     public static void menuOpcaoPedido() {
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("\nDigite  o número da opção: "
-                + "\n1 - Cadastrar pedido        "
-                + "\n2 - Editar    pedido        "
-                + "\n3 - Consultar pedido        "
-                + "\n4 - Remover   pedido        "
-                + "\n5 - Lista pedidos cliente   "
-                + "\n5 - Menu princial\n         ");
+        System.out.println("""
+                           
+                           Digite  o número da opção: 
+                           1 - Cadastrar pedido        
+                           2 - Editar    pedido        
+                           3 - Consultar pedido        
+                           4 - Remover   pedido        
+                           5 - Listar pedidos de cliente   
+                           5 - Menu princial
+                                    """);
 
         int i = inputSwitch.nextInt();
         switch (i) {
@@ -335,12 +362,15 @@ public class SistemaLanchonete {
     public static void menuOpcaoCliente() {
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("\nDigite  o número da opção: "
-                + "\n1 - Cadastrar cliente       "
-                + "\n2 - Editar    cliente       "
-                + "\n3 - Consultar cliente       "
-                + "\n4 - Remover   cliente       "
-                + "\n5 - Menu princial\n         ");
+        System.out.println("""
+                           
+                           Digite  o número da opção: 
+                           1 - Cadastrar cliente       
+                           2 - Editar    cliente       
+                           3 - Consultar cliente       
+                           4 - Remover   cliente       
+                           5 - Menu princial
+                                    """);
 
         int i = inputSwitch.nextInt();
         switch (i) {
