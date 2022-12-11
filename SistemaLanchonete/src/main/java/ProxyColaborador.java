@@ -106,18 +106,6 @@ public class ProxyColaborador {
 
         switch (i) {
             case 1 -> {
-                /*Scanner inputMin = new Scanner(System.in);
-                Scanner inputMax = new Scanner(System.in);
-                String intMin, intMax;
-                System.out.println("Insira o intervalo (REPRESENTAÇÃO ANO-MÊS-DIA em número):\n DE: ");
-                intMin = inputMin.nextLine();
-                System.out.println("ATÉ\n");
-                intMax = inputMax.nextLine();
-
-                LocalDate dataMin = LocalDate.parse(intMin);
-                LocalDate dataMax = LocalDate.parse(intMax);
-                 */
-
                 String diaMin;
                 String diaMax;
                 String mesMin;
@@ -162,7 +150,9 @@ public class ProxyColaborador {
                                     + "\nPedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getIdPedido()
                                     + "\nData Pedido: " + dataPrint.format(localDateFormatter)
                                     + "\nHora Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido()
-                                    + "\nStatus Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getStatusPedido());
+                                    + "\nHora de entrega: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraEntregaPedido()
+                                    + "\nStatus Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getStatusPedido()
+                                    + "\nValor Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getValorTotalPedido());
                         }
                     }
                 }
@@ -275,7 +265,7 @@ public class ProxyColaborador {
                     + "    Hora de entrega: " + modPedido.getHoraEntregaPedido() + "    Valor total: " + modPedido.getValorTotalPedido() + "     Status: " + modPedido.getStatusPedido()
                     + "\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             System.out.println("""
-                               Escolha uma opção: 
+                               \nEscolha uma opção: 
                                1 - Alterar Hora de Entrega do Pedido 
                                2 - Alterar Status do Pedido 
                                3 - Adicionar itens
@@ -297,7 +287,7 @@ public class ProxyColaborador {
                 }
                 case 2 -> {
                     System.out.println("""
-                               Insira o código do novo status do pedido:  
+                               \nInsira o código do novo status do pedido:  
                                1 - Aceito 
                                2 - Em andamento
                                3 - Saiu para entrega
@@ -305,6 +295,9 @@ public class ProxyColaborador {
                                5 - Cancelado
                                 """);
                     int novoStatus = input.nextInt();
+                    if(novoStatus == 5){
+                        modPedido.setHoraEntregaPedido("00:00:00");
+                    }
                     modPedido.setStatusPedido(novoStatus);
                     System.out.println("Alteração realizada com sucesso!");
                     modificarPedido(idPedido, Cl);
