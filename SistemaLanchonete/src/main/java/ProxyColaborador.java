@@ -151,10 +151,80 @@ public class ProxyColaborador {
                         }
                     }
                 }
-
+                break;
             }
 
             case 2 -> {
+                String diaMin;
+                String diaMax;
+                String mesMin; 
+                String mesMax; 
+                String anoMin;
+                String anoMax;
+                String horaMin;
+                String horaMax;
+                String minMin; 
+                String minMax;
+                
+                System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
+                
+                input = new Scanner(System.in);
+                System.out.printf("Dia: ");
+                diaMin = input.nextLine();
+                
+                System.out.printf("Mes: ");
+                mesMin = input.nextLine();
+                
+                System.out.printf("Ano: ");
+                anoMin = input.nextLine();
+                
+                System.out.printf("Hora: ");
+                horaMin = input.nextLine();
+                
+                System.out.printf("Minuto: ");
+                minMin = input.nextLine();
+
+                System.out.println("ATÉ\n");
+                
+                System.out.printf("Dia:");
+                diaMax = input.nextLine();
+                
+                System.out.printf("Mês: ");
+                mesMax = input.nextLine();
+                
+                System.out.printf("Ano: ");
+                anoMax = input.nextLine();
+                
+                System.out.printf("Hora: ");
+                horaMax = input.nextLine();
+                
+                System.out.printf("Minuto: ");
+                minMax = input.nextLine();
+                
+                LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
+                LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
+                LocalTime horaLimMin = LocalTime.parse(horaMin + ":" + minMin + ":" + "00");
+                LocalTime horaLimMax = LocalTime.parse(horaMax + ":" + minMax + ":" + "00");
+                
+                
+                for (int k = 0; k < ProxyAdministrador.Clientes.size(); k++) {
+                    for (int j = 0; j < ProxyAdministrador.Clientes.get(k).getPedidosCliente().size(); j++) {
+                        LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
+                        LocalTime horaPedido = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido());
+                        LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
+                        if (((dataPedido.isAfter(dataMin) || dataPedido.isEqual(dataMin)) && horaPedido.isAfter(horaLimMin)) 
+                                && ((dataPedido.isEqual(dataMax) || dataPedido.isBefore(dataMax)) && (horaPedido.isBefore(horaLimMax)))) {
+                            System.out.println("Cliente: " + ProxyAdministrador.Clientes.get(k).getNomePessoa() + " " + ProxyAdministrador.Clientes.get(k).getSobrenomePessoa()
+                                    + "\nEndereço: " + ProxyAdministrador.Clientes.get(k).getEnderecoCliente()
+                                    + "\nTelefone: " + ProxyAdministrador.Clientes.get(k).getTelefoneCliente()
+                                    + "\nPedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getIdPedido()
+                                    + "\nData Pedido: " + dataPrint.format(localDateFormatter)
+                                    + "\nHora Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido()
+                                    + "\nStatus Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getStatusPedido());
+                        }
+                    }
+                }
+                
                 break;
             }
 
