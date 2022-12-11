@@ -9,6 +9,7 @@ public class Pedido {
     private LocalTime horaPedido;
     private LocalTime horaEntregaPedido;
     private String statusPedido;
+    private float valorTotalPedido;
     private static int numPedido = 0; 
     private int idPedido;
     
@@ -85,6 +86,16 @@ public class Pedido {
         this.statusPedido = statusPedido;
     }
 
+    public float getValorTotalPedido() {
+        return valorTotalPedido;
+    }
+
+    public void setValorTotalPedido(float valorTotalPedido) {
+        this.valorTotalPedido = valorTotalPedido;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Pedido{" + "dataPedido=" + dataPedido + ", horaPedido=" + horaPedido + ", horaEntregaPedido=" + horaEntregaPedido + ", statusPedido=" + statusPedido + '}';

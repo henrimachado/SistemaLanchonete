@@ -10,11 +10,11 @@ public class ProxyColaborador {
 
     /*Colaborador
     *Alterar senha
-    *Cadastrar Pedido
+    *Cadastrar Pedido *
     *Alterar pedido
     *Consultar pedidos
     *Excluir pedidos 
-    *Pesquisar intervalo de pedidos
+    *Pesquisar intervalo de pedidos (metade)
      */
     //PEDIDOS
     DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd MM yyyy", new Locale("PT", "br"));
