@@ -3,8 +3,8 @@ import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.Pedido;
 import java.util.Scanner;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+import java.time.format.*;
+import java.util.*;
 
 public class ProxyColaborador {
 
@@ -17,7 +17,9 @@ public class ProxyColaborador {
     *Pesquisar intervalo de pedidos (metade)
      */
     //PEDIDOS
-    DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd MM yyyy", new Locale("PT", "br"));
+    //FORMATADOR COM RESTRIÇÃO QUE NOS GARANTE A VERIFICAÇÃO DE DATAS VÁLIDAS
+    DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+    DateTimeFormatter localHourFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
     public void cadastroPedido() {
         System.out.printf("Digite o CPF do cliente: ");
@@ -106,35 +108,57 @@ public class ProxyColaborador {
 
         switch (i) {
             case 1 -> {
-                String diaMin;
-                String diaMax;
-                String mesMin;
-                String mesMax;
-                String anoMin;
-                String anoMax;
+                String diaMin = "";
+                String diaMax = "";
+                String mesMin = "";
+                String mesMax = "";
+                String anoMin = "";
+                String anoMax = "";
+                boolean validaMax = false;
+                boolean validaMin = false;
 
-                System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
+                while (validaMax == false || validaMin == false) {
+                    System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
 
-                input = new Scanner(System.in);
-                System.out.printf("Dia: ");
-                diaMin = input.nextLine();
+                    input = new Scanner(System.in);
+                    System.out.printf("Dia: ");
+                    diaMin = input.nextLine();
+                    if (diaMin.length() == 1) {
+                        diaMin = "0" + diaMin;
+                    }
 
-                System.out.printf("Mes: ");
-                mesMin = input.nextLine();
+                    System.out.printf("Mes: ");
+                    mesMin = input.nextLine();
+                    if (mesMin.length() == 1) {
+                        mesMin = "0" + mesMin;
+                    }
 
-                System.out.printf("Ano: ");
-                anoMin = input.nextLine();
+                    System.out.printf("Ano: ");
+                    anoMin = input.nextLine();
 
-                System.out.println("ATÉ\n");
+                    System.out.println("ATÉ\n");
 
-                System.out.printf("Dia:");
-                diaMax = input.nextLine();
+                    System.out.printf("Dia:");
+                    diaMax = input.nextLine();
+                    if (diaMax.length() == 1) {
+                        diaMax = "0" + diaMax;
+                    }
 
-                System.out.printf("Mês: ");
-                mesMax = input.nextLine();
+                    System.out.printf("Mês: ");
+                    mesMax = input.nextLine();
+                    if (mesMax.length() == 1) {
+                        mesMax = "0" + mesMax;
+                    }
 
-                System.out.printf("Ano: ");
-                anoMax = input.nextLine();
+                    System.out.printf("Ano: ");
+                    anoMax = input.nextLine();
+
+                    String dataMin = anoMin + mesMin + diaMin;
+                    String dataMax = anoMax + mesMax + diaMax;
+
+                    validaMin = isDateValid(dataMin);
+                    validaMax = isDateValid(dataMax);
+                }
 
                 LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
                 LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
@@ -143,14 +167,16 @@ public class ProxyColaborador {
                     for (int j = 0; j < ProxyAdministrador.Clientes.get(k).getPedidosCliente().size(); j++) {
                         LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
                         LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
+                        LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido());
+                        LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
                         if (((dataPedido.isEqual(dataMin)) || (dataPedido.isAfter(dataMin))) && ((dataPedido.isEqual(dataMax)) || (dataPedido.isBefore(dataMax)))) {
                             System.out.println("Cliente: " + ProxyAdministrador.Clientes.get(k).getNomePessoa() + " " + ProxyAdministrador.Clientes.get(k).getSobrenomePessoa()
                                     + "\nEndereço: " + ProxyAdministrador.Clientes.get(k).getEnderecoCliente()
                                     + "\nTelefone: " + ProxyAdministrador.Clientes.get(k).getTelefoneCliente()
                                     + "\nPedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getIdPedido()
                                     + "\nData Pedido: " + dataPrint.format(localDateFormatter)
-                                    + "\nHora Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido()
-                                    + "\nHora de entrega: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraEntregaPedido()
+                                    + "\nHora Pedido: " + horaPrint.format(localHourFormatter)
+                                    + "\nHora de entrega: " + horaEntregaPrint.format(localHourFormatter)
                                     + "\nStatus Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getStatusPedido()
                                     + "\nValor Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getValorTotalPedido());
                         }
@@ -160,51 +186,92 @@ public class ProxyColaborador {
             }
 
             case 2 -> {
-                String diaMin;
-                String diaMax;
-                String mesMin;
-                String mesMax;
-                String anoMin;
-                String anoMax;
-                String horaMin;
-                String horaMax;
-                String minMin;
-                String minMax;
+                String diaMin = ""; //dia do limite inferior
+                String diaMax = ""; //dia do limite superior
+                String mesMin = ""; //mes do limite inferior
+                String mesMax = ""; //mes do limite superior
+                String anoMin = ""; //ano do limite inferior
+                String anoMax = ""; //ano do limite superior
+                String horaMin = ""; //hora do limite inferior
+                String horaMax = ""; //hora do limite superior
+                String minMin = ""; //minutos do limite inferior
+                String minMax = ""; //minutos do limite superior
+                boolean validaDataMin = false;
+                boolean validaDataMax = false;
+                boolean validaHoraMin = false;
+                boolean validaHoraMax = false;
 
-                System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
+                while (validaDataMin == false || validaDataMax == false || validaHoraMin == false || validaHoraMax == false) {
+                    System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
 
-                input = new Scanner(System.in);
-                System.out.printf("Dia: ");
-                diaMin = input.nextLine();
+                    input = new Scanner(System.in);
+                    System.out.printf("Dia: ");
+                    diaMin = input.nextLine();
+                    if (diaMin.length() == 1) {
+                        diaMin = "0" + diaMin;
+                    }
 
-                System.out.printf("Mes: ");
-                mesMin = input.nextLine();
+                    System.out.printf("Mes: ");
+                    mesMin = input.nextLine();
+                    if (mesMin.length() == 1) {
+                        mesMin = "0" + mesMin;
+                    }
 
-                System.out.printf("Ano: ");
-                anoMin = input.nextLine();
+                    System.out.printf("Ano: ");
+                    anoMin = input.nextLine();
 
-                System.out.printf("Hora: ");
-                horaMin = input.nextLine();
+                    System.out.printf("Hora: ");
+                    horaMin = input.nextLine();
+                    if (horaMin.length() == 1) {
+                        horaMin = "0" + horaMin;
+                    }
 
-                System.out.printf("Minuto: ");
-                minMin = input.nextLine();
+                    System.out.printf("Minuto: ");
+                    minMin = input.nextLine();
+                    if (minMin.length() == 1) {
+                        minMin = "0" + minMin;
+                    }
 
-                System.out.println("ATÉ\n");
+                    System.out.println("ATÉ\n");
 
-                System.out.printf("Dia:");
-                diaMax = input.nextLine();
+                    System.out.printf("Dia:");
+                    diaMax = input.nextLine();
+                    if (diaMax.length() == 1) {
+                        diaMax = "0" + diaMax;
+                    }
 
-                System.out.printf("Mês: ");
-                mesMax = input.nextLine();
+                    System.out.printf("Mês: ");
+                    mesMax = input.nextLine();
+                    if (mesMax.length() == 1) {
+                        mesMax = "0" + mesMax;
+                    }
 
-                System.out.printf("Ano: ");
-                anoMax = input.nextLine();
+                    System.out.printf("Ano: ");
+                    anoMax = input.nextLine();
 
-                System.out.printf("Hora: ");
-                horaMax = input.nextLine();
+                    System.out.printf("Hora: ");
+                    horaMax = input.nextLine();
+                    if (horaMax.length() == 1) {
+                        horaMax = "0" + horaMax;
+                    }
 
-                System.out.printf("Minuto: ");
-                minMax = input.nextLine();
+                    System.out.printf("Minuto: ");
+                    minMax = input.nextLine();
+                    if (minMax.length() == 1) {
+                        minMax = "0" + minMax;
+                    }
+
+                    String dataMin = anoMin + mesMin + diaMin;
+                    String dataMax = anoMax + mesMax + diaMax;
+                    String limHoraMin = horaMin + ":" + minMin;
+                    String limHoraMax = horaMax + ":" + minMax;
+
+                    validaDataMin = isDateValid(dataMin);
+                    validaDataMax = isDateValid(dataMax);
+                    validaHoraMin = isHourValid(limHoraMin);
+                    validaHoraMax = isHourValid(limHoraMax);
+
+                }
 
                 LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
                 LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
@@ -216,6 +283,8 @@ public class ProxyColaborador {
                         LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
                         LocalTime horaPedido = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido());
                         LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
+                        LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido());
+                        LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
                         if (((dataPedido.isAfter(dataMin) || dataPedido.isEqual(dataMin)) && horaPedido.isAfter(horaLimMin))
                                 && ((dataPedido.isEqual(dataMax) || dataPedido.isBefore(dataMax)) && (horaPedido.isBefore(horaLimMax)))) {
                             System.out.println("Cliente: " + ProxyAdministrador.Clientes.get(k).getNomePessoa() + " " + ProxyAdministrador.Clientes.get(k).getSobrenomePessoa()
@@ -223,7 +292,8 @@ public class ProxyColaborador {
                                     + "\nTelefone: " + ProxyAdministrador.Clientes.get(k).getTelefoneCliente()
                                     + "\nPedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getIdPedido()
                                     + "\nData Pedido: " + dataPrint.format(localDateFormatter)
-                                    + "\nHora Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido()
+                                    + "\nHora Pedido: " + horaPrint.format(localHourFormatter)
+                                    + "\nHora de Entrega: " + horaEntregaPrint.format(localHourFormatter)
                                     + "\nStatus Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getStatusPedido());
                         }
                     }
@@ -243,20 +313,6 @@ public class ProxyColaborador {
     }
 
     public void modificarPedido(int idPedido, Cliente Cl) {
-        /*
-        String CPF;
-        System.out.printf("Digite o CPF do cliente: ");
-        CPF = input.nextLine();
-        Cliente Cl = ProxyAdministrador.consultaCliente(CPF);
-
-        System.out.println("Pedidos feitos pelo Cliente " + Cl.getNomePessoa() + " " + Cl.getSobrenomePessoa() + ": ");
-        for (int i = 0; i < Cl.getPedidosCliente().size(); i++) {
-            System.out.println("IdPedido: " + Cl.getPedidosCliente().get(i).getIdPedido() + "    Data: "
-                    + Cl.getPedidosCliente().get(i).getDataPedido());
-        }
-        System.out.println("Digite o ID do pedido que deseja alterar ");
-        int idPedido = input.nextInt();
-         */
         Scanner input = new Scanner(System.in);
         if (consultarPedido(idPedido, Cl) != null) {
             Pedido modPedido = consultarPedido(idPedido, Cl);
@@ -295,7 +351,7 @@ public class ProxyColaborador {
                                5 - Cancelado
                                 """);
                     int novoStatus = input.nextInt();
-                    if(novoStatus == 5){
+                    if (novoStatus == 5) {
                         modPedido.setHoraEntregaPedido("00:00:00");
                     }
                     modPedido.setStatusPedido(novoStatus);
@@ -384,33 +440,127 @@ public class ProxyColaborador {
 
     }
 
-    /*
-    public static void modificarColabSenha(Colaborador Col) {
+    //FUNÇÃO DE ESTATÍSTICA DE VENDAS EM UM INTERVALO DE DATA
+    public void statsVendas() {
         Scanner input = new Scanner(System.in);
-        System.out.println("");
-        System.out.println("Digite a sua senha anterior: ");
-        String senhaAnt = input.nextLine();
-        System.out.println("Digite a nova senha: ");
-        String novaSenha = input.nextLine();
-        System.out.println("Confirme a nova senha: ");
-        String confirmSenha = input.nextLine();
+        String diaMin = "";
+        String diaMax = "";
+        String mesMin = "";
+        String mesMax = "";
+        String anoMin = "";
+        String anoMax = "";
+        boolean validaMax = false;
+        boolean validaMin = false;
 
-        if (Col.getSenhaUsuario().equals(senhaAnt)) {
-            if (novaSenha.equals(confirmSenha)) {
-                Col.setSenhaUsuario(novaSenha);
-                System.out.println("Alteração realizada com sucesso!");
-                //Chamar o menu novamente
-                break;
-            } else {
-                System.out.println("Senhas diferentes. Tente novamente.");
-                //Chamar o menu novamente
-                break;
+        while (validaMax == false || validaMin == false) {
+            System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
+
+            input = new Scanner(System.in);
+            System.out.printf("Dia: ");
+            diaMin = input.nextLine();
+            if (diaMin.length() == 1) {
+                diaMin = "0" + diaMin;
             }
-        } else {
-            System.out.println("Senha antiga não confere. Tente novamente");
-            //Chamar o menu novamente
-            break;
+
+            System.out.printf("Mes: ");
+            mesMin = input.nextLine();
+            if (mesMin.length() == 1) {
+                mesMin = "0" + mesMin;
+            }
+
+            System.out.printf("Ano: ");
+            anoMin = input.nextLine();
+
+            System.out.println("ATÉ\n");
+
+            System.out.printf("Dia:");
+            diaMax = input.nextLine();
+            if (diaMax.length() == 1) {
+                diaMax = "0" + diaMax;
+            }
+
+            System.out.printf("Mês: ");
+            mesMax = input.nextLine();
+            if (mesMax.length() == 1) {
+                mesMax = "0" + mesMax;
+            }
+
+            System.out.printf("Ano: ");
+            anoMax = input.nextLine();
+
+            String dataMin = anoMin + mesMin + diaMin;
+            String dataMax = anoMax + mesMax + diaMax;
+
+            validaMin = isDateValid(dataMin);
+            validaMax = isDateValid(dataMax);
+        }
+
+        LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
+        LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
+        ArrayList<Cliente> listaClientes = ProxyAdministrador.Clientes;
+        
+        float receitaTotal = 0;
+        int qntCancelados = 0;
+        int qntAceitos = 0;
+        int qntEntregues = 0;
+
+        for (int k = 0; k < listaClientes.size(); k++) {
+            for (int j = 0; j < listaClientes.get(k).getPedidosCliente().size(); j++) {
+                LocalDate dataPedido = LocalDate.parse(listaClientes.get(k).getPedidosCliente().get(j).getDataPedido()); //passar o novo formater
+                LocalDate dataPrint = LocalDate.parse(listaClientes.get(k).getPedidosCliente().get(j).getDataPedido()); //passar o novo formater
+                if (((dataPedido.isEqual(dataMin)) || (dataPedido.isAfter(dataMin))) && ((dataPedido.isEqual(dataMax)) || (dataPedido.isBefore(dataMax)))) {
+                    System.out.println("Cliente: " + listaClientes.get(k).getNomePessoa() + " " + listaClientes.get(k).getSobrenomePessoa()
+                            + "\nPedido: " + listaClientes.get(k).getPedidosCliente().get(j).getIdPedido()
+                            + "\nData Pedido: " + dataPrint.format(localDateFormatter) //usar o novo formater 
+                            + "\nHora Pedido: " + listaClientes.get(k).getPedidosCliente().get(j).getHoraPedido() //usar o novo formater
+                            + "\nStatus Pedido: " + listaClientes.get(k).getPedidosCliente().get(j).getStatusPedido()
+                            + "\nValor Pedido: " + listaClientes.get(k).getPedidosCliente().get(j).getValorTotalPedido());
+                    switch (listaClientes.get(k).getPedidosCliente().get(j).getStatusPedido()) {
+                        case 1 -> qntAceitos++;
+                        case 4 -> {
+                            qntEntregues++;
+                            receitaTotal += listaClientes.get(k).getPedidosCliente().get(j).getValorTotalPedido();
+                        }
+                        case 5 -> qntCancelados++;
+                        default -> {
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+                + "Estatísticas de venda para o intervalo de " + dataMin.format(localDateFormatter) + " à " + dataMax.format(localDateFormatter) + "\n");
+        System.out.println("Qnt. Pedidos Aceitos: " + qntAceitos + "      Qnt. Pedidos Cancelados: " + qntCancelados + "      Qnt. Pedidos Entregues: " + qntEntregues + "      Receita total arrecadada: " + receitaTotal
+                + "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+    }
+
+    public static boolean isDateValid(String strDate) {
+        //Formatter de data
+        String dateFormat = "uuuuMMdd";
+        //Resolver Strict garante que seja feito dentro dos valores possíveis
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT);
+        try {
+            LocalDate date = LocalDate.parse(strDate, dateTimeFormatter);
+            return true; //Se for válida
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+
+    }
+
+    public static boolean isHourValid(String strHour) {
+        //Formatter de hora
+        String hourFormat = "HH:mm";
+        //Resolver Strict garante que seja feito dentro dos valores possíveis
+        DateTimeFormatter hourTimeFormatter = DateTimeFormatter.ofPattern(hourFormat).withResolverStyle(ResolverStyle.STRICT);
+        try {
+            LocalTime hour = LocalTime.parse(strHour, hourTimeFormatter);
+            return true; //Se for válida
+        } catch (DateTimeParseException f) {
+            return false; //Se for inválida
         }
     }
-     */
+
 }

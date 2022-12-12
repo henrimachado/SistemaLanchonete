@@ -15,6 +15,13 @@ public class SistemaLanchonete {
         Locale locale = new Locale("pt","BR");
         Locale.setDefault(locale);
         
+        ProxyAdministrador menuAdm = new ProxyAdministrador();
+        ProxyColaborador menuColab = new ProxyColaborador();
+        menuAdm.cadastroCliente();
+        menuColab.cadastroPedido();
+        menuColab.cadastroPedido();
+        menuColab.listarPedidos();
+        
         /*     
         Administrador adm1 = new Administrador();
         adm1.setCPF("123");

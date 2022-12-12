@@ -116,4 +116,55 @@ public class jsonDump {
        
         return null;
     }
+    public static Colaborador assimilateColaborador() throws IOException{
+        Gson jsonObject = new Gson();
+        File colabFile = new File ("src\\main\\java\\SistemaLanchoneteArquivos\\Colaborador.json");
+        
+        try{
+            String dadosColab = new String (Files.readAllBytes(Paths.get(colabFile.toURI())));
+            Colaborador colabC = jsonObject.fromJson(dadosColab, new TypeToken<Colaborador>() {}.getType());
+            return colabC;
+        }
+        
+        catch(IOException e){
+           e.printStackTrace();
+        }
+        
+        return null;
+    }
+    
+    public static Cliente assimilateCliente() throws IOException{
+        Gson jsonObject = new Gson();
+        File clienteFile = new File ("src\\main\\java\\SistemaLanchoneteArquivos\\Cliente.json");
+        
+        try{
+            String dadosCliente = new String (Files.readAllBytes(Paths.get(clienteFile.toURI())));
+            Cliente ClienteC = jsonObject.fromJson(dadosCliente, new TypeToken<Cliente>() {}.getType());
+            return ClienteC;
+        }
+        
+        catch(IOException e){
+           e.printStackTrace();
+        }
+        
+        return null;
+    }
+    
+    
+    public static Produto assimilateProduto() throws IOException{
+        Gson jsonObject = new Gson();
+        File produtoFile = new File ("src\\main\\java\\SistemaLanchoneteArquivos\\Produto.json");
+        
+        try{
+            String dadosProduto = new String (Files.readAllBytes(Paths.get(produtoFile.toURI())));
+            Produto ProdutoP = jsonObject.fromJson(dadosProduto, new TypeToken<Produto>() {}.getType());
+            return ProdutoP;
+        }
+        
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
 }
