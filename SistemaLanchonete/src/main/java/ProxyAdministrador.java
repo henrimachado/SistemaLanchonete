@@ -569,7 +569,7 @@ public class ProxyAdministrador {
     }
 
     //Modificar admnistrador 
-    public static void modificarAdm(Administrador Adm) {
+    public void modificarAdm(Administrador Adm) {
 
         System.out.println("---------------------------------------------------------------\n"+ Adm + "\n---------------------------------------------------------------\n");
         Scanner input = new Scanner(System.in);
@@ -591,11 +591,11 @@ public class ProxyAdministrador {
 
                 if (novoLogin.equals(confirLogin)) {
                     Adm.setLoginUsuario(confirLogin);
-                    ProxyAdministrador.modificarAdm(Adm);
+                    modificarAdm(Adm);
                     break;
                 } else {
                     System.out.println("Dados inseridos não conferem. Tente novamente");
-                    ProxyAdministrador.modificarAdm(Adm);
+                    modificarAdm(Adm);
                     break;
                 }
             }
@@ -611,16 +611,16 @@ public class ProxyAdministrador {
                     if (novaSenha.equals(confirmSenha)) {
                         Adm.setSenhaUsuario(novaSenha);
                         System.out.println("Alteração realizada com sucesso!");
-                        ProxyAdministrador.modificarAdm(Adm);
+                        modificarAdm(Adm);
                         break;
                     } else {
                         System.out.println("Senhas diferentes. Tente novamente.");
-                        ProxyAdministrador.modificarAdm(Adm);
+                        modificarAdm(Adm);
                         break;
                     }
                 } else {
                     System.out.println("Senha antiga não confere. Tente novamente");
-                    ProxyAdministrador.modificarAdm(Adm);
+                    modificarAdm(Adm);
                     break;
                 }
             }
@@ -630,7 +630,7 @@ public class ProxyAdministrador {
                 String novoCPF = input.nextLine();
                 Adm.setCPF(novoCPF);
                 System.out.println("Alteração realizada com sucesso!");
-                ProxyAdministrador.modificarAdm(Adm);
+                modificarAdm(Adm);
                 break;
             }
 
@@ -644,7 +644,7 @@ public class ProxyAdministrador {
                 Adm.setSobrenomePessoa(novoSobrenome);
 
                 System.out.println("Alteração realizada com sucesso!");
-                ProxyAdministrador.modificarAdm(Adm);
+                modificarAdm(Adm);
                 break;
             }
 
@@ -654,7 +654,7 @@ public class ProxyAdministrador {
 
             default -> {
                 System.out.println("Opção inválida, tente novamente.");
-                ProxyAdministrador.modificarAdm(Adm);
+                modificarAdm(Adm);
                 break;
             }
 

@@ -1,6 +1,6 @@
 package br.com.lanchonete.pessoas;
 
-public abstract class Usuario extends Pessoa {
+public class Usuario extends Pessoa {
 
     private String loginUsuario;
     private String senhaUsuario;

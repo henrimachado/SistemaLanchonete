@@ -162,6 +162,12 @@ public class ProxyColaborador {
 
                 LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
                 LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
+                System.out.println("""
+                                   
+                                   ------------------------------------------------------------------------------------------------------------
+                                   |                                   PEDIDOS CADASTRADOS NO SISTEMA                                         |
+                                   ------------------------------------------------------------------------------------------------------------
+                                   """);
 
                 for (int k = 0; k < ProxyAdministrador.Clientes.size(); k++) {
                     for (int j = 0; j < ProxyAdministrador.Clientes.get(k).getPedidosCliente().size(); j++) {
@@ -277,6 +283,12 @@ public class ProxyColaborador {
                 LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
                 LocalTime horaLimMin = LocalTime.parse(horaMin + ":" + minMin + ":" + "00");
                 LocalTime horaLimMax = LocalTime.parse(horaMax + ":" + minMax + ":" + "00");
+                System.out.println("""
+                                   
+                                   ------------------------------------------------------------------------------------------------------------
+                                   |                                   PEDIDOS CADASTRADOS NO SISTEMA                                         |
+                                   ------------------------------------------------------------------------------------------------------------
+                                   """);
 
                 for (int k = 0; k < ProxyAdministrador.Clientes.size(); k++) {
                     for (int j = 0; j < ProxyAdministrador.Clientes.get(k).getPedidosCliente().size(); j++) {
@@ -498,11 +510,19 @@ public class ProxyColaborador {
         LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
         LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
         ArrayList<Cliente> listaClientes = ProxyAdministrador.Clientes;
-        
+
         float receitaTotal = 0;
         int qntCancelados = 0;
         int qntAceitos = 0;
         int qntEntregues = 0;
+        System.out.println("""
+                                   \n
+                                   ------------------------------------------------------------------------------------------------------------
+                                   |                                       RELATÓRIO DE VENDAS                                                |     
+                                   |                                   PEDIDOS CADASTRADOS NO SISTEMA                                         |
+                                   ------------------------------------------------------------------------------------------------------------
+                                   \n
+                                   """);
 
         for (int k = 0; k < listaClientes.size(); k++) {
             for (int j = 0; j < listaClientes.get(k).getPedidosCliente().size(); j++) {
@@ -516,12 +536,14 @@ public class ProxyColaborador {
                             + "\nStatus Pedido: " + listaClientes.get(k).getPedidosCliente().get(j).getStatusPedido()
                             + "\nValor Pedido: " + listaClientes.get(k).getPedidosCliente().get(j).getValorTotalPedido());
                     switch (listaClientes.get(k).getPedidosCliente().get(j).getStatusPedido()) {
-                        case 1 -> qntAceitos++;
+                        case 1 ->
+                            qntAceitos++;
                         case 4 -> {
                             qntEntregues++;
                             receitaTotal += listaClientes.get(k).getPedidosCliente().get(j).getValorTotalPedido();
                         }
-                        case 5 -> qntCancelados++;
+                        case 5 ->
+                            qntCancelados++;
                         default -> {
                         }
                     }
@@ -563,4 +585,29 @@ public class ProxyColaborador {
         }
     }
 
+    public void modificarColaborador(Colaborador Colab) {
+        String senhaAnt;
+        String novaSenha;
+        String senhaConf;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Insira sua senha anterior: ");
+        senhaAnt = input.nextLine();
+        System.out.println("Insira sua nova senha: ");
+        novaSenha = input.nextLine();
+        System.out.println("Confirme sua nova senha: ");
+        senhaConf = input.nextLine();
+        
+        if(Colab.getSenhaUsuario().equals(senhaAnt)){
+            if (novaSenha.equals(senhaConf)){
+                Colab.setSenhaUsuario(novaSenha);
+                System.out.println("Alteração realizada com sucesso!\n");
+            }
+            else{
+                System.out.println("Senhas não são iguais. Tente novamente.\n");
+            }
+        }
+        else{
+            System.out.println("Senha antiga não confere. Tente novamente.\n");
+        }
+    }
 }
