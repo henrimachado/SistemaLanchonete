@@ -169,22 +169,22 @@ public class ProxyColaborador {
                                    ------------------------------------------------------------------------------------------------------------
                                    """);
 
-                for (int k = 0; k < ProxyAdministrador.Clientes.size(); k++) {
-                    for (int j = 0; j < ProxyAdministrador.Clientes.get(k).getPedidosCliente().size(); j++) {
-                        LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
-                        LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
-                        LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido());
-                        LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
+                for (int k = 0; k < ProxyAdministrador.getClientes().size(); k++) {
+                    for (int j = 0; j < ProxyAdministrador.getClientes().get(k).getPedidosCliente().size(); j++) {
+                        LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
+                        LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
+                        LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraPedido());
+                        LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
                         if (((dataPedido.isEqual(dataMin)) || (dataPedido.isAfter(dataMin))) && ((dataPedido.isEqual(dataMax)) || (dataPedido.isBefore(dataMax)))) {
-                            System.out.println("Cliente: " + ProxyAdministrador.Clientes.get(k).getNomePessoa() + " " + ProxyAdministrador.Clientes.get(k).getSobrenomePessoa()
-                                    + "\nEndereço: " + ProxyAdministrador.Clientes.get(k).getEnderecoCliente()
-                                    + "\nTelefone: " + ProxyAdministrador.Clientes.get(k).getTelefoneCliente()
-                                    + "\nPedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getIdPedido()
+                            System.out.println("Cliente: " + ProxyAdministrador.getClientes().get(k).getNomePessoa() + " " + ProxyAdministrador.getClientes().get(k).getSobrenomePessoa()
+                                    + "\nEndereço: " + ProxyAdministrador.getClientes().get(k).getEnderecoCliente()
+                                    + "\nTelefone: " + ProxyAdministrador.getClientes().get(k).getTelefoneCliente()
+                                    + "\nPedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getIdPedido()
                                     + "\nData Pedido: " + dataPrint.format(localDateFormatter)
                                     + "\nHora Pedido: " + horaPrint.format(localHourFormatter)
                                     + "\nHora de entrega: " + horaEntregaPrint.format(localHourFormatter)
-                                    + "\nStatus Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getStatusPedido()
-                                    + "\nValor Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getValorTotalPedido());
+                                    + "\nStatus Pedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getStatusPedido()
+                                    + "\nValor Pedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getValorTotalPedido());
                         }
                     }
                 }
@@ -290,23 +290,23 @@ public class ProxyColaborador {
                                    ------------------------------------------------------------------------------------------------------------
                                    """);
 
-                for (int k = 0; k < ProxyAdministrador.Clientes.size(); k++) {
-                    for (int j = 0; j < ProxyAdministrador.Clientes.get(k).getPedidosCliente().size(); j++) {
-                        LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
-                        LocalTime horaPedido = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido());
-                        LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getDataPedido());
-                        LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraPedido());
-                        LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
+                for (int k = 0; k < ProxyAdministrador.getClientes().size(); k++) {
+                    for (int j = 0; j < ProxyAdministrador.getClientes().get(k).getPedidosCliente().size(); j++) {
+                        LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
+                        LocalTime horaPedido = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraPedido());
+                        LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
+                        LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraPedido());
+                        LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
                         if (((dataPedido.isAfter(dataMin) || dataPedido.isEqual(dataMin)) && horaPedido.isAfter(horaLimMin))
                                 && ((dataPedido.isEqual(dataMax) || dataPedido.isBefore(dataMax)) && (horaPedido.isBefore(horaLimMax)))) {
-                            System.out.println("Cliente: " + ProxyAdministrador.Clientes.get(k).getNomePessoa() + " " + ProxyAdministrador.Clientes.get(k).getSobrenomePessoa()
-                                    + "\nEndereço: " + ProxyAdministrador.Clientes.get(k).getEnderecoCliente()
-                                    + "\nTelefone: " + ProxyAdministrador.Clientes.get(k).getTelefoneCliente()
-                                    + "\nPedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getIdPedido()
+                            System.out.println("Cliente: " + ProxyAdministrador.getClientes().get(k).getNomePessoa() + " " + ProxyAdministrador.getClientes().get(k).getSobrenomePessoa()
+                                    + "\nEndereço: " + ProxyAdministrador.getClientes().get(k).getEnderecoCliente()
+                                    + "\nTelefone: " + ProxyAdministrador.getClientes().get(k).getTelefoneCliente()
+                                    + "\nPedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getIdPedido()
                                     + "\nData Pedido: " + dataPrint.format(localDateFormatter)
                                     + "\nHora Pedido: " + horaPrint.format(localHourFormatter)
                                     + "\nHora de Entrega: " + horaEntregaPrint.format(localHourFormatter)
-                                    + "\nStatus Pedido: " + ProxyAdministrador.Clientes.get(k).getPedidosCliente().get(j).getStatusPedido());
+                                    + "\nStatus Pedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getStatusPedido());
                         }
                     }
                 }
@@ -509,7 +509,7 @@ public class ProxyColaborador {
 
         LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
         LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
-        ArrayList<Cliente> listaClientes = ProxyAdministrador.Clientes;
+        ArrayList<Cliente> listaClientes = ProxyAdministrador.getClientes();
 
         float receitaTotal = 0;
         int qntCancelados = 0;

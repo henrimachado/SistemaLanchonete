@@ -1,17 +1,20 @@
-import com.google.gson.*;
 import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.*;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import java.io.FileWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class jsonDump {
+public class manipularJson {
 
-    public static void dumpColaborador(Colaborador[] Co) throws IOException {
+    public manipularJson() {
+    }
+    
+    public  void dumpColaborador(Colaborador[] Co) throws IOException {
         Gson jsonObject = new Gson();
         File colaboradorFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Colaboradores.json");
 
@@ -28,9 +31,9 @@ public class jsonDump {
         }
     }
 
-    public static Colaborador[] assimilateColaborador() throws IOException {
+    public Colaborador[] assimilateColaborador() throws IOException {
         Gson jsonObject = new Gson();
-        File colabFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Colaborador.json");
+        File colabFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Colaboradores.json");
 
         try {
             String dadosColab = new String(Files.readAllBytes(Paths.get(colabFile.toURI())));
@@ -44,7 +47,7 @@ public class jsonDump {
         return null;
     }
 
-    public static void dumpCliente(ArrayList<Cliente> Cl) throws IOException {
+    public void dumpCliente(ArrayList<Cliente> Cl) throws IOException {
         Gson jsonObject = new Gson();
         File clienteFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Clientes.json");
         FileWriter clienteWriter = null;
@@ -61,7 +64,7 @@ public class jsonDump {
 
     }
 
-    public static ArrayList<Cliente> assimilateCliente() throws IOException {
+    public  ArrayList<Cliente> assimilateCliente() throws IOException {
         Gson jsonObject = new Gson();
         File clienteFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Clientes.json");
 
@@ -77,7 +80,7 @@ public class jsonDump {
         return null;
     }
 
-    public static void dumpPedidos(Pedido Pe) throws IOException {
+    public  void dumpPedidos(Pedido Pe) throws IOException {
         Gson jsonObject = new Gson();
         File pedidoFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Pedidos.json");
         FileWriter pedidoWriter = null;
@@ -93,7 +96,7 @@ public class jsonDump {
         }
     }
 
-    public static void dumpProdutos(ArrayList<Produto>  Po) throws IOException {
+    public void dumpProdutos(ArrayList<Produto>  Po) throws IOException {
         Gson jsonObject = new Gson();
         File produtoFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Produtos.json");
         FileWriter produtoWriter = null;
@@ -109,9 +112,9 @@ public class jsonDump {
 
     }
 
-    public static ArrayList<Produto> assimilateProduto() throws IOException {
+    public ArrayList<Produto> assimilateProduto() throws IOException {
         Gson jsonObject = new Gson();
-        File produtoFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Produto.json");
+        File produtoFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Produtos.json");
 
         try {
             String dadosProduto = new String(Files.readAllBytes(Paths.get(produtoFile.toURI())));
@@ -125,7 +128,7 @@ public class jsonDump {
         return null;
     }
 
-    public static void dumpAdministrador(Administrador Adm) throws IOException {
+    public void dumpAdministrador(Administrador Adm) throws IOException {
         Gson jsonObject = new Gson();
         File admFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Administrador.json");
         FileWriter admWriter = null;
@@ -140,7 +143,7 @@ public class jsonDump {
         }
     }
 
-    public static Administrador assimilateAdministrador() throws IOException {
+    public Administrador assimilateAdministrador() throws IOException {
 
         Gson jsonObject = new Gson();
         File admFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Administrador.json");
@@ -155,5 +158,16 @@ public class jsonDump {
 
         return null;
     }
-
+    
+    public void assimilateAll() throws IOException{
+        ProxyAdministrador.setColaboradores(assimilateColaborador());
+        ProxyAdministrador.setClientes(assimilateCliente());
+        ProxyAdministrador.setListaProdutos(assimilateProduto());
+    }
+    
+    public void dumpAll() throws IOException{
+        dumpColaborador(ProxyAdministrador.getColaboradores());
+        dumpCliente(ProxyAdministrador.getClientes());
+        dumpProdutos(ProxyAdministrador.getListaProdutos());
+    }
 }

@@ -12,16 +12,15 @@ public class ProxyAdministrador {
 
     //MANIPULAÇÃO DE COLABORADORES
     //Questão 01 - O sistema deve armazenar de forma estática 15 colaboradores
-    private static final Colaborador Colaboradores[] = new Colaborador[15];
+    private static Colaborador Colaboradores[] = new Colaborador[15];
 
     //GETTER DO ARRAY DE COLABORADORES
     public static Colaborador[] getColaboradores() {
         return Colaboradores;
     }
 
-    //SETTER DE ARRAY DE COLABORADORES
-    public static void setColaboradores(Colaborador[] Colaboradores, Colaborador C) {
-
+    //FUNÇÃO PARA CADASTRO DE COLABORADORES
+    public static void addColaboradores(Colaborador[] Colaboradores, Colaborador C){
         int i = 0;
 
         while (ProxyAdministrador.Colaboradores[i] != null & i <= 15) {
@@ -33,6 +32,11 @@ public class ProxyAdministrador {
         } else {
             System.out.println("Vagas preenchidas. Não foi possível cadastrar novos colaboradores.");
         }
+    }
+    
+    //SETTER DE ARRAY DE COLABORADORES
+    public static void setColaboradores(Colaborador[] Colaboradores) {
+       ProxyAdministrador.Colaboradores = Colaboradores; 
 
     }
 
@@ -65,7 +69,7 @@ public class ProxyAdministrador {
 
         //Cadastro
         Colaborador C = new Colaborador(nomeColaborador, sobrenomeColaborador, CPF, loginColaborador, senhaColaborador);
-        ProxyAdministrador.setColaboradores(Colaboradores, C);
+        ProxyAdministrador.addColaboradores(Colaboradores, C);
     }
 
     //CONSULTA O COLABORADOR NO BANCO DE COLABORADORES
@@ -188,10 +192,10 @@ public class ProxyAdministrador {
 
     //MANIPULAÇÃO DE CLIENTES
     //Questão 8 - Clientes e pedidos devem ser salvos de forma dinâmica
-    protected static final ArrayList<Cliente> Clientes = new ArrayList<>();
+    private static  ArrayList<Cliente> Clientes = new ArrayList<>();
 
     //Getter
-    public ArrayList<Cliente> getClientes() {
+    public static ArrayList<Cliente> getClientes() {
         return Clientes;
     }
 
@@ -215,8 +219,12 @@ public class ProxyAdministrador {
     }
 
     //Setter
-    public static void setClientes(ArrayList<Cliente> Clientes, Cliente Cl) {
-        ProxyAdministrador.Clientes.add(Cl);
+    public static void setClientes(ArrayList<Cliente> Clientes) {
+        ProxyAdministrador.Clientes = Clientes;
+        /*for (int i = 0; i < Clientes.size(); i++){
+            ProxyAdministrador.Clientes.add(Clientes.get(i));
+        }
+        */
     }
 
     //CADASTRO DE NOVOS CLIENTES
@@ -246,7 +254,7 @@ public class ProxyAdministrador {
         telefoneCliente = input.nextLine();
 
         Cliente cl = new Cliente(nomeCliente, sobrenomeCliente, CPF, enderecoCliente, telefoneCliente);
-        ProxyAdministrador.setClientes(Clientes, cl);
+        ProxyAdministrador.Clientes.add(cl);
 
         //Manipulação com membro devidamente encapsulado, requer o uso de um método para tanto
         setQntClientesPrivate();
@@ -408,8 +416,8 @@ public class ProxyAdministrador {
     }
 
     //Setter de produtos na lista
-    public static void setListaProdutos(ArrayList<Produto> listaProdutos, Produto Pr) {
-        ProxyAdministrador.listaProdutos.add(Pr);
+    public static void setListaProdutos(ArrayList<Produto> listaProdutos) {
+        ProxyAdministrador.listaProdutos = listaProdutos;
     }
 
     //Cadastro produto 
@@ -434,7 +442,7 @@ public class ProxyAdministrador {
         idProduto = ProxyAdministrador.getNumProdutos();
 
         Produto Pr = new Produto(nomeProduto, valorProduto, idProduto, descricaoProduto);
-        ProxyAdministrador.setListaProdutos(listaProdutos, Pr);
+        ProxyAdministrador.getListaProdutos().add(Pr);
         ProxyAdministrador.setNumProdutos(numProdutos);
 
     }
@@ -600,6 +608,7 @@ public class ProxyAdministrador {
                 }
             }
             case 2 -> {
+                input = new Scanner(System.in);
                 System.out.println("Digite a sua senha anterior: ");
                 String senhaAnt = input.nextLine();
                 System.out.println("Digite a nova senha: ");
