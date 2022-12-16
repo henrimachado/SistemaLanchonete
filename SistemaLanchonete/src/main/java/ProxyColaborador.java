@@ -23,7 +23,6 @@ public class ProxyColaborador {
 
     public void cadastroPedido() {
         System.out.printf("Digite o CPF do cliente: ");
-
         Scanner input = new Scanner(System.in);
         String CPFCliente = input.nextLine();
 
@@ -39,37 +38,34 @@ public class ProxyColaborador {
             Integer idProduto = input.nextInt();
             novoPedido.setListaProdutos(idProduto);
 
-            System.out.println("""
+            boolean finalizarPedido = false;
+            do {
+                System.out.println("""
                                Escolha uma opção: 
                                1 - Inserir adicionais 
                                2 - Finalizar pedido
                                """);
 
-            int i = input.nextInt();
-            switch (i) {
-                case 1 -> {
-                    int j = 1;
-
-                    while (j == 1) {
-                        System.out.printf("Insira o Id do adicional: ");
+                int i = input.nextInt();
+                switch (i) {
+                    case 1 -> {
                         Integer idAdicional = input.nextInt();
                         novoPedido.setListaProdutos(idAdicional);
-
-                        System.out.println("""
-                                            Escolha uma opção: 
-                                            1 - Inserir novos adicionais 
-                                            2 - Finalizar pedido
-                                            """);
-                        j = input.nextInt();
+                        break;
                     }
-                    break;
 
+                    case 2 -> {
+                        finalizarPedido = true;
+                        break;
+                    }
+
+                    default -> {
+                        System.out.println("\nOpção inválida. Tente novamente!\n");
+                    }
                 }
 
-                case 2 -> {
-                    break;
-                }
-            }
+            } while (finalizarPedido == false);
+
             novoPedido.setDataPedido(LocalDate.now().toString());
             novoPedido.setHoraPedido(LocalTime.now().toString());
             novoPedido.setHoraEntregaPedido(LocalTime.now().plusMinutes(50).toString());
@@ -97,242 +93,250 @@ public class ProxyColaborador {
     *4 = Entregue
     *0 = Cancelado*/
     public void listarPedidos() {
-        System.out.println("""
+        boolean encerrarLista = false;
+        do {
+            System.out.println("""
                                Escolha uma opção: 
                                1 - Pesquisa por intervalo de data
                                2 - Pesquisa por intervalo de data e hora
-                               3 - Fechar
+                               3 - Voltar
                                 """);
-        Scanner input = new Scanner(System.in);
-        int i = input.nextInt();
+            Scanner input = new Scanner(System.in);
+            int i = input.nextInt();
 
-        switch (i) {
-            case 1 -> {
-                String diaMin = "";
-                String diaMax = "";
-                String mesMin = "";
-                String mesMax = "";
-                String anoMin = "";
-                String anoMax = "";
-                boolean validaMax = false;
-                boolean validaMin = false;
+            switch (i) {
+                case 1 -> {
+                    String diaMin = "";
+                    String diaMax = "";
+                    String mesMin = "";
+                    String mesMax = "";
+                    String anoMin = "";
+                    String anoMax = "";
+                    boolean validaMax = false;
+                    boolean validaMin = false;
 
-                while (validaMax == false || validaMin == false) {
-                    System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
+                    while (validaMax == false || validaMin == false) {
+                        System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
 
-                    input = new Scanner(System.in);
-                    System.out.printf("Dia: ");
-                    diaMin = input.nextLine();
-                    if (diaMin.length() == 1) {
-                        diaMin = "0" + diaMin;
+                        input = new Scanner(System.in);
+                        System.out.printf("Dia: ");
+                        diaMin = input.nextLine();
+                        if (diaMin.length() == 1) {
+                            diaMin = "0" + diaMin;
+                        }
+
+                        System.out.printf("Mes: ");
+                        mesMin = input.nextLine();
+                        if (mesMin.length() == 1) {
+                            mesMin = "0" + mesMin;
+                        }
+
+                        System.out.printf("Ano: ");
+                        anoMin = input.nextLine();
+
+                        System.out.println("ATÉ\n");
+
+                        System.out.printf("Dia:");
+                        diaMax = input.nextLine();
+                        if (diaMax.length() == 1) {
+                            diaMax = "0" + diaMax;
+                        }
+
+                        System.out.printf("Mês: ");
+                        mesMax = input.nextLine();
+                        if (mesMax.length() == 1) {
+                            mesMax = "0" + mesMax;
+                        }
+
+                        System.out.printf("Ano: ");
+                        anoMax = input.nextLine();
+
+                        String dataMin = anoMin + mesMin + diaMin;
+                        String dataMax = anoMax + mesMax + diaMax;
+
+                        validaMin = isDateValid(dataMin);
+                        validaMax = isDateValid(dataMax);
                     }
 
-                    System.out.printf("Mes: ");
-                    mesMin = input.nextLine();
-                    if (mesMin.length() == 1) {
-                        mesMin = "0" + mesMin;
-                    }
-
-                    System.out.printf("Ano: ");
-                    anoMin = input.nextLine();
-
-                    System.out.println("ATÉ\n");
-
-                    System.out.printf("Dia:");
-                    diaMax = input.nextLine();
-                    if (diaMax.length() == 1) {
-                        diaMax = "0" + diaMax;
-                    }
-
-                    System.out.printf("Mês: ");
-                    mesMax = input.nextLine();
-                    if (mesMax.length() == 1) {
-                        mesMax = "0" + mesMax;
-                    }
-
-                    System.out.printf("Ano: ");
-                    anoMax = input.nextLine();
-
-                    String dataMin = anoMin + mesMin + diaMin;
-                    String dataMax = anoMax + mesMax + diaMax;
-
-                    validaMin = isDateValid(dataMin);
-                    validaMax = isDateValid(dataMax);
-                }
-
-                LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
-                LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
-                System.out.println("""
+                    LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
+                    LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
+                    System.out.println("""
                                    
                                    ------------------------------------------------------------------------------------------------------------
                                    |                                   PEDIDOS CADASTRADOS NO SISTEMA                                         |
                                    ------------------------------------------------------------------------------------------------------------
                                    """);
 
-                for (int k = 0; k < ProxyAdministrador.getClientes().size(); k++) {
-                    for (int j = 0; j < ProxyAdministrador.getClientes().get(k).getPedidosCliente().size(); j++) {
-                        LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
-                        LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
-                        LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraPedido());
-                        LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
-                        if (((dataPedido.isEqual(dataMin)) || (dataPedido.isAfter(dataMin))) && ((dataPedido.isEqual(dataMax)) || (dataPedido.isBefore(dataMax)))) {
-                            System.out.println("Cliente: " + ProxyAdministrador.getClientes().get(k).getNomePessoa() + " " + ProxyAdministrador.getClientes().get(k).getSobrenomePessoa()
-                                    + "\nEndereço: " + ProxyAdministrador.getClientes().get(k).getEnderecoCliente()
-                                    + "\nTelefone: " + ProxyAdministrador.getClientes().get(k).getTelefoneCliente()
-                                    + "\nPedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getIdPedido()
-                                    + "\nData Pedido: " + dataPrint.format(localDateFormatter)
-                                    + "\nHora Pedido: " + horaPrint.format(localHourFormatter)
-                                    + "\nHora de entrega: " + horaEntregaPrint.format(localHourFormatter)
-                                    + "\nStatus Pedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getStatusPedido()
-                                    + "\nValor Pedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getValorTotalPedido());
+                    for (int k = 0; k < ProxyAdministrador.getClientes().size(); k++) {
+                        for (int j = 0; j < ProxyAdministrador.getClientes().get(k).getPedidosCliente().size(); j++) {
+                            LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
+                            LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
+                            LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraPedido());
+                            LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
+                            if (((dataPedido.isEqual(dataMin)) || (dataPedido.isAfter(dataMin))) && ((dataPedido.isEqual(dataMax)) || (dataPedido.isBefore(dataMax)))) {
+                                System.out.println("Cliente: " + ProxyAdministrador.getClientes().get(k).getNomePessoa() + " " + ProxyAdministrador.getClientes().get(k).getSobrenomePessoa()
+                                        + "\nEndereço: " + ProxyAdministrador.getClientes().get(k).getEnderecoCliente()
+                                        + "\nTelefone: " + ProxyAdministrador.getClientes().get(k).getTelefoneCliente()
+                                        + "\nPedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getIdPedido()
+                                        + "\nData Pedido: " + dataPrint.format(localDateFormatter)
+                                        + "\nHora Pedido: " + horaPrint.format(localHourFormatter)
+                                        + "\nHora de entrega: " + horaEntregaPrint.format(localHourFormatter)
+                                        + "\nStatus Pedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getStatusPedido()
+                                        + "\nValor Pedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getValorTotalPedido());
+                            }
                         }
                     }
-                }
-                break;
-            }
-
-            case 2 -> {
-                String diaMin = ""; //dia do limite inferior
-                String diaMax = ""; //dia do limite superior
-                String mesMin = ""; //mes do limite inferior
-                String mesMax = ""; //mes do limite superior
-                String anoMin = ""; //ano do limite inferior
-                String anoMax = ""; //ano do limite superior
-                String horaMin = ""; //hora do limite inferior
-                String horaMax = ""; //hora do limite superior
-                String minMin = ""; //minutos do limite inferior
-                String minMax = ""; //minutos do limite superior
-                boolean validaDataMin = false;
-                boolean validaDataMax = false;
-                boolean validaHoraMin = false;
-                boolean validaHoraMax = false;
-
-                while (validaDataMin == false || validaDataMax == false || validaHoraMin == false || validaHoraMax == false) {
-                    System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
-
-                    input = new Scanner(System.in);
-                    System.out.printf("Dia: ");
-                    diaMin = input.nextLine();
-                    if (diaMin.length() == 1) {
-                        diaMin = "0" + diaMin;
-                    }
-
-                    System.out.printf("Mes: ");
-                    mesMin = input.nextLine();
-                    if (mesMin.length() == 1) {
-                        mesMin = "0" + mesMin;
-                    }
-
-                    System.out.printf("Ano: ");
-                    anoMin = input.nextLine();
-
-                    System.out.printf("Hora: ");
-                    horaMin = input.nextLine();
-                    if (horaMin.length() == 1) {
-                        horaMin = "0" + horaMin;
-                    }
-
-                    System.out.printf("Minuto: ");
-                    minMin = input.nextLine();
-                    if (minMin.length() == 1) {
-                        minMin = "0" + minMin;
-                    }
-
-                    System.out.println("ATÉ\n");
-
-                    System.out.printf("Dia:");
-                    diaMax = input.nextLine();
-                    if (diaMax.length() == 1) {
-                        diaMax = "0" + diaMax;
-                    }
-
-                    System.out.printf("Mês: ");
-                    mesMax = input.nextLine();
-                    if (mesMax.length() == 1) {
-                        mesMax = "0" + mesMax;
-                    }
-
-                    System.out.printf("Ano: ");
-                    anoMax = input.nextLine();
-
-                    System.out.printf("Hora: ");
-                    horaMax = input.nextLine();
-                    if (horaMax.length() == 1) {
-                        horaMax = "0" + horaMax;
-                    }
-
-                    System.out.printf("Minuto: ");
-                    minMax = input.nextLine();
-                    if (minMax.length() == 1) {
-                        minMax = "0" + minMax;
-                    }
-
-                    String dataMin = anoMin + mesMin + diaMin;
-                    String dataMax = anoMax + mesMax + diaMax;
-                    String limHoraMin = horaMin + ":" + minMin;
-                    String limHoraMax = horaMax + ":" + minMax;
-
-                    validaDataMin = isDateValid(dataMin);
-                    validaDataMax = isDateValid(dataMax);
-                    validaHoraMin = isHourValid(limHoraMin);
-                    validaHoraMax = isHourValid(limHoraMax);
-
+                    break;
                 }
 
-                LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
-                LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
-                LocalTime horaLimMin = LocalTime.parse(horaMin + ":" + minMin + ":" + "00");
-                LocalTime horaLimMax = LocalTime.parse(horaMax + ":" + minMax + ":" + "00");
-                System.out.println("""
+                case 2 -> {
+                    String diaMin = ""; //dia do limite inferior
+                    String diaMax = ""; //dia do limite superior
+                    String mesMin = ""; //mes do limite inferior
+                    String mesMax = ""; //mes do limite superior
+                    String anoMin = ""; //ano do limite inferior
+                    String anoMax = ""; //ano do limite superior
+                    String horaMin = ""; //hora do limite inferior
+                    String horaMax = ""; //hora do limite superior
+                    String minMin = ""; //minutos do limite inferior
+                    String minMax = ""; //minutos do limite superior
+                    boolean validaDataMin = false;
+                    boolean validaDataMax = false;
+                    boolean validaHoraMin = false;
+                    boolean validaHoraMax = false;
+
+                    while (validaDataMin == false || validaDataMax == false || validaHoraMin == false || validaHoraMax == false) {
+                        System.out.println("Insira o intervalo (representação em números (dois digitos para dia e mês)):\n DE");
+
+                        input = new Scanner(System.in);
+                        System.out.printf("Dia: ");
+                        diaMin = input.nextLine();
+                        if (diaMin.length() == 1) {
+                            diaMin = "0" + diaMin;
+                        }
+
+                        System.out.printf("Mes: ");
+                        mesMin = input.nextLine();
+                        if (mesMin.length() == 1) {
+                            mesMin = "0" + mesMin;
+                        }
+
+                        System.out.printf("Ano: ");
+                        anoMin = input.nextLine();
+
+                        System.out.printf("Hora: ");
+                        horaMin = input.nextLine();
+                        if (horaMin.length() == 1) {
+                            horaMin = "0" + horaMin;
+                        }
+
+                        System.out.printf("Minuto: ");
+                        minMin = input.nextLine();
+                        if (minMin.length() == 1) {
+                            minMin = "0" + minMin;
+                        }
+
+                        System.out.println("ATÉ\n");
+
+                        System.out.printf("Dia:");
+                        diaMax = input.nextLine();
+                        if (diaMax.length() == 1) {
+                            diaMax = "0" + diaMax;
+                        }
+
+                        System.out.printf("Mês: ");
+                        mesMax = input.nextLine();
+                        if (mesMax.length() == 1) {
+                            mesMax = "0" + mesMax;
+                        }
+
+                        System.out.printf("Ano: ");
+                        anoMax = input.nextLine();
+
+                        System.out.printf("Hora: ");
+                        horaMax = input.nextLine();
+                        if (horaMax.length() == 1) {
+                            horaMax = "0" + horaMax;
+                        }
+
+                        System.out.printf("Minuto: ");
+                        minMax = input.nextLine();
+                        if (minMax.length() == 1) {
+                            minMax = "0" + minMax;
+                        }
+
+                        String dataMin = anoMin + mesMin + diaMin;
+                        String dataMax = anoMax + mesMax + diaMax;
+                        String limHoraMin = horaMin + ":" + minMin;
+                        String limHoraMax = horaMax + ":" + minMax;
+
+                        validaDataMin = isDateValid(dataMin);
+                        validaDataMax = isDateValid(dataMax);
+                        validaHoraMin = isHourValid(limHoraMin);
+                        validaHoraMax = isHourValid(limHoraMax);
+
+                    }
+
+                    LocalDate dataMin = LocalDate.parse(anoMin + "-" + mesMin + "-" + diaMin);
+                    LocalDate dataMax = LocalDate.parse(anoMax + "-" + mesMax + "-" + diaMax);
+                    LocalTime horaLimMin = LocalTime.parse(horaMin + ":" + minMin + ":" + "00");
+                    LocalTime horaLimMax = LocalTime.parse(horaMax + ":" + minMax + ":" + "00");
+                    System.out.println("""
                                    
                                    ------------------------------------------------------------------------------------------------------------
                                    |                                   PEDIDOS CADASTRADOS NO SISTEMA                                         |
                                    ------------------------------------------------------------------------------------------------------------
                                    """);
 
-                for (int k = 0; k < ProxyAdministrador.getClientes().size(); k++) {
-                    for (int j = 0; j < ProxyAdministrador.getClientes().get(k).getPedidosCliente().size(); j++) {
-                        LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
-                        LocalTime horaPedido = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraPedido());
-                        LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
-                        LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraPedido());
-                        LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
-                        if (((dataPedido.isAfter(dataMin) || dataPedido.isEqual(dataMin)) && horaPedido.isAfter(horaLimMin))
-                                && ((dataPedido.isEqual(dataMax) || dataPedido.isBefore(dataMax)) && (horaPedido.isBefore(horaLimMax)))) {
-                            System.out.println("Cliente: " + ProxyAdministrador.getClientes().get(k).getNomePessoa() + " " + ProxyAdministrador.getClientes().get(k).getSobrenomePessoa()
-                                    + "\nEndereço: " + ProxyAdministrador.getClientes().get(k).getEnderecoCliente()
-                                    + "\nTelefone: " + ProxyAdministrador.getClientes().get(k).getTelefoneCliente()
-                                    + "\nPedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getIdPedido()
-                                    + "\nData Pedido: " + dataPrint.format(localDateFormatter)
-                                    + "\nHora Pedido: " + horaPrint.format(localHourFormatter)
-                                    + "\nHora de Entrega: " + horaEntregaPrint.format(localHourFormatter)
-                                    + "\nStatus Pedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getStatusPedido());
+                    for (int k = 0; k < ProxyAdministrador.getClientes().size(); k++) {
+                        for (int j = 0; j < ProxyAdministrador.getClientes().get(k).getPedidosCliente().size(); j++) {
+                            LocalDate dataPedido = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
+                            LocalTime horaPedido = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraPedido());
+                            LocalDate dataPrint = LocalDate.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getDataPedido());
+                            LocalTime horaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraPedido());
+                            LocalTime horaEntregaPrint = LocalTime.parse(ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getHoraEntregaPedido());
+                            if (((dataPedido.isAfter(dataMin) || dataPedido.isEqual(dataMin)) && horaPedido.isAfter(horaLimMin))
+                                    && ((dataPedido.isEqual(dataMax) || dataPedido.isBefore(dataMax)) && (horaPedido.isBefore(horaLimMax)))) {
+                                System.out.println("Cliente: " + ProxyAdministrador.getClientes().get(k).getNomePessoa() + " " + ProxyAdministrador.getClientes().get(k).getSobrenomePessoa()
+                                        + "\nEndereço: " + ProxyAdministrador.getClientes().get(k).getEnderecoCliente()
+                                        + "\nTelefone: " + ProxyAdministrador.getClientes().get(k).getTelefoneCliente()
+                                        + "\nPedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getIdPedido()
+                                        + "\nData Pedido: " + dataPrint.format(localDateFormatter)
+                                        + "\nHora Pedido: " + horaPrint.format(localHourFormatter)
+                                        + "\nHora de Entrega: " + horaEntregaPrint.format(localHourFormatter)
+                                        + "\nStatus Pedido: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getStatusPedido());
+                            }
                         }
                     }
+
+                    break;
                 }
 
-                break;
+                case 3 -> {
+                    encerrarLista = true;
+                    break;
+                }
+                default -> {
+                    System.out.println("\nOpção inválida. Tente novamente!\n");
+                    break;
+                }
+
             }
 
-            case 3 -> {
-                break;
-            }
-            default -> {
-                break;
-            }
-
-        }
+        } while (encerrarLista == false);
     }
 
     public void modificarPedido(int idPedido, Cliente Cl) {
         Scanner input = new Scanner(System.in);
-        if (consultarPedido(idPedido, Cl) != null) {
-            Pedido modPedido = consultarPedido(idPedido, Cl);
-            System.out.println("DADOS DO PEDIDO\n------------------------\n");
-            System.out.println("Id: " + modPedido.getIdPedido() + "    Data:" + modPedido.getDataPedido() + "     Hora: " + modPedido.getHoraPedido()
-                    + "    Hora de entrega: " + modPedido.getHoraEntregaPedido() + "    Valor total: " + modPedido.getValorTotalPedido() + "     Status: " + modPedido.getStatusPedido()
-                    + "\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-            System.out.println("""
+        boolean menuAnterior = false;
+        do {
+            if (consultarPedido(idPedido, Cl) != null) {
+                Pedido modPedido = consultarPedido(idPedido, Cl);
+                System.out.println("DADOS DO PEDIDO\n------------------------\n");
+                System.out.println("Id: " + modPedido.getIdPedido() + "    Data:" + modPedido.getDataPedido() + "     Hora: " + modPedido.getHoraPedido()
+                        + "    Hora de entrega: " + modPedido.getHoraEntregaPedido() + "    Valor total: " + modPedido.getValorTotalPedido() + "     Status: " + modPedido.getStatusPedido()
+                        + "\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.println("""
                                \nEscolha uma opção: 
                                1 - Alterar Hora de Entrega do Pedido 
                                2 - Alterar Status do Pedido 
@@ -340,21 +344,20 @@ public class ProxyColaborador {
                                4 - Remover itens
                                5 - Fechar
                                 """);
-            int i = input.nextInt();
-            switch (i) {
-                case 1 -> {
-                    System.out.println("Entre com a novo horário de entrega: ");
-                    System.out.printf("Hora: ");
-                    String novaHora = input.nextLine();
-                    System.out.printf("Minutos: ");
-                    String novoMin = input.nextLine();
+                int i = input.nextInt();
+                switch (i) {
+                    case 1 -> {
+                        System.out.println("Entre com a novo horário de entrega: ");
+                        System.out.printf("Hora: ");
+                        String novaHora = input.nextLine();
+                        System.out.printf("Minutos: ");
+                        String novoMin = input.nextLine();
 
-                    modPedido.setHoraEntregaPedido(novaHora + ":" + novoMin + ":" + "00");
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarPedido(idPedido, Cl);
-                }
-                case 2 -> {
-                    System.out.println("""
+                        modPedido.setHoraEntregaPedido(novaHora + ":" + novoMin + ":" + "00");
+                        System.out.println("Alteração realizada com sucesso!");
+                    }
+                    case 2 -> {
+                        System.out.println("""
                                \nInsira o código do novo status do pedido:  
                                1 - Aceito 
                                2 - Em andamento
@@ -362,52 +365,52 @@ public class ProxyColaborador {
                                4 - Entregue 
                                5 - Cancelado
                                 """);
-                    int novoStatus = input.nextInt();
-                    if (novoStatus == 5) {
-                        modPedido.setHoraEntregaPedido("00:00:00");
-                    }
-                    modPedido.setStatusPedido(novoStatus);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarPedido(idPedido, Cl);
-                }
-                case 3 -> {
-                    System.out.printf("Insira o Id do item que deseja adicionar: ");
-                    int novoItem = input.nextInt();
-
-                    modPedido.setListaProdutos(novoItem);
-                    modPedido.setValorTotalPedido(modPedido.getValorTotalPedido() + ProxyAdministrador.consultaProduto(novoItem).getValorProduto());
-                    System.out.printf("Alteração realizada com sucesso!");
-                    modificarPedido(idPedido, Cl);
-                }
-                case 4 -> {
-                    System.out.println("Insira o Id do item que deseja remover: ");
-                    int removerItem = input.nextInt();
-                    int f = 0;
-                    for (int r = 0; r <= modPedido.getListaProdutos().size(); r++) {
-                        f++;
-                        if (modPedido.getListaProdutos().get(r) == removerItem) {
-                            modPedido.getListaProdutos().remove(r);
-                            modPedido.setValorTotalPedido(modPedido.getValorTotalPedido() - ProxyAdministrador.consultaProduto(removerItem).getValorProduto());
-                            System.out.printf("Alteração realizada com sucesso!");
-                            break;
-                        } else if (f > modPedido.getListaProdutos().size()) {
-                            System.out.println("Id inválido ou o produto não está associado a esse pedido. Tente novamente");
-                            break;
+                        int novoStatus = input.nextInt();
+                        if (novoStatus == 5) {
+                            modPedido.setHoraEntregaPedido("00:00:00");
                         }
-                        modificarPedido(idPedido, Cl);
+                        modPedido.setStatusPedido(novoStatus);
+                        System.out.println("Alteração realizada com sucesso!");
                     }
-                }
-                case 5 -> {
-                    break;
-                }
+                    case 3 -> {
+                        System.out.printf("Insira o Id do item que deseja adicionar: ");
+                        int novoItem = input.nextInt();
 
-                default -> {
-                    System.out.println("Opção inválida, tente novamente.");
-                    modificarPedido(idPedido, Cl);
-                }
+                        modPedido.setListaProdutos(novoItem);
+                        modPedido.setValorTotalPedido(modPedido.getValorTotalPedido() + ProxyAdministrador.consultaProduto(novoItem).getValorProduto());
+                        System.out.printf("Alteração realizada com sucesso!");
+                    }
+                    case 4 -> {
+                        System.out.println("Insira o Id do item que deseja remover: ");
+                        int removerItem = input.nextInt();
+                        int f = 0;
+                        for (int r = 0; r <= modPedido.getListaProdutos().size(); r++) {
+                            f++;
+                            if (modPedido.getListaProdutos().get(r) == removerItem) {
+                                modPedido.getListaProdutos().remove(r);
+                                modPedido.setValorTotalPedido(modPedido.getValorTotalPedido() - ProxyAdministrador.consultaProduto(removerItem).getValorProduto());
+                                System.out.printf("Alteração realizada com sucesso!");
+                                break;
+                            } else if (f > modPedido.getListaProdutos().size()) {
+                                System.out.println("Id inválido ou o produto não está associado a esse pedido. Tente novamente");
+                                break;
+                            }
+                        }
+                    }
+                    case 5 -> {
+                        menuAnterior = true;
+                        break;
+                    }
 
+                    default -> {
+                        System.out.println("\nOpção inválida, tente novamente.\n");
+
+                    }
+
+                }
             }
-        }
+
+        } while (menuAnterior == false);
 
     }
 
@@ -596,17 +599,15 @@ public class ProxyColaborador {
         novaSenha = input.nextLine();
         System.out.println("Confirme sua nova senha: ");
         senhaConf = input.nextLine();
-        
-        if(Colab.getSenhaUsuario().equals(senhaAnt)){
-            if (novaSenha.equals(senhaConf)){
+
+        if (Colab.getSenhaUsuario().equals(senhaAnt)) {
+            if (novaSenha.equals(senhaConf)) {
                 Colab.setSenhaUsuario(novaSenha);
                 System.out.println("Alteração realizada com sucesso!\n");
-            }
-            else{
+            } else {
                 System.out.println("Senhas não são iguais. Tente novamente.\n");
             }
-        }
-        else{
+        } else {
             System.out.println("Senha antiga não confere. Tente novamente.\n");
         }
     }

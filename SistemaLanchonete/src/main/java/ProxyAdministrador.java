@@ -20,23 +20,34 @@ public class ProxyAdministrador {
     }
 
     //FUNÇÃO PARA CADASTRO DE COLABORADORES
-    public static void addColaboradores(Colaborador[] Colaboradores, Colaborador C){
+    public static void addColaboradores(Colaborador C) {
+        /*
         int i = 0;
-
-        while (ProxyAdministrador.Colaboradores[i] != null & i <= 15) {
-            i = i + 1;
+        if (ProxyAdministrador.Colaboradores != null) {
+            while (ProxyAdministrador.Colaboradores[i] != null & i <= 15) {
+                i = i + 1;
+            }
+            if (i < 15) {
+                ProxyAdministrador.Colaboradores[i] = C;
+            } else {
+                System.out.println("Vagas preenchidas. Não foi possível cadastrar novos colaboradores.");
+            }
         }
-
-        if (i < 15) {
+        else{
             ProxyAdministrador.Colaboradores[i] = C;
-        } else {
-            System.out.println("Vagas preenchidas. Não foi possível cadastrar novos colaboradores.");
         }
+        */
+        for (int i = 0; i < 15; i++){
+            if (ProxyAdministrador.Colaboradores[i] == null){
+                ProxyAdministrador.Colaboradores[i] = C;
+            }
+        }
+
     }
-    
+
     //SETTER DE ARRAY DE COLABORADORES
     public static void setColaboradores(Colaborador[] Colaboradores) {
-       ProxyAdministrador.Colaboradores = Colaboradores; 
+        ProxyAdministrador.Colaboradores = Colaboradores;
 
     }
 
@@ -69,7 +80,7 @@ public class ProxyAdministrador {
 
         //Cadastro
         Colaborador C = new Colaborador(nomeColaborador, sobrenomeColaborador, CPF, loginColaborador, senhaColaborador);
-        ProxyAdministrador.addColaboradores(Colaboradores, C);
+        ProxyAdministrador.addColaboradores(C);
     }
 
     //CONSULTA O COLABORADOR NO BANCO DE COLABORADORES
@@ -94,11 +105,15 @@ public class ProxyAdministrador {
 
         Scanner inputSwitch = new Scanner(System.in);
 
-        if (consultaColaborador(CPF) != null) {
-            Colaborador modColab = consultaColaborador(CPF);
-            System.out.println("\nDADOS COLABORADOR\n----------------------------------------------------\n");
-            System.out.println(modColab + "\n---------------------------------------------------------------------------------------------------------------------------------\n");
-            System.out.println("""
+        boolean menuAnterior = false;
+
+        do {
+            String CPFColab = CPF;
+            if (consultaColaborador(CPFColab) != null) {
+                Colaborador modColab = consultaColaborador(CPFColab);
+                System.out.println("\nDADOS COLABORADOR\n----------------------------------------------------\n");
+                System.out.println(modColab + "\n---------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome 
                                2 - Alterar Sobrenome 
@@ -107,56 +122,55 @@ public class ProxyAdministrador {
                                5 - Fechar
                                 """);
 
-            int i = inputSwitch.nextInt();
-            Scanner inputDado = new Scanner(System.in);
+                int i = inputSwitch.nextInt();
+                Scanner inputDado = new Scanner(System.in);
 
-            switch (i) {
-                case 1 -> {
-                    System.out.printf("Digite o novo nome: ");
-                    String dado = inputDado.nextLine();
+                switch (i) {
+                    case 1 -> {
+                        System.out.printf("Digite o novo nome: ");
+                        String dado = inputDado.nextLine();
 
-                    modColab.setNomePessoa(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarColaborador(CPF);
-                    break;
+                        modColab.setNomePessoa(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+
+                    case 2 -> {
+                        System.out.printf("Digite o novo sobrenome: ");
+                        String dado = inputDado.nextLine();
+
+                        modColab.setSobrenomePessoa(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+
+                    case 3 -> {
+                        System.out.printf("Digite o novo CPF: ");
+                        String dado = inputDado.nextLine();
+
+                        modColab.setCPF(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        CPFColab = dado;
+                        break;
+                    }
+
+                    case 4 -> {
+
+                    }
+
+                    case 5 -> {
+                        menuAnterior = true;
+                        break;
+                    }
+
+                    default -> {
+                        System.out.println("Opção inválida");
+                    }
                 }
-
-                case 2 -> {
-                    System.out.printf("Digite o novo sobrenome: ");
-                    String dado = inputDado.nextLine();
-
-                    modColab.setSobrenomePessoa(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarColaborador(CPF);
-                    break;
-                }
-
-                case 3 -> {
-                    System.out.printf("Digite o novo CPF: ");
-                    String dado = inputDado.nextLine();
-
-                    modColab.setCPF(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarColaborador(dado);
-                    break;
-                }
-
-                case 4 -> {
-
-                }
-
-                case 5 -> {
-                    break;
-                }
-
-                default -> {
-                    System.out.println("Opção inválida");
-                    modificarColaborador(CPF);
-                }
+            } else {
+                System.out.println("CPF inválido!");
             }
-        } else {
-            System.out.println("CPF inválido!");
-        }
+        } while (menuAnterior == false);
 
     }
 
@@ -192,7 +206,7 @@ public class ProxyAdministrador {
 
     //MANIPULAÇÃO DE CLIENTES
     //Questão 8 - Clientes e pedidos devem ser salvos de forma dinâmica
-    private static  ArrayList<Cliente> Clientes = new ArrayList<>();
+    private static ArrayList<Cliente> Clientes = new ArrayList<>();
 
     //Getter
     public static ArrayList<Cliente> getClientes() {
@@ -221,10 +235,6 @@ public class ProxyAdministrador {
     //Setter
     public static void setClientes(ArrayList<Cliente> Clientes) {
         ProxyAdministrador.Clientes = Clientes;
-        /*for (int i = 0; i < Clientes.size(); i++){
-            ProxyAdministrador.Clientes.add(Clientes.get(i));
-        }
-        */
     }
 
     //CADASTRO DE NOVOS CLIENTES
@@ -296,11 +306,15 @@ public class ProxyAdministrador {
 
         Scanner inputSwitch = new Scanner(System.in);
 
-        if (consultaCliente(CPF) != null) {
-            Cliente modCliente = consultaCliente(CPF);
-            System.out.println("DADOS CLIENTE\n--------------------------------\n");
-            System.out.println(modCliente + "\n------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-            System.out.println("""
+        boolean menuAnterior = false;
+
+        String CPFCli = CPF;
+        do {
+            if (consultaCliente(CPFCli) != null) {
+                Cliente modCliente = consultaCliente(CPFCli);
+                System.out.println("DADOS CLIENTE\n--------------------------------\n");
+                System.out.println(modCliente + "\n------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome 
                                2 - Alterar Sobrenome 
@@ -310,70 +324,67 @@ public class ProxyAdministrador {
                                6 - Fechar
                                 """);
 
-            int i = inputSwitch.nextInt();
-            Scanner inputDado = new Scanner(System.in);
+                int i = inputSwitch.nextInt();
+                Scanner inputDado = new Scanner(System.in);
 
-            switch (i) {
-                case 1 -> {
-                    System.out.printf("Digite o novo nome: ");
-                    String dado = inputDado.nextLine();
+                switch (i) {
+                    case 1 -> {
+                        System.out.printf("Digite o novo nome: ");
+                        String dado = inputDado.nextLine();
 
-                    modCliente.setNomePessoa(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarCliente(CPF);
-                    break;
+                        modCliente.setNomePessoa(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+
+                    case 2 -> {
+                        System.out.printf("Digite o novo sobrenome: ");
+                        String dado = inputDado.nextLine();
+
+                        modCliente.setSobrenomePessoa(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+
+                    case 3 -> {
+                        System.out.printf("Digite o novo CPF: ");
+                        String dado = inputDado.nextLine();
+
+                        modCliente.setCPF(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        CPFCli = dado;
+                        break;
+                    }
+                    case 4 -> {
+                        System.out.printf("Digite o novo endereço: ");
+                        String dado = inputDado.nextLine();
+
+                        modCliente.setEnderecoCliente(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+                    case 5 -> {
+                        System.out.printf("Digite o novo telefone: ");
+                        String dado = inputDado.nextLine();
+
+                        modCliente.setTelefoneCliente(dado);
+                        System.out.printf("Alteração realizada com sucesso!");
+                        break;
+                    }
+
+                    case 6 -> {
+                        menuAnterior = true;
+                        break;
+                    }
+
+                    default -> {
+                        System.out.println("Opção inválida");
+                    }
                 }
-
-                case 2 -> {
-                    System.out.printf("Digite o novo sobrenome: ");
-                    String dado = inputDado.nextLine();
-
-                    modCliente.setSobrenomePessoa(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarCliente(CPF);
-                    break;
-                }
-
-                case 3 -> {
-                    System.out.printf("Digite o novo CPF: ");
-                    String dado = inputDado.nextLine();
-
-                    modCliente.setCPF(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarCliente(dado);
-                    break;
-                }
-                case 4 -> {
-                    System.out.printf("Digite o novo endereço: ");
-                    String dado = inputDado.nextLine();
-
-                    modCliente.setEnderecoCliente(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarCliente(CPF);
-                    break;
-                }
-                case 5 -> {
-                    System.out.printf("Digite o novo telefone: ");
-                    String dado = inputDado.nextLine();
-
-                    modCliente.setTelefoneCliente(dado);
-                    System.out.printf("Alteração realizada com sucesso!");
-                    modificarCliente(CPF);
-                    break;
-                }
-
-                case 6 -> {
-                    break;
-                }
-
-                default -> {
-                    System.out.println("Opção inválida");
-                    modificarCliente(CPF);
-                }
+            } else {
+                System.out.println("CPF inválido!");
             }
-        } else {
-            System.out.println("CPF inválido!");
-        }
+        } while (menuAnterior == false);
 
     }
 
@@ -484,11 +495,13 @@ public class ProxyAdministrador {
 
         Scanner inputSwitch = new Scanner(System.in);
 
-        if (consultaProduto(idProduto) != null) {
-            Produto modProduto = consultaProduto(idProduto);
-            System.out.println("DADOS DO PEDIDO\n------------------------\n");
-            System.out.println(modProduto + "\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-            System.out.println("""
+        boolean menuAnterior = false;
+        do {
+            if (consultaProduto(idProduto) != null) {
+                Produto modProduto = consultaProduto(idProduto);
+                System.out.println("DADOS DO PEDIDO\n------------------------\n");
+                System.out.println(modProduto + "\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome 
                                2 - Alterar Descrição 
@@ -496,52 +509,50 @@ public class ProxyAdministrador {
                                4 - Fechar
                                 """);
 
-            int i = inputSwitch.nextInt();
-            Scanner inputDado = new Scanner(System.in);
+                int i = inputSwitch.nextInt();
+                Scanner inputDado = new Scanner(System.in);
 
-            switch (i) {
-                case 1 -> {
-                    System.out.printf("Digite o novo nome: ");
-                    String dado = inputDado.nextLine();
+                switch (i) {
+                    case 1 -> {
+                        System.out.printf("Digite o novo nome: ");
+                        String dado = inputDado.nextLine();
 
-                    modProduto.setNomeProduto(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarProduto(idProduto);
-                    break;
+                        modProduto.setNomeProduto(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+
+                    case 2 -> {
+                        System.out.printf("Digite a nova descrição: ");
+                        String dado = inputDado.nextLine();
+
+                        modProduto.setDescricaoProduto(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+
+                    case 3 -> {
+                        System.out.printf("Digite o novo CPF: ");
+                        float dado = inputDado.nextFloat();
+
+                        modProduto.setValorProduto(dado);
+                        System.out.println("Alteração realizada com sucesso!");
+                        break;
+                    }
+
+                    case 4 -> {
+                        menuAnterior = true;
+                        break;
+                    }
+
+                    default -> {
+                        System.out.println("Opção inválida");
+                    }
                 }
-
-                case 2 -> {
-                    System.out.printf("Digite a nova descrição: ");
-                    String dado = inputDado.nextLine();
-
-                    modProduto.setDescricaoProduto(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarProduto(idProduto);
-                    break;
-                }
-
-                case 3 -> {
-                    System.out.printf("Digite o novo CPF: ");
-                    float dado = inputDado.nextFloat();
-
-                    modProduto.setValorProduto(dado);
-                    System.out.println("Alteração realizada com sucesso!");
-                    modificarProduto(idProduto);
-                    break;
-                }
-
-                case 4 -> {
-                    break;
-                }
-
-                default -> {
-                    System.out.println("Opção inválida");
-                    modificarProduto(idProduto);
-                }
+            } else {
+                System.out.println("Identificador de produto inválido!");
             }
-        } else {
-            System.out.println("Identificador de produto inválido!");
-        }
+        } while (menuAnterior == false);
 
     }
 
@@ -579,9 +590,11 @@ public class ProxyAdministrador {
     //Modificar admnistrador 
     public void modificarAdm(Administrador Adm) {
 
-        System.out.println("---------------------------------------------------------------\n"+ Adm + "\n---------------------------------------------------------------\n");
-        Scanner input = new Scanner(System.in);
-        System.out.println("""
+        boolean menuAnterior = false;
+        do {
+            System.out.println("---------------------------------------------------------------\n" + Adm + "\n---------------------------------------------------------------\n");
+            Scanner input = new Scanner(System.in);
+            System.out.println("""
                            Escolha uma opção:
                            1 - Alterar login
                            2 - Alterar senha
@@ -589,85 +602,80 @@ public class ProxyAdministrador {
                            4 - Alterar nome
                            5 - Fechar
                            """);
-        int i = input.nextInt();
-        switch (i) {
-            case 1 -> {
-                System.out.printf("Digite o novo login: ");
-                String novoLogin = input.nextLine();
-                System.out.println("Confirme o login: ");
-                String confirLogin = input.nextLine();
+            int i = input.nextInt();
+            switch (i) {
+                case 1 -> {
+                    System.out.printf("Digite o novo login: ");
+                    String novoLogin = input.nextLine();
+                    System.out.println("Confirme o login: ");
+                    String confirLogin = input.nextLine();
 
-                if (novoLogin.equals(confirLogin)) {
-                    Adm.setLoginUsuario(confirLogin);
-                    modificarAdm(Adm);
-                    break;
-                } else {
-                    System.out.println("Dados inseridos não conferem. Tente novamente");
-                    modificarAdm(Adm);
-                    break;
-                }
-            }
-            case 2 -> {
-                input = new Scanner(System.in);
-                System.out.println("Digite a sua senha anterior: ");
-                String senhaAnt = input.nextLine();
-                System.out.println("Digite a nova senha: ");
-                String novaSenha = input.nextLine();
-                System.out.println("Confirme a nova senha: ");
-                String confirmSenha = input.nextLine();
-
-                if (Adm.getSenhaUsuario().equals(senhaAnt)) {
-                    if (novaSenha.equals(confirmSenha)) {
-                        Adm.setSenhaUsuario(novaSenha);
-                        System.out.println("Alteração realizada com sucesso!");
-                        modificarAdm(Adm);
+                    if (novoLogin.equals(confirLogin)) {
+                        Adm.setLoginUsuario(confirLogin);
                         break;
                     } else {
-                        System.out.println("Senhas diferentes. Tente novamente.");
-                        modificarAdm(Adm);
+                        System.out.println("Dados inseridos não conferem. Tente novamente");
                         break;
                     }
-                } else {
-                    System.out.println("Senha antiga não confere. Tente novamente");
-                    modificarAdm(Adm);
+                }
+                case 2 -> {
+                    input = new Scanner(System.in);
+                    System.out.println("Digite a sua senha anterior: ");
+                    String senhaAnt = input.nextLine();
+                    System.out.println("Digite a nova senha: ");
+                    String novaSenha = input.nextLine();
+                    System.out.println("Confirme a nova senha: ");
+                    String confirmSenha = input.nextLine();
+
+                    if (Adm.getSenhaUsuario().equals(senhaAnt)) {
+                        if (novaSenha.equals(confirmSenha)) {
+                            Adm.setSenhaUsuario(novaSenha);
+                            System.out.println("Alteração realizada com sucesso!");
+                            break;
+                        } else {
+                            System.out.println("Senhas diferentes. Tente novamente.");
+                            break;
+                        }
+                    } else {
+                        System.out.println("Senha antiga não confere. Tente novamente");
+                        break;
+                    }
+                }
+
+                case 3 -> {
+                    System.out.println("Digite o novo CPF: ");
+                    String novoCPF = input.nextLine();
+                    Adm.setCPF(novoCPF);
+                    System.out.println("Alteração realizada com sucesso!");
                     break;
                 }
+
+                case 4 -> {
+                    System.out.printf("Digite o novo nome: ");
+                    String novoNome = input.nextLine();
+                    Adm.setNomePessoa(novoNome);
+
+                    System.out.printf("Digite o novo sobrenome: ");
+                    String novoSobrenome = input.nextLine();
+                    Adm.setSobrenomePessoa(novoSobrenome);
+
+                    System.out.println("Alteração realizada com sucesso!");
+                    break;
+                }
+
+                case 5 -> {
+                    menuAnterior = true;
+                    break;
+                }
+
+                default -> {
+                    System.out.println("Opção inválida, tente novamente.");
+                    break;
+                }
+
             }
 
-            case 3 -> {
-                System.out.println("Digite o novo CPF: ");
-                String novoCPF = input.nextLine();
-                Adm.setCPF(novoCPF);
-                System.out.println("Alteração realizada com sucesso!");
-                modificarAdm(Adm);
-                break;
-            }
-
-            case 4 -> {
-                System.out.printf("Digite o novo nome: ");
-                String novoNome = input.nextLine();
-                Adm.setNomePessoa(novoNome);
-
-                System.out.printf("Digite o novo sobrenome: ");
-                String novoSobrenome = input.nextLine();
-                Adm.setSobrenomePessoa(novoSobrenome);
-
-                System.out.println("Alteração realizada com sucesso!");
-                modificarAdm(Adm);
-                break;
-            }
-
-            case 5 -> {
-                break;
-            }
-
-            default -> {
-                System.out.println("Opção inválida, tente novamente.");
-                modificarAdm(Adm);
-                break;
-            }
-
-        }
+        } while (menuAnterior == false);
 
     }
 }

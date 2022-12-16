@@ -57,6 +57,7 @@ public class SistemaLanchonete {
     public static void startSistema() throws IOException {
         //Uso de json
         manipularJson mJson = new manipularJson();
+
         mJson.assimilateAll();
 
         
@@ -94,6 +95,7 @@ public class SistemaLanchonete {
             }
             case 2 -> {
                 mJson.dumpAll();
+                mJson.dumpColaborador(ProxyAdministrador.getColaboradores());
                 break;
             }
             default -> {

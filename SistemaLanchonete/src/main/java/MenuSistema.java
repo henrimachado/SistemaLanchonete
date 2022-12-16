@@ -9,11 +9,14 @@ public class MenuSistema {
     public MenuSistema() {
     }
     
-    //Menu do administrador
+    //Menu do administrador FEITO
     public void menuAdministrador(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
 
-        System.out.println("""
+        boolean sairSistema = false;
+        
+        do {
+            System.out.println("""
                            
                            Escolha uma opções do menu: 
                            1 -  Colaboradores          
@@ -28,46 +31,44 @@ public class MenuSistema {
         switch (j) {
             case 1 -> {
                 menuOpcaoColaboradorAdmin(menuAdm, menuColab, usuarioAtual);
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 2 -> {
                 menuOpcaoCliente(menuAdm, menuColab, usuarioAtual);
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 3 -> {
                 menuOpcaoProduto(menuAdm, menuColab, usuarioAtual);
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 4 -> {
                 menuOpcaoRelatorio(menuAdm, menuColab, usuarioAtual);
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 5 -> {
                 menuOpcaoAdmin(menuAdm, menuColab, usuarioAtual);
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 6 -> {
                 System.out.println("O sistema foi finalizado.");
-                SistemaLanchonete.startSistema();
+                sairSistema = true;
                 break;
             }
             default -> {
                 System.out.println("A opção selecionada é invalida.");
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
             }
         }
+        } while (sairSistema == false);
+        System.out.println("Estamos aqui!");
     }
 
-    //Menu do colaborador
+    //Menu do colaborador FEITO
     public void menuColaborador(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
-
-        System.out.println("""
+        boolean sairSistema = false;
+        
+        do {
+            System.out.println("""
                            
                            Escolha uma opções do menu: 
                            1 -  Perfil                 
@@ -80,36 +81,37 @@ public class MenuSistema {
         switch (i) {
             case 1 -> {
                 menuOpcaoColaboradorColab(menuAdm, menuColab, usuarioAtual);
-                menuColaborador(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 2 -> {
                 menuOpcaoPedido(menuAdm, menuColab, usuarioAtual);
-                menuColaborador(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 3 -> {
                 menuOpcaoRelatorio(menuAdm, menuColab, usuarioAtual);
-                menuColaborador(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 4 -> {
-                System.out.println("O sistema foi finalizado.");
+                System.out.println("\nO sistema foi finalizado.\n");
+                sairSistema = true;
                 break;
             }
             default -> {
-                System.out.println("A opção selecionada é invalida.");
-                menuColaborador(menuAdm, menuColab, usuarioAtual);
+                System.out.println("A opção selecionada é invalida.\n");
             }
         }
+        }while (sairSistema == false);
     }
 
-    //Menu do opção de colaborar quando logado pelo administrador
+    //Menu do opção de colaborar quando logado pelo administrador FEITO
     public void menuOpcaoColaboradorAdmin(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
 
-        System.out.println("""
+        boolean menuAnterior = false;
+        
+        do{
+            System.out.println("""
                            
                            Digite  o número da opção: 
                            1 - Cadastrar colaborador   
@@ -124,15 +126,12 @@ public class MenuSistema {
         switch (i) {
             case 1 -> {
                 menuAdm.cadastroColaborador();
-                menuOpcaoColaboradorAdmin(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 2 -> {
                 System.out.println("Insira o CPF do colaborador: ");
                 CPF = input.nextLine();
                 menuAdm.modificarColaborador(CPF);
-                //ProxyAdministrador.modificarColaborador();
-                menuOpcaoColaboradorAdmin(menuAdm, menuColab, usuarioAtual);
                 break;
             }
 
@@ -140,31 +139,32 @@ public class MenuSistema {
                 System.out.println("Insira o CPF do colaborador: ");
                 CPF = input.nextLine();
                 System.out.println(menuAdm.consultaColaborador(CPF));
-                menuOpcaoColaboradorAdmin(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 4 -> {
                 System.out.println("Insira o CPF do colaborador: ");
                 CPF = input.nextLine();
                 menuAdm.excluirColaborador(CPF);
-                menuOpcaoColaboradorAdmin(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 5 -> {
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
+                menuAnterior = true;
                 break;
             }
             default -> {
                 System.out.println("Opção inválida.");
-                menuOpcaoColaboradorAdmin(menuAdm, menuColab, usuarioAtual);
             }
         }
+        }while (menuAnterior == false);
     }
 
-    //Menu do opção de colaborar quando logado pelo colaborador
+    //Menu do opção de colaborar quando logado pelo colaborador FEITO
     public void menuOpcaoColaboradorColab(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
-        System.out.println("\n-------------------------------------------------------"
+        boolean menuAnterior = false;
+        
+        do {
+            System.out.println("\n-------------------------------------------------------"
                 + usuarioAtual.getNomePessoa() + " " + usuarioAtual.getSobrenomePessoa()
                 + "-------------------------------------------------------\n");
         System.out.println("""
@@ -178,25 +178,27 @@ public class MenuSistema {
         switch (i) {
             case 1 -> {
                 menuColab.modificarColaborador((Colaborador) usuarioAtual);
-                menuOpcaoColaboradorColab(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 2 -> {
-                menuColaborador(menuAdm, menuColab, usuarioAtual);
+                menuAnterior = true;
                 break;
             }
             default -> {
                 System.out.println("A opção selecionada é invalida.");
-                menuOpcaoColaboradorColab(menuAdm, menuColab, usuarioAtual);
             }
         }
+        }while(menuAnterior == false);
     }
 
-    //Menu de opção de produtos
+    //Menu de opção de produtos FEITO
     public void menuOpcaoProduto(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
-        System.out.println("""
+        boolean menuAnterior = false;
+        
+        do {
+            System.out.println("""
                            
                            Digite  o número da opção: 
                            1 - Cadastrar Produto       
@@ -211,44 +213,42 @@ public class MenuSistema {
         switch (i) {
             case 1 -> {
                 menuAdm.cadastroProduto();
-                menuOpcaoProduto(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 2 -> {
                 System.out.println("Digite o ID do produto que deseja alterar: ");
                 idProduto = input.nextInt();
                 menuAdm.modificarProduto(idProduto);
-                menuOpcaoProduto(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 3 -> {
                 System.out.println("Dite o ID do produto que deseja alterar");
                 idProduto = input.nextInt();
                 System.out.println(ProxyAdministrador.consultaProduto(idProduto));
-                menuOpcaoProduto(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 4 -> {
                 menuAdm.excluirProduto();
-                menuOpcaoProduto(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 5 -> {
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
+                menuAnterior = true;
                 break;
             }
             default -> {
                 System.out.println("A opção selecionada é invalida.");
-                menuOpcaoProduto(menuAdm, menuColab, usuarioAtual);
             }
         }
+        }while (menuAnterior == false);
     }
 
-    //Menu de opção de relatorios
+    //Menu de opção de relatorios FEITO
     public void menuOpcaoRelatorio(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
-
-        System.out.println("""
+        boolean menuAnterior = false; 
+        
+        do {
+            System.out.println("""
                            Insira a opção desejada:          
                            
                            1 -   Relatorio de clientes      
@@ -268,7 +268,6 @@ public class MenuSistema {
                                                    -------------------------------------------------------------------------------------------------------------------------
                                                    """);
                 menuAdm.printClientes();
-                menuOpcaoRelatorio(menuAdm, menuColab, usuarioAtual);
             }
             case 2 -> {
                 System.out.println("""
@@ -277,7 +276,6 @@ public class MenuSistema {
                                                    -------------------------------------------------------------------------------------------------------------------------
                                                    """);
                 menuAdm.printColaboradores();
-                menuOpcaoRelatorio(menuAdm, menuColab, usuarioAtual);
             }
             case 3 -> {
                 System.out.println("""
@@ -286,47 +284,39 @@ public class MenuSistema {
                                                    -------------------------------------------------------------------------------------------------------------------------
                                                    """);
                 menuAdm.consultaListaProdutos();
-                menuOpcaoRelatorio(menuAdm, menuColab, usuarioAtual);
             }
             case 4 -> {
                 menuColab.listarPedidos();
-                menuOpcaoRelatorio(menuAdm, menuColab, usuarioAtual);
             }
             case 5 -> {
                 menuColab.statsVendas();
-                menuOpcaoRelatorio(menuAdm, menuColab, usuarioAtual);
             }
             case 6 -> {
+                
+                /*
                 if (usuarioAtual instanceof Administrador) {
                     menuAdministrador(menuAdm, menuColab, usuarioAtual);
                 } else if (usuarioAtual instanceof Colaborador) {
                     menuColaborador(menuAdm, menuColab, usuarioAtual);
                 }
+                */
+                menuAnterior = true;
                 break;
-                /*                **Conferir se precisa de break **
-                Tanto o colaborador quando o administrador possuem acesso
-                ao menu de relatorio, necessario fazer uma validação, que ao
-                selecionar a opçao "Menu princial" o sistema volte ou para o
-                menuAdministrador() ou para o  menuColaborador() dependendo
-                de qual user estiver logado.
-                Exemplo:
-                If tipo.user = adm then
-                menuAdministrador()
-                else
-                menuColaborador()
-                 */
+
             }
             default -> {
                 System.out.println("A opção selecionada é invalida.");
-                menuOpcaoRelatorio(menuAdm, menuColab, usuarioAtual);
             }
         }
+        }while (menuAnterior == false);
     }
 
-    //Menu de opção de administrador
+    //Menu de opção de administrador FEITO
     public void menuOpcaoAdmin(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
-        System.out.println("""
+        boolean menuAnterior = false; 
+        do{
+            System.out.println("""
                            
                            Digite  o número da opção: 
                            1 - Dados admin             
@@ -338,32 +328,35 @@ public class MenuSistema {
         switch (i) {
             case 1 -> {
                 menuAdm.consultaAdm((Administrador) usuarioAtual);
-                menuOpcaoAdmin(menuAdm, menuColab, usuarioAtual);
+                //menuOpcaoAdmin(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 2 -> {
                 menuAdm.modificarAdm((Administrador) usuarioAtual);
-                //Function alterar dados (e-amil e senha )do admin...
-                menuOpcaoAdmin(menuAdm, menuColab, usuarioAtual);
+                //menuOpcaoAdmin(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 3 -> {
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
+                //menuAdministrador(menuAdm, menuColab, usuarioAtual);
+                menuAnterior = true;
                 break;
             }
             default -> {
                 System.out.println("A opção selecionada é invalida.");
-                menuOpcaoAdmin(menuAdm, menuColab, usuarioAtual);
+                //menuOpcaoAdmin(menuAdm, menuColab, usuarioAtual);
             }
         }
+        }while(menuAnterior == false);
     }
 
-    //Menu de opção de pedido
+    //Menu de opção de pedido FEITO
     public void menuOpcaoPedido(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
+        boolean menuAnterior = false;
 
-        System.out.println("""
+        do{
+            System.out.println("""
                            
                            Digite  o número da opção: 
                            1 - Cadastrar pedido        
@@ -380,7 +373,6 @@ public class MenuSistema {
         switch (i) {
             case 1 -> {
                 menuColab.cadastroPedido();
-                menuOpcaoPedido(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 2 -> {
@@ -394,7 +386,6 @@ public class MenuSistema {
                 System.out.println("Digite o ID do pedido que deseja modificar: ");
                 idPedido = input.nextInt();
                 menuColab.modificarPedido(idPedido, ProxyAdministrador.consultaCliente(CPF));
-                menuOpcaoPedido(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 3 -> {
@@ -408,12 +399,10 @@ public class MenuSistema {
                 System.out.println("Digite o ID do pedido que deseja acessar: ");
                 idPedido = input.nextInt();
                 System.out.println(menuColab.consultarPedido(idPedido, ProxyAdministrador.consultaCliente(CPF)));
-                menuOpcaoPedido(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 4 -> {
                 menuColab.excluirPedido();
-                menuOpcaoPedido(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 5 -> {
@@ -423,26 +412,26 @@ public class MenuSistema {
                 for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
                     System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
                 }
-                menuOpcaoPedido(menuAdm, menuColab, usuarioAtual);
                 break;
             }
             case 6 -> {
-                menuColaborador(menuAdm, menuColab, usuarioAtual);
+                menuAnterior = true;
                 break;
             }
             default -> {
                 System.out.println("A opção selecionada é invalida.");
-                menuOpcaoPedido(menuAdm, menuColab, usuarioAtual);
             }
         }
+        }while(menuAnterior == false);
     }
 
     //Menu de opção de pedido
     public void menuOpcaoCliente(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
-
-        System.out.println("""
+        boolean menuAnterior = false;
+        do{
+            System.out.println("""
                            
                            Digite  o número da opção: 
                            1 - Cadastrar cliente       
@@ -457,33 +446,29 @@ public class MenuSistema {
         switch (i) {
             case 1 -> {
                 menuAdm.cadastroCliente();
-                menuOpcaoCliente(menuAdm, menuColab, usuarioAtual);
             }
             case 2 -> {
                 System.out.println("Insira o CPF do cliente: ");
                 CPF = input.nextLine();
                 menuAdm.modificarCliente(CPF);
-                menuOpcaoCliente(menuAdm, menuColab, usuarioAtual);
             }
             case 3 -> {
                 System.out.println("Insira o CPF do cliente: ");
                 CPF = input.nextLine();
                 System.out.println(ProxyAdministrador.consultaCliente(CPF));
-                menuOpcaoCliente(menuAdm, menuColab, usuarioAtual);
             }
             case 4 -> {
                 System.out.println("Insira o CPF do cliente: ");
                 CPF = input.nextLine();
                 menuAdm.excluirCliente(CPF);
-                menuOpcaoCliente(menuAdm, menuColab, usuarioAtual);
             }
             case 5 -> {
-                menuAdministrador(menuAdm, menuColab, usuarioAtual);
+                menuAnterior = true;
             }
             default -> {
                 System.out.println("A opção selecionada é invalida.");
-                menuOpcaoCliente(menuAdm, menuColab, usuarioAtual);
             }
         }
+        }while(menuAnterior == false);
     }
 }
