@@ -93,9 +93,9 @@ public class ProxyAdministrador {
         Colaborador attColaborador = new Colaborador();
         attColaborador = null;
 
-        for (int i = 0; i < 15; i++) {
-            if (CPFColaborador.equals(ProxyAdministrador.Colaboradores[i].getCPF())) {
-                attColaborador = ProxyAdministrador.Colaboradores[i];
+        for (Colaborador colab : ProxyAdministrador.getColaboradores()) {
+            if (CPFColaborador.equals(colab.getCPF())) {
+                attColaborador = colab;
                 break;
             }
 

@@ -14,7 +14,6 @@ public class SistemaLanchonete {
         //Inicializando o sistema
         //manipularJson mJson = new manipularJson();
         //mJson.assimilateAll();
-
         //ProxyAdministrador.getColaboradores();
         SistemaLanchonete.startSistema();
 
@@ -28,6 +27,7 @@ public class SistemaLanchonete {
     //Função login
     public static Usuario loginSistema(manipularJson mJson) throws IOException {
         Administrador adm = mJson.assimilateAdministrador();
+
         Scanner input = new Scanner(System.in);
         System.out.println("Digite seu login: ");
         String loginUsuario = input.nextLine();
@@ -37,15 +37,17 @@ public class SistemaLanchonete {
 
             Usuario usuarioAtual = null;
 
-            if (loginUsuario.equals(adm.getLoginUsuario())) {
-                if (senhaUsuario.equals(adm.getSenhaUsuario())) {
-                    usuarioAtual = adm;
-                }
+            if (loginUsuario.equals(adm.getLoginUsuario()) && senhaUsuario.equals(adm.getSenhaUsuario())) {
+
+                usuarioAtual = adm;
+
             } else {
                 for (Colaborador colab : ProxyAdministrador.getColaboradores()) {
                     if (loginUsuario.equals(colab.getLoginUsuario()) && senhaUsuario.equals(colab.getSenhaUsuario())) {
                         usuarioAtual = colab;
+                        break;
                     }
+
                 }
                 /*for (int i = 0; i < 15; i++) {
                     if (loginUsuario.equals(ProxyAdministrador.getColaboradores()[i].getLoginUsuario())) {
