@@ -12,10 +12,12 @@ public class SistemaLanchonete {
         Locale.setDefault(locale);
 
         //Inicializando o sistema
-        
+        //manipularJson mJson = new manipularJson();
+        //mJson.assimilateAll();
 
+        //ProxyAdministrador.getColaboradores();
         SistemaLanchonete.startSistema();
-        
+
         //ANTES DE ENVIAR, USAR ISSO DAQUI PRA PODER INICIALIZAR COM NULO PRA DAR BOM
         /*manipularJson mJson = new manipularJson();
         mJson.dumpColaborador(ProxyAdministrador.getColaboradores());
@@ -40,13 +42,18 @@ public class SistemaLanchonete {
                     usuarioAtual = adm;
                 }
             } else {
-                for (int i = 0; i < 15; i++) {
-                    if (senhaUsuario.equals(ProxyAdministrador.getColaboradores()[i].getLoginUsuario())) {
-                        if (loginUsuario.equals(ProxyAdministrador.getColaboradores()[i].getSenhaUsuario())) {
+                for (Colaborador colab : ProxyAdministrador.getColaboradores()) {
+                    if (loginUsuario.equals(colab.getLoginUsuario()) && senhaUsuario.equals(colab.getSenhaUsuario())) {
+                        usuarioAtual = colab;
+                    }
+                }
+                /*for (int i = 0; i < 15; i++) {
+                    if (loginUsuario.equals(ProxyAdministrador.getColaboradores()[i].getLoginUsuario())) {
+                        if (senhaUsuario.equals(ProxyAdministrador.getColaboradores()[i].getSenhaUsuario())) {
                             usuarioAtual = ProxyAdministrador.getColaboradores()[i];
                         }
                     }
-                }
+                }*/
             }
 
             if (usuarioAtual == null) {
@@ -63,50 +70,49 @@ public class SistemaLanchonete {
         manipularJson mJson = new manipularJson();
         mJson.assimilateAll();
 
-        
         Usuario usuarioAtual = null;
-        
+
         //Inicializando sistema
         ProxyAdministrador menuAdm = new ProxyAdministrador();
         ProxyColaborador menuColab = new ProxyColaborador();
         MenuSistema menuSistema = new MenuSistema();
-        
+
         //Login
         Scanner inputSistema = new Scanner(System.in);
         int i;
         boolean sairSistema = false;
-        do{
+        do {
             System.out.println("""
                            
                            Escolha uma opções do menu: 
                            1 -  Login          
                            2 -  Encerrar
                                """);
-        i = inputSistema.nextInt();
-        switch (i) {
-            case 1 -> {
-                while (usuarioAtual == null) {
-                    usuarioAtual = SistemaLanchonete.loginSistema(mJson);
-                }
+            i = inputSistema.nextInt();
+            switch (i) {
+                case 1 -> {
+                    while (usuarioAtual == null) {
+                        usuarioAtual = SistemaLanchonete.loginSistema(mJson);
+                    }
 
-                if (usuarioAtual instanceof Administrador) {
-                    menuSistema.menuAdministrador(menuAdm, menuColab, usuarioAtual);
-                    mJson.dumpAdministrador((Administrador) usuarioAtual);
+                    if (usuarioAtual instanceof Administrador) {
+                        menuSistema.menuAdministrador(menuAdm, menuColab, usuarioAtual);
+                        mJson.dumpAdministrador((Administrador) usuarioAtual);
 
-                } else if (usuarioAtual instanceof Colaborador) {
-                    menuSistema.menuColaborador(menuAdm, menuColab, usuarioAtual);
+                    } else if (usuarioAtual instanceof Colaborador) {
+                        menuSistema.menuColaborador(menuAdm, menuColab, usuarioAtual);
+                    }
+                    break;
                 }
-                break;
+                case 2 -> {
+                    mJson.dumpAll();
+                    sairSistema = true;
+                    break;
+                }
+                default -> {
+                    System.out.println("Opção inválida, reinicie o programa");
+                }
             }
-            case 2 -> {
-                mJson.dumpAll();
-                sairSistema = true;
-                break;
-            }
-            default -> {
-                System.out.println("Opção inválida, reinicie o programa");
-            }
-        }
-        }while(sairSistema == false);
+        } while (sairSistema == false);
     }
 }

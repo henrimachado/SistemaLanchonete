@@ -13,7 +13,7 @@ public class ProxyAdministrador {
     //MANIPULAÇÃO DE COLABORADORES
     //Questão 01 - O sistema deve armazenar de forma estática 15 colaboradores
     private static Colaborador Colaboradores[] = new Colaborador[15];
-    
+
     //GETTER DO ARRAY DE COLABORADORES
     public static Colaborador[] getColaboradores() {
         return Colaboradores;
@@ -36,9 +36,9 @@ public class ProxyAdministrador {
         else{
             ProxyAdministrador.Colaboradores[i] = C;
         }
-        */
-        for (int i = 0; i < 15; i++){
-            if (ProxyAdministrador.Colaboradores[i] == null){
+         */
+        for (int i = 0; i < 15; i++) {
+            if (ProxyAdministrador.Colaboradores[i] == null) {
                 ProxyAdministrador.Colaboradores[i] = C;
                 break;
             }
@@ -70,8 +70,10 @@ public class ProxyAdministrador {
         System.out.printf("Sobrenome: ");
         sobrenomeColaborador = input.nextLine();
 
-        System.out.printf("CPF: ");
-        CPF = input.nextLine();
+        do {
+            System.out.printf("CPF: ");
+            CPF = input.nextLine();
+        } while (ProxyAdministrador.ValidaCPF(CPF) == false);
 
         System.out.printf("E-mail: ");
         loginColaborador = input.nextLine();
@@ -146,9 +148,11 @@ public class ProxyAdministrador {
                     }
 
                     case 3 -> {
-                        System.out.printf("Digite o novo CPF: ");
-                        String dado = inputDado.nextLine();
-
+                        String dado;
+                        do {
+                            System.out.printf("Digite o novo CPF: ");
+                            dado = inputDado.nextLine();
+                        } while (ProxyAdministrador.ValidaCPF(dado) == false);
                         modColab.setCPF(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         CPFColab = dado;
@@ -255,8 +259,10 @@ public class ProxyAdministrador {
         System.out.printf("Sobrenome: ");
         sobrenomeCliente = input.nextLine();
 
-        System.out.printf("CPF: ");
-        CPF = input.nextLine();
+        do {
+            System.out.printf("CPF: ");
+            CPF = input.nextLine();
+        } while (ProxyAdministrador.ValidaCPF(CPF) == false);
 
         System.out.printf("Endereço: ");
         enderecoCliente = input.nextLine();
@@ -348,8 +354,13 @@ public class ProxyAdministrador {
                     }
 
                     case 3 -> {
-                        System.out.printf("Digite o novo CPF: ");
-                        String dado = inputDado.nextLine();
+                        String dado;
+                        do {
+                            System.out.printf("Digite o novo CPF: ");
+
+                            System.out.printf("CPF: ");
+                            dado = inputDado.nextLine();
+                        } while (ProxyAdministrador.ValidaCPF(dado) == false);
 
                         modCliente.setCPF(dado);
                         System.out.println("Alteração realizada com sucesso!");
@@ -644,8 +655,12 @@ public class ProxyAdministrador {
                 }
 
                 case 3 -> {
-                    System.out.println("Digite o novo CPF: ");
-                    String novoCPF = input.nextLine();
+
+                    String novoCPF;
+                    do {
+                        System.out.println("Digite o novo CPF: ");
+                        novoCPF = input.nextLine();
+                    } while (ProxyAdministrador.ValidaCPF(novoCPF) == false);
                     Adm.setCPF(novoCPF);
                     System.out.println("Alteração realizada com sucesso!");
                     break;
@@ -678,5 +693,85 @@ public class ProxyAdministrador {
 
         } while (menuAnterior == false);
 
+    }
+
+    public static boolean ValidaCPF(String cpf) {
+        // importar a java.util.InputMismatchException
+
+        //Validando se o CPF é formado apenas por numeros iguais
+        if (cpf.equals("00000000000")
+                || cpf.equals("11111111111")
+                || cpf.equals("22222222222")
+                || cpf.equals("33333333333")
+                || cpf.equals("44444444444")
+                || cpf.equals("55555555555")
+                || cpf.equals("66666666666")
+                || cpf.equals("77777777777")
+                || cpf.equals("88888888888")
+                || cpf.equals("99999999999") || (cpf.length() != 11)) {
+            System.out.println("\nCPF inválido. Digite novamente.\n");
+            return false;
+        }
+
+        // variaveis do décimo e décimo primeiro 
+        char digito10;
+        char digito11;
+        int soma;
+        int i;
+        int r;
+        int numero;
+        int peso;
+
+        try {
+            // para calcular o primeiro digito "verificador"
+            soma = 0;
+            peso = 10;
+            for (i = 0; i < 9; i++) {
+                // para converter o caractere do CPF em um número inteiro
+                // o 48 representa o zero tabela ASCII
+                numero = (int) (cpf.charAt(i) - 48);
+                soma = soma + (numero * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (soma % 11);
+            if ((r == 10) || (r == 11)) {
+                digito10 = '0';
+            } else {
+                digito10 = (char) (r + 48);
+            }
+
+            //para calcular o segundo digito "verificador"
+            soma = 0;
+            //peso igual a 11, pois, o primeiro digito verificador já foi calculado
+            peso = 11;
+            for (i = 0; i < 10; i++) {
+                // xS é a variavel a qual vai receber os valores das somas
+                numero = (int) (cpf.charAt(i) - 48);
+                soma = soma + (numero * peso);
+                // O xpeso sempre diminui de uma soma para a outra
+                peso = peso - 1;
+            }
+
+            r = 11 - (soma % 11);
+
+            if ((r == 10) || (r == 11)) {
+                digito11 = '0';
+            } else {
+                digito11 = (char) (r + 48);
+            }
+
+            //Valida se os numeros informados batem o valor com os numeros 
+            if ((digito10 == cpf.charAt(9))
+                    && (digito11 == cpf.charAt(10))) {
+                return (true);
+            } else {
+                System.out.println("\nCPF inválido. Digite novamente.\n");
+                return (false);
+            }
+        } catch (Exception e) {
+            System.out.println("Não foi possivel validar o CPF.");
+            return (false);
+        }
     }
 }
