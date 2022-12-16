@@ -13,10 +13,14 @@ public class SistemaLanchonete {
 
         //Inicializando o sistema
         
-        
-        
-        SistemaLanchonete.startSistema();
 
+        SistemaLanchonete.startSistema();
+        
+        //ANTES DE ENVIAR, USAR ISSO DAQUI PRA PODER INICIALIZAR COM NULO PRA DAR BOM
+        /*manipularJson mJson = new manipularJson();
+        mJson.dumpColaborador(ProxyAdministrador.getColaboradores());
+        mJson.dumpCliente(ProxyAdministrador.getClientes());
+        mJson.dumpProdutos(ProxyAdministrador.getListaProdutos());*/
     }
 
     //Função login
@@ -57,7 +61,6 @@ public class SistemaLanchonete {
     public static void startSistema() throws IOException {
         //Uso de json
         manipularJson mJson = new manipularJson();
-
         mJson.assimilateAll();
 
         
@@ -71,7 +74,9 @@ public class SistemaLanchonete {
         //Login
         Scanner inputSistema = new Scanner(System.in);
         int i;
-        System.out.println("""
+        boolean sairSistema = false;
+        do{
+            System.out.println("""
                            
                            Escolha uma opções do menu: 
                            1 -  Login          
@@ -95,12 +100,13 @@ public class SistemaLanchonete {
             }
             case 2 -> {
                 mJson.dumpAll();
-                mJson.dumpColaborador(ProxyAdministrador.getColaboradores());
+                sairSistema = true;
                 break;
             }
             default -> {
                 System.out.println("Opção inválida, reinicie o programa");
             }
         }
+        }while(sairSistema == false);
     }
 }

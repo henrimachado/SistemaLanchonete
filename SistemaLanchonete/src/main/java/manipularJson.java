@@ -163,6 +163,7 @@ public class manipularJson {
         ProxyAdministrador.setColaboradores(assimilateColaborador());
         ProxyAdministrador.setClientes(assimilateCliente());
         ProxyAdministrador.setListaProdutos(assimilateProduto());
+        
     }
     
     public void dumpAll() throws IOException{

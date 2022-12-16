@@ -13,7 +13,7 @@ public class ProxyAdministrador {
     //MANIPULAÇÃO DE COLABORADORES
     //Questão 01 - O sistema deve armazenar de forma estática 15 colaboradores
     private static Colaborador Colaboradores[] = new Colaborador[15];
-
+    
     //GETTER DO ARRAY DE COLABORADORES
     public static Colaborador[] getColaboradores() {
         return Colaboradores;
@@ -40,6 +40,7 @@ public class ProxyAdministrador {
         for (int i = 0; i < 15; i++){
             if (ProxyAdministrador.Colaboradores[i] == null){
                 ProxyAdministrador.Colaboradores[i] = C;
+                break;
             }
         }
 
