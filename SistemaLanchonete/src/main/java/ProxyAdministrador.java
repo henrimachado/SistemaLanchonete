@@ -160,7 +160,24 @@ public class ProxyAdministrador {
                     }
 
                     case 4 -> {
-
+                        String novoLogin;
+                        String confirmLogin;
+                        do{
+                            System.out.printf("Digite o novo login: ");
+                            novoLogin = inputDado.nextLine();
+                            System.out.printf("Digite a confirmação do novo login: ");
+                            confirmLogin = inputDado.nextLine();
+                            
+                            if(novoLogin.equals(confirmLogin)){
+                                modColab.setLoginUsuario(confirmLogin);
+                                System.out.println("\nAlteração realizada com sucesso!");
+                            }
+                            else{
+                                System.out.println("\nDados não conferem. Tente novamente!\n");
+                            }
+                            
+                        }while(!novoLogin.equals(confirmLogin));
+                        
                     }
 
                     case 5 -> {
