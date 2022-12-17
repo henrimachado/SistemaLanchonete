@@ -29,10 +29,12 @@ br.com.lanchonete.pessoas
 br.com.lanchonete.produtos
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/br/com/lanchonete/pessoas/Administrador.java'
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/br/com/lanchonete/pessoas/Cliente.java'
+'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/br/com/lanchonete/pessoas/ClienteComparator.java'
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/br/com/lanchonete/pessoas/Colaborador.java'
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/br/com/lanchonete/pessoas/Pessoa.java'
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/br/com/lanchonete/pessoas/Usuario.java'
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/br/com/lanchonete/produtos/Pedido.java'
+'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/br/com/lanchonete/produtos/PedidoComparator.java'
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/br/com/lanchonete/produtos/Produto.java'
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/manipularJson.java'
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/MenuSistema.java'
@@ -40,37 +42,37 @@ br.com.lanchonete.produtos
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/ProxyColaborador.java'
 'C:/Users/henri/OneDrive/Documents/NetBeansProjects/Projeto_Final/SistemaLanchonete/src/main/java/SistemaLanchonete.java'
 C:\Users\henri\.m2\repository\com\google\code\gson\gson\2.10\gson-2.10.jar = 1670762391247
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\manipularJson.java = 1671309818008
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\MenuSistema.java = 1671312820625
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\ProxyAdministrador.java = 1671313598393
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\ProxyColaborador.java = 1671313597097
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\SistemaLanchonete.java = 1671313617306
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\manipularJson.java = 1671317224178
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\MenuSistema.java = 1671317218307
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\ProxyAdministrador.java = 1671317221146
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\ProxyColaborador.java = 1671317219790
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java\SistemaLanchonete.java = 1671317475520
 C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\src\main\java = 1671222260370
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\allclasses-index.html = 1671313625149
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\allpackages-index.html = 1671313625152
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\copy.svg = 1671313625210
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\element-list = 1671313624993
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\help-doc.html = 1671313625202
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\index-all.html = 1671313625191
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\index.html = 1671313625128
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\jquery-ui.overrides.css = 1671313625234
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\manipularJson.html = 1671313624815
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\member-search-index.js = 1671313625165
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\MenuSistema.html = 1671313624848
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\module-search-index.js = 1671313625155
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\overview-summary.html = 1671313625197
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\overview-tree.html = 1671313625124
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\package-search-index.js = 1671313625156
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\package-summary.html = 1671313625003
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\package-tree.html = 1671313625010
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\package-use.html = 1671313625112
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\ProxyAdministrador.html = 1671313624947
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\ProxyColaborador.html = 1671313624966
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\script.js = 1671313625208
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\search-page.js = 1671313625215
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\search.html = 1671313625194
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\search.js = 1671313625213
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\SistemaLanchonete.html = 1671313624979
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\stylesheet.css = 1671313625206
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\tag-search-index.js = 1671313625167
-C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\type-search-index.js = 1671313625160
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\allclasses-index.html = 1671317482665
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\allpackages-index.html = 1671317482668
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\copy.svg = 1671317482747
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\element-list = 1671317482468
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\help-doc.html = 1671317482734
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\index-all.html = 1671317482722
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\index.html = 1671317482639
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\jquery-ui.overrides.css = 1671317482778
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\manipularJson.html = 1671317482269
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\member-search-index.js = 1671317482685
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\MenuSistema.html = 1671317482297
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\module-search-index.js = 1671317482679
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\overview-summary.html = 1671317482729
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\overview-tree.html = 1671317482633
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\package-search-index.js = 1671317482682
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\package-summary.html = 1671317482487
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\package-tree.html = 1671317482493
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\package-use.html = 1671317482620
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\ProxyAdministrador.html = 1671317482415
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\ProxyColaborador.html = 1671317482433
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\script.js = 1671317482745
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\search-page.js = 1671317482752
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\search.html = 1671317482726
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\search.js = 1671317482750
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\SistemaLanchonete.html = 1671317482455
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\stylesheet.css = 1671317482741
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\tag-search-index.js = 1671317482687
+C:\Users\henri\OneDrive\Documents\NetBeansProjects\Projeto_Final\SistemaLanchonete\target\site\apidocs\type-search-index.js = 1671317482683

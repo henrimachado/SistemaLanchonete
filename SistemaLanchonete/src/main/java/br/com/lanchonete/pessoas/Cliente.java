@@ -9,7 +9,9 @@ import br.com.lanchonete.produtos.*;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
-public class Cliente extends Pessoa implements Comparable<Cliente> {
+
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
+public class Cliente extends Pessoa {
 
     private String enderecoCliente;
     private String telefoneCliente;
@@ -25,6 +27,7 @@ public class Cliente extends Pessoa implements Comparable<Cliente> {
      * @param enderecoCliente Define um endereço para o Cliente
      * @param telefoneCliente Define um número de telefone para o Cliente
      */
+    //Questão 4 - Utilizar a palavra chave super para implementar os construtores das subsclasses
     public Cliente(String nomePessoa, String sobrenomePessoa, String CPF, String enderecoCliente, String telefoneCliente) {
         super(nomePessoa, sobrenomePessoa, CPF);
         this.enderecoCliente = enderecoCliente;
@@ -35,6 +38,7 @@ public class Cliente extends Pessoa implements Comparable<Cliente> {
      * Construtor padrão Obs.: Realiza uma chamada ao construtor padrão da
      * classe pai (Pessoa)
      */
+    //Questão 4 - Utilizar a palavra chave super para implementar os construtores das subsclasses
     public Cliente() {
         super();
     }
@@ -91,19 +95,11 @@ public class Cliente extends Pessoa implements Comparable<Cliente> {
      *
      * @return Representação String para o objeto Cliente
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return getCPF() + "    " + getNomePessoa().toUpperCase() + " " + getSobrenomePessoa().toUpperCase() + "    "
                 + getTelefoneCliente() + "    " + getEnderecoCliente().toUpperCase();
     }
 
-    /**
-     * Método de comparação entre objetos da classe cliente
-     * @param o Objeto do tipo cliente
-     * @return Valores de comparação 
-     */
-    @Override
-    public int compareTo(Cliente o) {
-        return this.getCPF().compareTo(o.getCPF());
-    }
 }

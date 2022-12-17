@@ -9,8 +9,9 @@ import java.util.Locale;
  *
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
- * @version 1.1
+ * @version 1.2
  */
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
 public class SistemaLanchonete {
 
     public static void main(String[] args) throws IOException {
@@ -35,7 +36,10 @@ public class SistemaLanchonete {
      * cadastradas
      * @throws IOException Exceção associada à manipulação de arquivos Json
      */
+    
+    //Questão 2 - O sistema será utilizado por colaboradores e pelo administrador
     public static Usuario loginSistema(manipularJson mJson) throws IOException {
+        //Questão 13 - Salve e recupere todas as informações do sistema em um arquivo json
         Administrador adm = mJson.assimilateAdministrador();
 
         Scanner input = new Scanner(System.in);
@@ -79,6 +83,7 @@ public class SistemaLanchonete {
      */
     public static void startSistema() throws IOException {
         //Uso de json
+        //Questão 13 - Salve e recupere todas as informações do sistema em um arquivo json
         manipularJson mJson = new manipularJson();
         mJson.assimilateAll();
 
@@ -105,6 +110,7 @@ public class SistemaLanchonete {
                                """);
         inputSistema = new Scanner(System.in);
         i = inputSistema.nextInt();
+        //Questão 2 - O sistema será utilizado por colaboradores e pelo administrador
         switch (i) {
             case 1 -> {
                 while (usuarioAtual == null) {
@@ -113,6 +119,7 @@ public class SistemaLanchonete {
 
                 if (usuarioAtual instanceof Administrador) {
                     menuSistema.menuAdministrador(menuAdm, menuColab, usuarioAtual);
+                    //Questão 13 - Salve e recupere todas as informações do sistema em um arquivo json
                     mJson.dumpAdministrador((Administrador) usuarioAtual);
 
                 } else if (usuarioAtual instanceof Colaborador) {
@@ -121,6 +128,7 @@ public class SistemaLanchonete {
                 break;
             }
             case 2 -> {
+                //Questão 13 - Salve e recupere todas as informações do sistema em um arquivo json
                 mJson.dumpAll(menuColab);
                 sairSistema = true;
                 break;
@@ -136,6 +144,7 @@ public class SistemaLanchonete {
      *
      * @return Representação String do Sistema da Lanchonete
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return "SistemaLanchonete";

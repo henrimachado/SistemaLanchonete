@@ -14,6 +14,7 @@ import java.util.*;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
 public class ProxyColaborador {
 
     //FORMATADOR COM RESTRIÇÃO QUE NOS GARANTE A VERIFICAÇÃO DE DATAS VÁLIDAS
@@ -104,6 +105,7 @@ public class ProxyColaborador {
      *
      * @return Lista de Extratos de todos os pedidos cadastrados no sistema
      */
+    //Questão 9 - Cada pedido efetuado vai gerar um extrato que deve ser salvo junto com a informação do cliente que fez o pedido
     public static ArrayList<String> getExtratosPedidos() {
         return extratosPedidos;
     }
@@ -113,6 +115,7 @@ public class ProxyColaborador {
      *
      * @param extratosPedidos Lista de Extratos de Pedidos
      */
+    //Questão 9 - Cada pedido efetuado vai gerar um extrato que deve ser salvo junto com a informação do cliente que fez o pedido
     public static void setExtratosPedidos(ArrayList<String> extratosPedidos) {
         ProxyColaborador.extratosPedidos = extratosPedidos;
     }
@@ -123,6 +126,7 @@ public class ProxyColaborador {
      *
      * @return Lista de extratos de pedidos cadastrados no sistema
      */
+    //Questão 9 - Cada pedido efetuado vai gerar um extrato que deve ser salvo junto com a informação do cliente que fez o pedido
     public ArrayList<String> extratosPedidos() {
         ArrayList<String> extratos = new ArrayList();
         for (Cliente cl : ProxyAdministrador.getClientes()) {
@@ -143,6 +147,8 @@ public class ProxyColaborador {
      * no sistema Fornece as opções de listagem por um intervalo de datas ou
      * intervalo de data e hora
      */
+    //Questão 7 - Verificar e imprimir dados dos pedidos dos clientes tal como o status
+    //Questão 14 - Pesquisar pedidos de clientes em um determinado intervalo de datas e horários
     public void listarPedidos() {
         boolean encerrarLista = false;
         do {
@@ -488,6 +494,7 @@ public class ProxyColaborador {
      * @return Objeto do tipo pedido se a chave tiver sido previamente
      * cadastrada
      */
+    //Questão 7 - Verificar e imprimir dados dos pedidos dos clientes tal como o status
     public Pedido consultarPedido(int idPedido, Cliente Cl) {
         Pedido attPedido = new Pedido();
         attPedido = null;
@@ -731,6 +738,7 @@ public class ProxyColaborador {
      * @return Representação em String da classe intermediária de
      * funcionalidades geralmente disponíveis ao colaborador
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return "ProxyColaborador";

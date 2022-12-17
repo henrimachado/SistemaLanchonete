@@ -6,6 +6,7 @@ package br.com.lanchonete.pessoas;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
 public class Usuario extends Pessoa {
 
     private String loginUsuario;
@@ -21,6 +22,7 @@ public class Usuario extends Pessoa {
      * @param loginUsuario Define um login (e-mail) de acesso para o usuário
      * @param senhaUsuario Define uma senha de acesso para o usuário
      */
+    //Questão 4 - Utilizar a palavra chave super para implementar os construtores das subsclasses
     public Usuario(String nomePessoa, String sobrenomePessoa, String CPF, String loginUsuario, String senhaUsuario) {
         super(nomePessoa, sobrenomePessoa, CPF);
         this.loginUsuario = loginUsuario;
@@ -31,6 +33,7 @@ public class Usuario extends Pessoa {
      * Construtor Padrão Realiza uma chamada ao construtor padrão da classe pai
      * (Pessoa)
      */
+    //Questão 4 - Utilizar a palavra chave super para implementar os construtores das subsclasses
     public Usuario() {
         super();
     }
@@ -71,6 +74,7 @@ public class Usuario extends Pessoa {
      *
      * @return Representação String do objeto Usuario
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return getCPF() + "    " + getNomePessoa().toUpperCase() + " " + getSobrenomePessoa().toUpperCase()

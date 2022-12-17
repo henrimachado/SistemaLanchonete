@@ -6,6 +6,7 @@ package br.com.lanchonete.pessoas;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
 public final class Administrador extends Usuario {
 
     private static int admCount;
@@ -25,6 +26,7 @@ public final class Administrador extends Usuario {
      * @param senhaUsuario define a senha utilizada pelo Administrador do
      * programa
      */
+    //Questão 4 - Utilizar a palavra chave super para implementar os construtores das subsclasses
     public Administrador(String nomePessoa, String sobrenomePessoa, String CPF, String loginUsuario, String senhaUsuario) {
         super(nomePessoa, sobrenomePessoa, CPF, loginUsuario, senhaUsuario);
         setAdmCount(admCount);
@@ -34,6 +36,7 @@ public final class Administrador extends Usuario {
      * Construtor padrão Obs.: Realiza uma chamada ao construtor padrão da
      * classe pai (Usuário)
      */
+    //Questão 4 - Utilizar a palavra chave super para implementar os construtores das subsclasses
     public Administrador() {
         super();
     }
@@ -58,6 +61,7 @@ public final class Administrador extends Usuario {
      *
      * @return Representação em String do Administrador conforme estabelecido
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return getCPF() + "    " + getNomePessoa().toUpperCase() + " " + getSobrenomePessoa().toUpperCase()

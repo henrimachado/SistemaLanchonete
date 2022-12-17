@@ -1,6 +1,6 @@
-import br.com.lanchonete.pessoas.Administrador;
-import br.com.lanchonete.pessoas.Colaborador;
-import br.com.lanchonete.pessoas.Usuario;
+import br.com.lanchonete.pessoas.*;
+import br.com.lanchonete.produtos.*;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Collections;
@@ -10,6 +10,7 @@ import java.util.Collections;
  * @author Mateus Henrique Machado 
  * @author Iago Mateus Ávila Fernandes 
  */
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
 public class MenuSistema {
 
     /**
@@ -69,6 +70,7 @@ public class MenuSistema {
                 case 6 -> {
                     System.out.println("O sistema foi finalizado.");
                     manipularJson mJson = new manipularJson();
+                    //Questão 13 - Salve e recupere todas as informações do sistema em um arquivo json
                     mJson.dumpAll(menuColab);
                     sairSistema = true;
                     break;
@@ -121,6 +123,7 @@ public class MenuSistema {
                 case 4 -> {
                     System.out.println("\nO sistema foi finalizado.\n");
                     manipularJson mJson = new manipularJson();
+                    //Questão 13 - Salve e recupere todas as informações do sistema em um arquivo json
                     mJson.dumpAll(menuColab);
                     sairSistema = true;
                     break;
@@ -336,6 +339,7 @@ public class MenuSistema {
                     menuAdm.printClientes();
                     ProxyAdministrador.setQntClientesProtected();
                     ProxyAdministrador.setQntClientesPrivate();
+                    //Questão 11 - Criar um método de classe que deve retornar quantas instâncias foram criadas do tipo cliente
                     System.out.println("Total de clientes cadastrados: " + ProxyAdministrador.qntClientesProtected);
                 }
                 case 2 -> {
@@ -353,9 +357,11 @@ public class MenuSistema {
                     menuAdm.consultaListaProdutos();
                 }
                 case 4 -> {
+                      //Questão 14 - Pesquisar pedidos de clientes em um determinado intervalo de datas e horários
                     menuColab.listarPedidos();
                 }
                 case 5 -> {
+                      //Questão 14 - Pesquisar pedidos de clientes em um determinado intervalo de datas e horários
                     menuColab.statsVendas();
                 }
                 case 6 -> {
@@ -482,6 +488,7 @@ public class MenuSistema {
                     break;
                 }
                 case 5 -> {
+                    //Questão 13 - Salve e recupere todas as informações do sistema em um arquivo json
                     manipularJson mJson = new manipularJson();
                     mJson.dumpExtratosPedidos(menuColab.extratosPedidos());
                     ProxyColaborador.setExtratosPedidos(mJson.assimilateExtratosPedidos());
@@ -548,10 +555,12 @@ public class MenuSistema {
                     menuAdm.excluirCliente(CPF);
                 }
                 case 5 -> {
+                    //Questão 7 - Verificar e imprimir dados dos pedidos dos clientes tal como o status
                     System.out.println("CPF do cliente: ");
                     CPF = input.nextLine();
                     System.out.println("Lista de pedidos do Cliente: ");
-                    Collections.sort(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente());
+                    //Questão 12 - Implementar a interface Comparator para as classes Cliente e Pedido
+                    Collections.sort(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente(), new PedidoComparator());
                     for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
                         System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
                     }
@@ -571,6 +580,7 @@ public class MenuSistema {
      * 
      * @return Representação String da Classe
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return "Menu do Sistema";

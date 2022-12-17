@@ -34,6 +34,8 @@ import java.util.ArrayList;
  *
  *
  */
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
+//Questão 13 - Salve e recupere todas as informações do sistema em um arquivo json
 public class manipularJson {
 
     /**
@@ -140,6 +142,7 @@ public class manipularJson {
      * @param extratosPedidos Lista de extratos de Pedidos
      * @throws IOException Exceção associada à manipulação de dados Json
      */
+    //Questão 9 - Cada pedido efetuado vai gerar um extrato que deve ser salvo junto com a informação do cliente que fez o pedido
     public void dumpExtratosPedidos(ArrayList<String> extratosPedidos) throws IOException {
         Gson jsonObject = new Gson();
         File pedidoFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Pedidos.json");
@@ -162,6 +165,7 @@ public class manipularJson {
      * @return Lista de extratos de pedidos
      * @throws IOException Exceção associada à manipulação de dados Json
      */
+    //Questão 9 - Cada pedido efetuado vai gerar um extrato que deve ser salvo junto com a informação do cliente que fez o pedido
     public ArrayList<String> assimilateExtratosPedidos() throws IOException {
         Gson jsonObject = new Gson();
         File clienteFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Pedidos.json");
@@ -296,6 +300,7 @@ public class manipularJson {
      *
      * @return Representação em String da Classe de manipulação de arquivos
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return "Manipulação de Arquivos JSON";

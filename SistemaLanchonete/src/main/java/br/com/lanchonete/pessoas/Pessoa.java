@@ -6,6 +6,7 @@ package br.com.lanchonete.pessoas;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
 public abstract class Pessoa {
 
     private String nomePessoa;
@@ -84,6 +85,7 @@ public abstract class Pessoa {
      *
      * @return Representação String do objeto pessoa
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return CPF + "    " + nomePessoa.toUpperCase() + " " + sobrenomePessoa.toUpperCase();

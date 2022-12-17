@@ -6,6 +6,7 @@ package br.com.lanchonete.produtos;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
 public class Produto {
 
     private String nomeProduto;
@@ -102,6 +103,7 @@ public class Produto {
      *
      * @return Representação em String do objeto produto
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return "[" + idProduto + "]   " + nomeProduto.toUpperCase() + "    R$" + valorProduto + "      " + descricaoProduto;

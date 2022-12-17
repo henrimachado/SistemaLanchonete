@@ -4,6 +4,7 @@ import br.com.lanchonete.produtos.Produto;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
+
 /**
  * Classe intermediária para funcionalidades geralmente disponíveis ao
  * Administrador
@@ -11,6 +12,7 @@ import java.util.Collections;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
 public class ProxyAdministrador {
 
     /**
@@ -19,8 +21,8 @@ public class ProxyAdministrador {
     public ProxyAdministrador() {
     }
 
-    //MANIPULAÇÃO DE COLABORADORES
-    //Questão 01 - O sistema deve armazenar de forma estática 15 colaboradores
+    //COLABORADORES
+    //Questão 5 - O sistema deve armazenar de forma estática 15 colaboradores
     private static Colaborador Colaboradores[] = new Colaborador[15];
 
     /**
@@ -59,6 +61,7 @@ public class ProxyAdministrador {
     /**
      * Função padrão para cadastro de novos colaboradores no sistema
      */
+    //Questão 6 - Deve ser possível cadastrar os clientes no sistema e alterar seus atributos
     public void cadastroColaborador() {
 
         String nomeColaborador, sobrenomeColaborador, CPF, loginColaborador, senhaColaborador;
@@ -75,8 +78,8 @@ public class ProxyAdministrador {
         do {
             System.out.printf("CPF: ");
             CPF = input.nextLine();
-            
-            if(ValidaCPF(CPF) == false || consultaColaborador(CPF) != null){
+
+            if (ValidaCPF(CPF) == false || consultaColaborador(CPF) != null) {
                 System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
             }
         } while (ProxyAdministrador.ValidaCPF(CPF) == false || consultaColaborador(CPF) != null);
@@ -122,6 +125,7 @@ public class ProxyAdministrador {
      * @param CPF Chave de busca do objeto Colaborador na base de colaboradores
      * do sistema
      */
+    //Questão 6 - Deve ser possível cadastrar os clientes no sistema e alterar seus atributos
     public void modificarColaborador(String CPF) {
         Scanner inputSwitch = new Scanner(System.in);
 
@@ -166,10 +170,10 @@ public class ProxyAdministrador {
                         do {
                             System.out.printf("Novo CPF: ");
                             dado = inputDado.nextLine();
-                            if(ProxyAdministrador.ValidaCPF(dado) == false || consultaColaborador(CPF)!=null){
+                            if (ProxyAdministrador.ValidaCPF(dado) == false || consultaColaborador(CPF) != null) {
                                 System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
                             }
-                        } while (ProxyAdministrador.ValidaCPF(dado) == false || consultaColaborador(CPF)!=null);
+                        } while (ProxyAdministrador.ValidaCPF(dado) == false || consultaColaborador(CPF) != null);
                         modColab.setCPF(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         CPFColab = dado;
@@ -218,6 +222,7 @@ public class ProxyAdministrador {
      * @param CPF Chave de busca do objeto Colaborador na base de colaboradores
      * do sistema
      */
+    //Questão 6 - Deve ser possível cadastrar os clientes no sistema e alterar seus atributos
     public void excluirColaborador(String CPF) {
         String CPFColaborador = CPF;
 
@@ -268,13 +273,18 @@ public class ProxyAdministrador {
         return Clientes;
     }
 
+    //Questão 10 - Criar duas variáveis de classe que armazenam quantas instâncias foram criadas do tipo Cliente dentro da classe sistema
+    //Questão 10a - Uma delas usando o enfoque em encapsulamento
     private static int qntClientesPrivate;
+    //Questão 10b - Implementar usando o controle de acesso do tipo protected
     protected static int qntClientesProtected;
 
     /**
      *
      * @return Quantidade de clientes cadastrados no sistema
      */
+     //Questão 10a - Uma delas usando o enfoque em encapsulamento
+    //Questão 11 - Criar um método de classe que deve retornar quantas instâncias foram criadas do tipo cliente
     public static int getQntClientesPrivate() {
         return qntClientesPrivate;
     }
@@ -282,6 +292,7 @@ public class ProxyAdministrador {
     /**
      * Incremento da quantidade de clientes cadastrados no sistema
      */
+     //Questão 10a - Uma delas usando o enfoque em encapsulamento
     public static void setQntClientesPrivate() {
         int qnt = 0;
         for (Cliente cl : ProxyAdministrador.getClientes()) {
@@ -294,6 +305,7 @@ public class ProxyAdministrador {
      *
      * @return Quantidade de clientes cadastrados no sistema
      */
+    //Questão 11 - Criar um método de classe que deve retornar quantas instâncias foram criadas do tipo cliente
     public static int getQntClientesProtected() {
         return qntClientesProtected;
     }
@@ -334,10 +346,10 @@ public class ProxyAdministrador {
         do {
             System.out.printf("CPF: ");
             CPF = input.nextLine();
-            if(ProxyAdministrador.ValidaCPF(CPF) == false || consultaCliente(CPF)!= null){
+            if (ProxyAdministrador.ValidaCPF(CPF) == false || consultaCliente(CPF) != null) {
                 System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
             }
-        } while (ProxyAdministrador.ValidaCPF(CPF) == false || consultaCliente(CPF)!= null);
+        } while (ProxyAdministrador.ValidaCPF(CPF) == false || consultaCliente(CPF) != null);
 
         System.out.printf("Endereço: ");
         enderecoCliente = input.nextLine();
@@ -448,7 +460,7 @@ public class ProxyAdministrador {
                         do {
                             System.out.printf("Novo CPF: ");
                             dado = inputDado.nextLine();
-                            if(ProxyAdministrador.ValidaCPF(dado) == false || consultaCliente(CPF) != null){
+                            if (ProxyAdministrador.ValidaCPF(dado) == false || consultaCliente(CPF) != null) {
                                 System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
                             }
                         } while (ProxyAdministrador.ValidaCPF(dado) == false || consultaCliente(CPF) != null);
@@ -493,7 +505,9 @@ public class ProxyAdministrador {
      * sistema
      */
     public void printClientes() {
-        Collections.sort(ProxyAdministrador.getClientes());
+        //Questão 12 - Implementar a interface Comparator para as classes Cliente e Pedido
+        ClienteComparator comparator = new ClienteComparator();
+        Collections.sort(ProxyAdministrador.getClientes(), comparator);
         for (Cliente cliente : ProxyAdministrador.getClientes()) {
             if (cliente != null) {
                 System.out.println(cliente);
@@ -507,7 +521,7 @@ public class ProxyAdministrador {
      * cadastrado no sistema
      *
      * @param CPF Chave de busca do cliente na base de clientes cadastrados
-     */ 
+     */
     public void printCliente(String CPF) {
         if (consultaCliente(CPF) != null) {
             System.out.println(consultaCliente(CPF));
@@ -813,7 +827,7 @@ public class ProxyAdministrador {
                     do {
                         System.out.printf("Novo CPF: ");
                         novoCPF = input.nextLine();
-                        if(ProxyAdministrador.ValidaCPF(novoCPF) == false || consultaColaborador(novoCPF) != null){
+                        if (ProxyAdministrador.ValidaCPF(novoCPF) == false || consultaColaborador(novoCPF) != null) {
                             System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
                         }
                     } while (ProxyAdministrador.ValidaCPF(novoCPF) == false || consultaColaborador(novoCPF) != null);
@@ -944,6 +958,7 @@ public class ProxyAdministrador {
      * @return Representação String da classe intermediária de funcionalidades
      * do Administrador
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         return "ProxyAdministrador";

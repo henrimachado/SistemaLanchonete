@@ -10,7 +10,8 @@ import java.util.ArrayList;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
-public class Pedido implements Comparable<Pedido> {
+//Questão 1 - Implementar todas as classes com base no diagrama de classes criado
+public class Pedido {
 
     private String dataPedido;
     private String horaPedido;
@@ -175,6 +176,7 @@ public class Pedido implements Comparable<Pedido> {
      *
      * @return Representação String de um objeto pedido
      */
+    //Questão 3 - Sobrescrever o método toString() de todas as classes implementadas
     @Override
     public String toString() {
         DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
@@ -218,21 +220,6 @@ public class Pedido implements Comparable<Pedido> {
                 + "    HORA ESPERADA DE ENTREGA: " + printHoraEntrega.format(localHourFormatter);
     }
 
-    /**
-     * Função de comparação entre pedidos
-     *
-     * @param o Objeto do tipo pedido
-     * @return Resultado da comparação
-     */
-    @Override
-    public int compareTo(Pedido o) {
-        if (this.idPedido > o.getIdPedido()) {
-            return 1;
-        } else if (this.idPedido < o.getIdPedido()) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
+    
 
 }
