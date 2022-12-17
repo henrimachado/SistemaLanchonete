@@ -11,18 +11,42 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
+ * Classe que contém métodos de manipulação de arquivos Json
  *
- * @author henri
+ * @author Mateus Henrique Machado
+ * @author Iago Mateus Ávila Fernandes 
+ * @see <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson">
+ * Gson MvnRepository </a>
+ * @see
+ * <a href="https://www.devmedia.com.br/como-converter-objetos-java-para-ou-de-json-com-a-biblioteca-gson/28091">
+ * DevMedia - Como converter objetos java para Json com a biblioteca Gson </a>
+ *
+ * @see
+ * <a href="https://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt">
+ * StackOverflow - Convert from json to a typed ArrayList </a>
+ *
+ * @see
+ * <a href="https://stackoverflow.com/questions/27893342/how-to-convert-list-to-a-json-object-using-gson">
+ * StackOverflow - How to convert list to a json object using gson </a>
+ *
+ * @see
+ * <a href="https://www.baeldung.com/gson-list"> Baeldung - Gson List </a>
+ *
+ *
  */
 public class manipularJson {
 
+    /**
+     * Construtor padrão
+     */
     public manipularJson() {
     }
 
     /**
+     * Função para descarregar dados referentes aos colaboradores cadastrados
      *
-     * @param Co
-     * @throws IOException
+     * @param Co Lista de colaboradores do sistema
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public void dumpColaborador(Colaborador[] Co) throws IOException {
         Gson jsonObject = new Gson();
@@ -42,8 +66,11 @@ public class manipularJson {
     }
 
     /**
+     * Função de assimilação dos dados referentes aos colaboradores existes no
+     * arquivo
      *
-     * @return @throws IOException
+     * @return Lista de colaboradores do sistema
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public Colaborador[] assimilateColaborador() throws IOException {
         Gson jsonObject = new Gson();
@@ -62,9 +89,10 @@ public class manipularJson {
     }
 
     /**
+     * Função para descarregar dados referentes aos Clientes cadastrados
      *
-     * @param Cl
-     * @throws IOException
+     * @param Cl Lista de clientes do sistema
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public void dumpCliente(ArrayList<Cliente> Cl) throws IOException {
         Gson jsonObject = new Gson();
@@ -84,8 +112,10 @@ public class manipularJson {
     }
 
     /**
+     * Função para assimilação dos dados referentes aos clientes no arquivo
      *
-     * @return @throws IOException
+     * @return Lista de Clientes
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public ArrayList<Cliente> assimilateCliente() throws IOException {
         Gson jsonObject = new Gson();
@@ -104,9 +134,11 @@ public class manipularJson {
     }
 
     /**
-     * 
-     * @param extratosPedidos
-     * @throws IOException 
+     * Função para descarregar dados referentes aos extrados de pedidos
+     * cadastrados
+     *
+     * @param extratosPedidos Lista de extratos de Pedidos
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public void dumpExtratosPedidos(ArrayList<String> extratosPedidos) throws IOException {
         Gson jsonObject = new Gson();
@@ -123,11 +155,12 @@ public class manipularJson {
             pedidoWriter.close();
         }
     }
-    
+
     /**
-     * 
-     * @return
-     * @throws IOException 
+     * Função de assimilação de dados relativos aos Extratos de Pedidos
+     *
+     * @return Lista de extratos de pedidos
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public ArrayList<String> assimilateExtratosPedidos() throws IOException {
         Gson jsonObject = new Gson();
@@ -144,12 +177,12 @@ public class manipularJson {
 
         return null;
     }
-    
-    
+
     /**
+     * Função para descarregar dados referentes aos produtos cadastrados
      *
-     * @param Po
-     * @throws IOException
+     * @param Po Lista de produtos cadastrados
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public void dumpProdutos(ArrayList<Produto> Po) throws IOException {
         Gson jsonObject = new Gson();
@@ -168,8 +201,10 @@ public class manipularJson {
     }
 
     /**
+     * Função para assimilação de dados referentes aos produtos cadastrados
      *
-     * @return @throws IOException
+     * @return Lista de produtos
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public ArrayList<Produto> assimilateProduto() throws IOException {
         Gson jsonObject = new Gson();
@@ -188,9 +223,10 @@ public class manipularJson {
     }
 
     /**
+     * Função para descarregar dados referentes aos Administrador do sistema
      *
-     * @param Adm
-     * @throws IOException
+     * @param Adm Objeto do Administrador
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public void dumpAdministrador(Administrador Adm) throws IOException {
         Gson jsonObject = new Gson();
@@ -208,8 +244,10 @@ public class manipularJson {
     }
 
     /**
+     * Função para assimilação dos dados do Administrador salvos no sistema
      *
-     * @return @throws IOException
+     * @return Objeto do tipo Administrador
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public Administrador assimilateAdministrador() throws IOException {
 
@@ -228,8 +266,10 @@ public class manipularJson {
     }
 
     /**
+     * Função destinada à chamada das funções de assimilação de dados de forma
+     * generalizada
      *
-     * @throws IOException
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public void assimilateAll() throws IOException {
         ProxyAdministrador.setColaboradores(assimilateColaborador());
@@ -239,9 +279,11 @@ public class manipularJson {
     }
 
     /**
+     * Função destinada à chamada das funções de descarregamento de dados de
+     * forma generalizada
      *
      * @param menuColab
-     * @throws IOException
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public void dumpAll(ProxyColaborador menuColab) throws IOException {
         dumpColaborador(ProxyAdministrador.getColaboradores());
@@ -250,10 +292,13 @@ public class manipularJson {
         dumpExtratosPedidos(menuColab.extratosPedidos());
     }
 
+    /**
+     *
+     * @return Representação em String da Classe de manipulação de arquivos
+     */
     @Override
     public String toString() {
         return "Manipulação de Arquivos JSON";
     }
-    
-    
+
 }

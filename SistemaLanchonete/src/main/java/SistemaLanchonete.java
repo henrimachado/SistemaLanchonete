@@ -1,16 +1,19 @@
+
 import br.com.lanchonete.pessoas.*;
 import java.util.Scanner;
 import java.io.IOException;
 import java.util.Locale;
 
 /**
- *
- * @author henri
+ * Classe principal para o Sistema da Lanchonete contendo o método main()
+ * @author Mateus Henrique Machado
+ * @author Iago Mateus Ávila Fernandes
+ * @version 1.0
  */
 public class SistemaLanchonete {
 
     public static void main(String[] args) throws IOException {
-        //https://www.arquivodecodigos.com.br/dicas/2445-java-definindo-o-locale-padrAo-da-jvm.html
+
         Locale locale = new Locale("pt", "BR");
         Locale.setDefault(locale);
 
@@ -23,12 +26,12 @@ public class SistemaLanchonete {
         mJson.dumpProdutos(ProxyAdministrador.getListaProdutos());*/
     }
 
-    //Função login
+
     /**
-     *
-     * @param mJson
-     * @return
-     * @throws IOException
+     * Função padrão para login no sistema
+     * @param mJson Objeto da classe manipularJson para assimilação de dados 
+     * @return Usuario logado no sistema desde que as credenciais estejam cadastradas
+     * @throws IOException Exceção associada à manipulação de arquivos Json
      */
     public static Usuario loginSistema(manipularJson mJson) throws IOException {
         Administrador adm = mJson.assimilateAdministrador();
@@ -68,8 +71,8 @@ public class SistemaLanchonete {
     }
 
     /**
-     *
-     * @throws IOException
+     * Função padrão de inicialização do sistema como um todo
+     * @throws IOException Exceção associada à manipulação de dados Json
      */
     public static void startSistema() throws IOException {
         //Uso de json
@@ -125,6 +128,10 @@ public class SistemaLanchonete {
         } while (sairSistema == false);
     }
 
+    /**
+     * 
+     * @return Representação String do Sistema da Lanchonete
+     */
     @Override
     public String toString() {
         return "SistemaLanchonete";

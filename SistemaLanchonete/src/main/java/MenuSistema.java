@@ -1,4 +1,3 @@
-
 import br.com.lanchonete.pessoas.Administrador;
 import br.com.lanchonete.pessoas.Colaborador;
 import br.com.lanchonete.pessoas.Usuario;
@@ -6,22 +5,25 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- *
- * @author henri
+ * Classe representativa do Menu de Opções do Sistema 
+ * @author Mateus Henrique Machado 
+ * @author Iago Mateus Ávila Fernandes 
  */
 public class MenuSistema {
 
+    /**
+     * Construtor padrão do Menu do Sistema
+     */
     public MenuSistema() {
     }
 
     /**
-     *
-     * @param menuAdm
-     * @param menuColab
-     * @param usuarioAtual
-     * @throws IOException
+     * Função padrão para acesso às opções acessíveis ao Administrador
+     * @param menuAdm Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Administrador
+     * @param menuColab Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Colaborador
+     * @param usuarioAtual Recebe o objeto referente ao usuário logado no sistema
+     * @throws IOException Exceção associada à manipulação de dados em arquivo Json
      */
-    //Menu do administrador FEITO
     public void menuAdministrador(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
 
@@ -77,12 +79,12 @@ public class MenuSistema {
 
     /**
      *
-     * @param menuAdm
-     * @param menuColab
-     * @param usuarioAtual
-     * @throws IOException
+     * Função padrão para acesso às opções acessíveis ao Colaborador
+     * @param menuAdm Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Administrador
+     * @param menuColab Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Colaborador
+     * @param usuarioAtual Recebe o objeto referente ao usuário logado no sistema
+     * @throws IOException Exceção associada à manipulação de dados em arquivo Json
      */
-    //Menu do colaborador FEITO
     public void menuColaborador(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         boolean sairSistema = false;
@@ -126,13 +128,13 @@ public class MenuSistema {
     }
 
     /**
-     *
-     * @param menuAdm
-     * @param menuColab
-     * @param usuarioAtual
-     * @throws IOException
+     * Função padrão para acesso às opções de manipulação de Colaborador
+     * @param menuAdm Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Administrador
+     * @param menuColab Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Colaborador
+     * @param usuarioAtual Recebe o objeto referente ao usuário logado no sistema
+     * @throws IOException Exceção associada à manipulação de dados em arquivo Json
      */
-    //Menu do opção de colaborar quando logado pelo administrador FEITO
+
     public void menuOpcaoColaboradorAdmin(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
@@ -190,21 +192,21 @@ public class MenuSistema {
     }
 
     /**
-     *
-     * @param menuAdm
-     * @param menuColab
-     * @param usuarioAtual
-     * @throws IOException
+     * Função padrão para acesso às opções de manipulação de dados pessoais do Colaborador
+     * @param menuAdm Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Administrador
+     * @param menuColab Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Colaborador
+     * @param usuarioAtual Recebe o objeto referente ao usuário logado no sistema
+     * @throws IOException Exceção associada à manipulação de dados em arquivo Json
      */
-    //Menu do opção de colaborar quando logado pelo colaborador FEITO
+
     public void menuOpcaoColaboradorColab(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         boolean menuAnterior = false;
 
         do {
-            System.out.println("\n-------------------------------------------------------"
+            System.out.println("_______________________________\n"
                     + usuarioAtual.getNomePessoa() + " " + usuarioAtual.getSobrenomePessoa()
-                    + "-------------------------------------------------------\n");
+                    + "________________________________________\n");
             System.out.println("""
                            
                            Escolha uma opção:
@@ -232,13 +234,13 @@ public class MenuSistema {
     }
 
     /**
-     *
-     * @param menuAdm
-     * @param menuColab
-     * @param usuarioAtual
-     * @throws IOException
+     * Função padrão para acesso às opções de manipulação de Produtos 
+     * @param menuAdm Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Administrador
+     * @param menuColab Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Colaborador
+     * @param usuarioAtual Recebe o objeto referente ao usuário logado no sistema
+     * @throws IOException Exceção associada à manipulação de dados em arquivo Json
      */
-    //Menu de opção de produtos FEITO
+
     public void menuOpcaoProduto(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
@@ -293,13 +295,13 @@ public class MenuSistema {
     }
 
     /**
-     *
-     * @param menuAdm
-     * @param menuColab
-     * @param usuarioAtual
-     * @throws IOException
+     * Função padrão para acesso às opções de visualização de relatórios com base em dados do sistema
+     * @param menuAdm Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Administrador
+     * @param menuColab Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Colaborador
+     * @param usuarioAtual Recebe o objeto referente ao usuário logado no sistema
+     * @throws IOException Exceção associada à manipulação de dados em arquivo Json
      */
-    //Menu de opção de relatorios FEITO
+
     public void menuOpcaoRelatorio(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         boolean menuAnterior = false;
@@ -352,14 +354,6 @@ public class MenuSistema {
                     menuColab.statsVendas();
                 }
                 case 6 -> {
-
-                    /*
-                if (usuarioAtual instanceof Administrador) {
-                    menuAdministrador(menuAdm, menuColab, usuarioAtual);
-                } else if (usuarioAtual instanceof Colaborador) {
-                    menuColaborador(menuAdm, menuColab, usuarioAtual);
-                }
-                     */
                     menuAnterior = true;
                     break;
 
@@ -372,13 +366,13 @@ public class MenuSistema {
     }
 
     /**
-     *
-     * @param menuAdm
-     * @param menuColab
-     * @param usuarioAtual
-     * @throws IOException
+     * Função padrão para acesso às opções de manipulação de informações pessoais do Administrador
+     * @param menuAdm Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Administrador
+     * @param menuColab Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Colaborador
+     * @param usuarioAtual Recebe o objeto referente ao usuário logado no sistema
+     * @throws IOException Exceção associada à manipulação de dados em arquivo Json
      */
-    //Menu de opção de administrador FEITO
+
     public void menuOpcaoAdmin(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         boolean menuAnterior = false;
@@ -419,13 +413,12 @@ public class MenuSistema {
     }
 
     /**
-     *
-     * @param menuAdm
-     * @param menuColab
-     * @param usuarioAtual
-     * @throws IOException
+     * Função padrão de acesso às opções de manipulação de Pedidos
+     * @param menuAdm Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Administrador
+     * @param menuColab Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Colaborador
+     * @param usuarioAtual Recebe o objeto referente ao usuário logado no sistema
+     * @throws IOException Exceção associada à manipulação de dados em arquivo Json
      */
-    //Menu de opção de pedido FEITO
     public void menuOpcaoPedido(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
@@ -504,13 +497,12 @@ public class MenuSistema {
     }
 
     /**
-     *
-     * @param menuAdm
-     * @param menuColab
-     * @param usuarioAtual
-     * @throws IOException
+     * Função padrão de acesso às opções de manipulação de Clientes
+     * @param menuAdm Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Administrador
+     * @param menuColab Recebe um objeto da classe intermediária de funcionalidades disponíveis ao Colaborador
+     * @param usuarioAtual Recebe o objeto referente ao usuário logado no sistema
+     * @throws IOException Exceção associada à manipulação de dados em arquivo Json
      */
-    //Menu de opção de pedido
     public void menuOpcaoCliente(ProxyAdministrador menuAdm, ProxyColaborador menuColab, Usuario usuarioAtual) throws IOException {
         Scanner inputSwitch = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
@@ -569,6 +561,10 @@ public class MenuSistema {
         } while (menuAnterior == false);
     }
 
+    /**
+     * 
+     * @return Representação String da Classe
+     */
     @Override
     public String toString() {
         return "Menu do Sistema";

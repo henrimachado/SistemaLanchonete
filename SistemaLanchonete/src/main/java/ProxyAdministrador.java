@@ -5,13 +5,16 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
+ * Classe intermediária para funcionalidades geralmente disponíveis ao
+ * Administrador
  *
- * @author henri
+ * @author Mateus Henrique Machado
+ * @author Iago Mateus Ávila Fernandes
  */
 public class ProxyAdministrador {
 
     /**
-     *
+     * Construtor padrão
      */
     public ProxyAdministrador() {
     }
@@ -20,19 +23,19 @@ public class ProxyAdministrador {
     //Questão 01 - O sistema deve armazenar de forma estática 15 colaboradores
     private static Colaborador Colaboradores[] = new Colaborador[15];
 
-    //GETTER DO ARRAY DE COLABORADORES
     /**
      *
-     * @return
+     * @return Lista de colaboradores cadastrados no sistema
      */
     public static Colaborador[] getColaboradores() {
         return Colaboradores;
     }
 
-    //FUNÇÃO PARA CADASTRO DE COLABORADORES
     /**
+     * Função padrão para adição de novos colaboradores à lista mantida pelo
+     * Sistema
      *
-     * @param C
+     * @param C Objeto colaborador a ser adicionado à lista de colaboradores
      */
     public void addColaboradores(Colaborador C) {
         for (int i = 0; i < 15; i++) {
@@ -44,17 +47,18 @@ public class ProxyAdministrador {
 
     }
 
-    //SETTER DE ARRAY DE COLABORADORES
     /**
      *
-     * @param Colaboradores
+     * @param Colaboradores Lista de Colaboradores do negócio
      */
     public static void setColaboradores(Colaborador[] Colaboradores) {
         ProxyAdministrador.Colaboradores = Colaboradores;
 
     }
 
-    //FUNÇÃO DE CADASTRO DE COLABORADORES
+    /**
+     * Função padrão para cadastro de novos colaboradores no sistema
+     */
     public void cadastroColaborador() {
 
         String nomeColaborador, sobrenomeColaborador, CPF, loginColaborador, senhaColaborador;
@@ -85,11 +89,12 @@ public class ProxyAdministrador {
         System.out.println("Cadastro realizado com sucesso!");
     }
 
-    //CONSULTA O COLABORADOR NO BANCO DE COLABORADORS
     /**
+     * Função padrão para consulta a um objeto do tipo Colaborador
      *
-     * @param CPF
-     * @return
+     * @param CPF Chave de comparação entre os objetos do tipo Colaborador
+     * @return Objeto do tipo colaborador caso a chave esteja cadastrada no
+     * sistema
      */
     public Colaborador consultaColaborador(String CPF) {
 
@@ -107,10 +112,11 @@ public class ProxyAdministrador {
         return attColaborador;
     }
 
-    //FUNÇÃO PARA MODIFICAÇÃO DE DADOS DO COLABORADOR   
     /**
+     * Função padrão de acesso às opções de modificações do Colaborador
      *
-     * @param CPF
+     * @param CPF Chave de busca do objeto Colaborador na base de colaboradores
+     * do sistema
      */
     public void modificarColaborador(String CPF) {
         Scanner inputSwitch = new Scanner(System.in);
@@ -121,7 +127,7 @@ public class ProxyAdministrador {
             if (consultaColaborador(CPFColab) != null) {
                 Colaborador modColab = consultaColaborador(CPFColab);
                 System.out.println("DADOS COLABORADOR");
-                System.out.println(modColab + "________________________________");
+                System.out.println(modColab + "\n________________________________\n");
                 System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome 
@@ -199,10 +205,11 @@ public class ProxyAdministrador {
 
     }
 
-    //FUNÇÃO PARA EXCLUSÃO DE COLABORADORES
     /**
+     * Função padrão para remoção de colaboradores no sistema
      *
-     * @param CPF
+     * @param CPF Chave de busca do objeto Colaborador na base de colaboradores
+     * do sistema
      */
     public void excluirColaborador(String CPF) {
         String CPFColaborador = CPF;
@@ -217,8 +224,9 @@ public class ProxyAdministrador {
 
     }
 
-    //Acessar informação colaborador 
-    //IMPRIMIR COLABORADORES NA TELA
+    /**
+     * Função padrão para impressão de dados dos colaboradores do sistema
+     */
     public void printColaboradores() {
         for (Colaborador colab : ProxyAdministrador.getColaboradores()) {
             if (colab != null) {
@@ -227,10 +235,11 @@ public class ProxyAdministrador {
         }
     }
 
-    //ACESSAR INFORMAÇÕES DE UM COLABORADOR ESPECÍFICO
     /**
+     * Função padrão para exibição de dados referentes a um colaborador
+     * específico cadastrado no sistema
      *
-     * @param CPF
+     * @param CPF Chave de busca do objeto na base de colaboradores do sistema
      */
     public void printColaborador(String CPF) {
         if (consultaColaborador(CPF) != null) {
@@ -244,10 +253,9 @@ public class ProxyAdministrador {
     //Questão 8 - Clientes e pedidos devem ser salvos de forma dinâmica
     private static ArrayList<Cliente> Clientes = new ArrayList<>();
 
-    //Getter
     /**
      *
-     * @return
+     * @return Lista de clientes cadastrados no sistema
      */
     public static ArrayList<Cliente> getClientes() {
         return Clientes;
@@ -258,14 +266,14 @@ public class ProxyAdministrador {
 
     /**
      *
-     * @return
+     * @return Quantidade de clientes cadastrados no sistema
      */
     public static int getQntClientesPrivate() {
         return qntClientesPrivate;
     }
 
     /**
-     *
+     * Incremento da quantidade de clientes cadastrados no sistema
      */
     public static void setQntClientesPrivate() {
         int qnt = 0;
@@ -277,12 +285,15 @@ public class ProxyAdministrador {
 
     /**
      *
-     * @return
+     * @return Quantidade de clientes cadastrados no sistema
      */
     public static int getQntClientesProtected() {
         return qntClientesProtected;
     }
 
+    /**
+     * Incremento da quantidade de clientes cadastrados no sistema
+     */
     public static void setQntClientesProtected() {
         int qnt = 0;
         for (Cliente cl : ProxyAdministrador.getClientes()) {
@@ -291,18 +302,16 @@ public class ProxyAdministrador {
         qntClientesProtected = qnt;
     }
 
-    //Setter
     /**
      *
-     * @param Clientes
+     * @param Clientes Define a lista de clientes para a base do Sistema
      */
     public static void setClientes(ArrayList<Cliente> Clientes) {
         ProxyAdministrador.Clientes = Clientes;
     }
 
-    //CADASTRO DE NOVOS CLIENTES
     /**
-     *
+     * Função padrão para o cadastro de clientes no sistema
      */
     public void cadastroCliente() {
         String nomeCliente, sobrenomeCliente, CPF, enderecoCliente, telefoneCliente;
@@ -335,11 +344,12 @@ public class ProxyAdministrador {
         qntClientesProtected++;
     }
 
-    //CONSULTA DE CLIENTES NO BANCO DE CLIENTES
     /**
+     * Função para consulta a um objeto do tipo Cliente na base de clientes
+     * cadastrados no sistema
      *
-     * @param CPF
-     * @return
+     * @param CPF Chave de busca na base de dados do Sistema
+     * @return Objeto cliente caso a chave esteja devidamente cadastrada
      */
     public static Cliente consultaCliente(String CPF) {
 
@@ -356,10 +366,11 @@ public class ProxyAdministrador {
         return attCliente;
     }
 
-    //FUNÇÃO DE EXCLUSÃO DE DADOS DE UM CLIENTE
     /**
+     * Função padrão para a exclusão de clientes cadastrados no sistema
      *
-     * @param CPF
+     * @param CPF Chave de busca na base de dados de clientes cadastrados no
+     * sistema
      */
     public void excluirCliente(String CPF) {
         String CPFCliente = CPF;
@@ -373,10 +384,12 @@ public class ProxyAdministrador {
         System.out.println("Alteração realizada com sucesso!");
     }
 
-    //FUNÇÃO DE MODIFICAÇÃO DE DADOS DE UM CLIENTE
     /**
+     * Função padrão para a modificação de dados relativos a um cliente
+     * cadastrado no sistema
      *
-     * @param CPF
+     * @param CPF Chave de busca do objeto cliente na base de dados de clientes
+     * cadastrados no sistema
      */
     public void modificarCliente(String CPF) {
 
@@ -462,8 +475,10 @@ public class ProxyAdministrador {
 
     }
 
-    //Acessar informações cliente 
-    //ACESSO A TODOS OS CLIENTES DE UMA VEZ SÓ
+    /**
+     * Função padrão para exibição de dados de todos os clientes cadastrados no
+     * sistema
+     */
     public void printClientes() {
         for (Cliente cliente : ProxyAdministrador.getClientes()) {
             if (cliente != null) {
@@ -473,11 +488,12 @@ public class ProxyAdministrador {
 
     }
 
-    //ACESSO A UM ÚNICO CLIENTE
     /**
+     * Função padrão para exibição de dados de um cliente em específico
+     * cadastrado no sistema
      *
-     * @param CPF
-     */
+     * @param CPF Chave de busca do cliente na base de clientes cadastrados
+     */ 
     public void printCliente(String CPF) {
         if (consultaCliente(CPF) != null) {
             System.out.println(consultaCliente(CPF));
@@ -492,40 +508,41 @@ public class ProxyAdministrador {
     private static int numProdutos = 0;
 
     /**
-     *
-     * @return
+     * @return Quantidade de produtos cadastrados no sistema
      */
     public static int getNumProdutos() {
         return numProdutos;
     }
 
     /**
+     * Incremento da quantidade de produtos cadastrados no sistema
      *
-     * @param numProdutos
+     * @param numProdutos Define a quantidade de produtos cadastrados no sistema
      */
     public static void setNumProdutos(int numProdutos) {
         ProxyAdministrador.numProdutos = numProdutos + 1;
     }
 
-    //getter da lista de produtos
     /**
      *
-     * @return
+     * @return Lista de produtos cadastrados no sistema
      */
     public static ArrayList<Produto> getListaProdutos() {
         return listaProdutos;
     }
 
-    //Setter de produtos na lista
     /**
      *
-     * @param listaProdutos
+     * @param listaProdutos Define a lista de produtos a ser cadastrada no
+     * sistema
      */
     public static void setListaProdutos(ArrayList<Produto> listaProdutos) {
         ProxyAdministrador.listaProdutos = listaProdutos;
     }
 
-    //Cadastro produto 
+    /**
+     * Função padrão para o cadastro de produtos no sistema
+     */
     public void cadastroProduto() {
         String nomeProduto, descricaoProduto;
         float valorProduto;
@@ -551,14 +568,16 @@ public class ProxyAdministrador {
 
     }
 
-    //FUNÇÃO DE EXCLUSÃO DE PRODUTO
+    /**
+     * Função padrão para exclusão de produtos cadastrados no sistema
+     */
     public void excluirProduto() {
         System.out.println("PRODUTOS CADASTRADOS\n___________________________");
-        
-        for(Produto produto : ProxyAdministrador.listaProdutos){
+
+        for (Produto produto : ProxyAdministrador.listaProdutos) {
             System.out.println("[" + produto.getIdProduto() + "]   " + produto.getNomeProduto());
         }
-        
+
         System.out.println("""
                            _________________________________________________
                            Exclusão de produtos
@@ -576,11 +595,14 @@ public class ProxyAdministrador {
         System.out.println("Produto removido com sucesso.");
     }
 
-    //CONSULTA PRODUTO
     /**
+     * Função padrão para consulta a um objeto do tipo produto na base de
+     * produtos do sistema
      *
-     * @param idProduto
-     * @return
+     * @param idProduto Chave de busca do objeto produto dentro da base de
+     * produtos cadastrados
+     * @return Objeto do tipo Produto caso a chave tenha sido previamente
+     * cadastrada no sistema
      */
     public static Produto consultaProduto(int idProduto) {
         Produto attProduto = new Produto();
@@ -597,8 +619,10 @@ public class ProxyAdministrador {
     }
 
     /**
+     * Função padrão de acesso às opções de modificação dos dados de um produto
      *
-     * @param idProduto
+     * @param idProduto Chave de busca de um objeto produto dentro da base de
+     * produtos cadastrados no sistema
      */
     public void modificarProduto(int idProduto) {
 
@@ -665,6 +689,10 @@ public class ProxyAdministrador {
 
     }
 
+    /**
+     * Função padrão para exibição de produtos cadastrados no sistema Obs.:
+     * Usada para acessar os índices associados a cada produto
+     */
     public void consultaListaProdutos() {
         System.out.println("PRODUTOS CADASTRADOS\n___________________________");
         for (int i = 0; i < ProxyAdministrador.listaProdutos.size(); i++) {
@@ -673,10 +701,13 @@ public class ProxyAdministrador {
         }
     }
 
-    //Acessar produto 
+    /**
+     * Função padrão para exibição de dados completos de um produto específico
+     * cadastrado no sistema
+     */
     public void printProduto() {
         System.out.println("PRODUTOS CADASTRADOS\n___________________________");
-        for(Produto produto : ProxyAdministrador.listaProdutos){
+        for (Produto produto : ProxyAdministrador.listaProdutos) {
             System.out.println("[" + produto.getIdProduto() + "]   " + produto.getNomeProduto());
         }
         System.out.println("CONSULTA\n_______________________");
@@ -690,10 +721,12 @@ public class ProxyAdministrador {
     }
 
     //ADMINISTRADORES
-    //Acessar Administrador
     /**
+     * Função padrão para exibição dos dados associados ao Administrador do
+     * programa
      *
-     * @param Adm
+     * @param Adm Objeto administrador que deve estar logado no momento da
+     * chamada
      */
     public void consultaAdm(Administrador Adm) {
         System.out.println(Adm);
@@ -701,8 +734,10 @@ public class ProxyAdministrador {
 
     //Modificar admnistrador 
     /**
+     * Função padrão para acesso às opções de modificação de dados associados ao
+     * Administrador
      *
-     * @param Adm
+     * @param Adm Objeto administrador que deve estar logado no sistema
      */
     public void modificarAdm(Administrador Adm) {
 
@@ -800,13 +835,15 @@ public class ProxyAdministrador {
     }
 
     /**
+     * Função padrão para a validação do número de CPF repassado como parâmetro
+     * em cadastros de Clientes e Colaboradores
      *
-     * @param cpf
-     * @return
+     * @author Iago Mateus Ávila Fernandes
+     * @author Mateus Henrique Machado
+     * @param cpf Número do CPF inserido pelo usuário
+     * @return Validade do CPF: true ou false
      */
     public static boolean ValidaCPF(String cpf) {
-        // importar a java.util.InputMismatchException
-
         //Validando se o CPF é formado apenas por numeros iguais
         if (cpf.equals("00000000000")
                 || cpf.equals("11111111111")
@@ -885,6 +922,11 @@ public class ProxyAdministrador {
         }
     }
 
+    /**
+     *
+     * @return Representação String da classe intermediária de funcionalidades
+     * do Administrador
+     */
     @Override
     public String toString() {
         return "ProxyAdministrador";

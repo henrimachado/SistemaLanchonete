@@ -2,8 +2,9 @@ package br.com.lanchonete.pessoas;
 
 /**
  * Classe representativa da entidade Usuário do Sistema
- * @author Mateus Henrique Machado 
- * @author Iago Mateus Ávila Fernandes 
+ *
+ * @author Mateus Henrique Machado
+ * @author Iago Mateus Ávila Fernandes
  */
 public class Usuario extends Pessoa {
 
@@ -11,8 +12,9 @@ public class Usuario extends Pessoa {
     private String senhaUsuario;
 
     /**
-     * Construtor Parametrizado
-     * Realiza uma chamada ao construtor da classe pai (Pessoa)
+     * Construtor Parametrizado Realiza uma chamada ao construtor da classe pai
+     * (Pessoa)
+     *
      * @param nomePessoa Define um nome para o usuário
      * @param sobrenomePessoa Define um sobrenome para o usuário
      * @param CPF Define um número de CPF para o usuário
@@ -26,8 +28,8 @@ public class Usuario extends Pessoa {
     }
 
     /**
-     * Construtor Padrão 
-     * Realiza uma chamada ao construtor padrão da classe pai (Pessoa)
+     * Construtor Padrão Realiza uma chamada ao construtor padrão da classe pai
+     * (Pessoa)
      */
     public Usuario() {
         super();
@@ -35,7 +37,7 @@ public class Usuario extends Pessoa {
 
     /**
      *
-     * @return Login de acesso associado ao usuário 
+     * @return Login de acesso associado ao usuário
      */
     public String getLoginUsuario() {
         return loginUsuario;
@@ -66,15 +68,14 @@ public class Usuario extends Pessoa {
     }
 
     /**
-     * 
+     *
      * @return Representação String do objeto Usuario
      */
     @Override
     public String toString() {
-        return  getCPF() +  "    " + getNomePessoa().toUpperCase() + " " + getSobrenomePessoa().toUpperCase() + 
-                "    " + loginUsuario;
-                
+        return getCPF() + "    " + getNomePessoa().toUpperCase() + " " + getSobrenomePessoa().toUpperCase()
+                + "    " + loginUsuario;
+
     }
 
-    
 }

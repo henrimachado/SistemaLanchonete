@@ -2,40 +2,46 @@ package br.com.lanchonete.pessoas;
 
 import java.util.ArrayList;
 import br.com.lanchonete.produtos.*;
+
 /**
- * 
- * @author henri
+ * Classe representativa da entidade Cliente no Sistema
+ *
+ * @author Mateus Henrique Machado
+ * @author Iago Mateus Ávila Fernandes
  */
 public class Cliente extends Pessoa {
-    
+
     private String enderecoCliente;
     private String telefoneCliente;
     private ArrayList<Pedido> pedidosCliente = new ArrayList<>();
-    //private Pedido vetor de pedido 
 
     /**
+     * Construtor parametrizado para o objeto Cliente Obs.: Realiza uma chamada
+     * ao construtor parametrizado da classe pai (Pessoa)
      *
-     * @param nomePessoa
-     * @param sobrenomePessoa
-     * @param CPF
-     * @param enderecoCliente
-     * @param telefoneCliente
+     * @param nomePessoa Define um nome para o Cliente
+     * @param sobrenomePessoa Define um sobrenome para o Cliente
+     * @param CPF Define um número de CPF para o Cliente
+     * @param enderecoCliente Define um endereço para o Cliente
+     * @param telefoneCliente Define um número de telefone para o Cliente
      */
-    //Construtor parametrizado
     public Cliente(String nomePessoa, String sobrenomePessoa, String CPF, String enderecoCliente, String telefoneCliente) {
         super(nomePessoa, sobrenomePessoa, CPF);
         this.enderecoCliente = enderecoCliente;
         this.telefoneCliente = telefoneCliente;
     }
 
-    //Construtor padrão
+    /**
+     * Construtor padrão Obs.: Realiza uma chamada ao construtor padrão da
+     * classe pai (Pessoa)
+     */
     public Cliente() {
         super();
     }
 
     /**
      *
-     * @return
+     * @return Lista de pedidos associados ao cliente
      */
     public ArrayList<Pedido> getPedidosCliente() {
         return pedidosCliente;
@@ -43,7 +49,7 @@ public class Cliente extends Pessoa {
 
     /**
      *
-     * @param novoPedido
+     * @param novoPedido Adicina um novo pedido à lista de pedidos feitas
      */
     public void setPedidosCliente(Pedido novoPedido) {
         this.pedidosCliente.add(0, novoPedido);
@@ -51,7 +57,7 @@ public class Cliente extends Pessoa {
 
     /**
      *
-     * @return
+     * @return Endereço associado ao Cliente
      */
     public String getEnderecoCliente() {
         return enderecoCliente;
@@ -59,7 +65,7 @@ public class Cliente extends Pessoa {
 
     /**
      *
-     * @param enderecoCliente
+     * @param enderecoCliente Define um endereço para o Cliente
      */
     public void setEnderecoCliente(String enderecoCliente) {
         this.enderecoCliente = enderecoCliente;
@@ -67,7 +73,7 @@ public class Cliente extends Pessoa {
 
     /**
      *
-     * @return
+     * @return Número de telefone associado ao Cliente
      */
     public String getTelefoneCliente() {
         return telefoneCliente;
@@ -75,19 +81,19 @@ public class Cliente extends Pessoa {
 
     /**
      *
-     * @param telefoneCliente
+     * @param telefoneCliente Define um número de telefone para o Cliente
      */
     public void setTelefoneCliente(String telefoneCliente) {
         this.telefoneCliente = telefoneCliente;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return Representação String para o objeto Cliente
      */
     @Override
     public String toString() {
-        return getCPF() + "    " + getNomePessoa().toUpperCase() + " " + getSobrenomePessoa().toUpperCase() + "    " + 
-                getTelefoneCliente() + "    " +  getEnderecoCliente().toUpperCase();
+        return getCPF() + "    " + getNomePessoa().toUpperCase() + " " + getSobrenomePessoa().toUpperCase() + "    "
+                + getTelefoneCliente() + "    " + getEnderecoCliente().toUpperCase();
     }
 }

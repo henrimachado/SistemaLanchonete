@@ -2,8 +2,9 @@ package br.com.lanchonete.produtos;
 
 /**
  * Classe representativa dos produtos no sistema
- * @author Mateus Henrique Machado 
- * @author Iago Mateus Ávila Fernandes 
+ *
+ * @author Mateus Henrique Machado
+ * @author Iago Mateus Ávila Fernandes
  */
 public class Produto {
 
@@ -14,19 +15,18 @@ public class Produto {
 
     /**
      * Construtor com inicialização de atributos
+     *
      * @param nomeProduto Define o nome do produto
      * @param valorProduto Define o valor (float) do produto
      * @param idProduto Define um identificador para o produto
      * @param descricaoProduto Define uma descrição em texto para o produto
      */
-
     public Produto(String nomeProduto, float valorProduto, int idProduto, String descricaoProduto) {
         this.nomeProduto = nomeProduto;
         this.valorProduto = valorProduto;
         this.idProduto = idProduto;
         this.descricaoProduto = descricaoProduto;
     }
-
 
     /**
      * Construtor Padrão
@@ -35,7 +35,7 @@ public class Produto {
     }
 
     /**
-     * 
+     *
      * @return Nome associado ao produto
      */
     public String getNomeProduto() {
@@ -104,7 +104,7 @@ public class Produto {
      */
     @Override
     public String toString() {
-         return  "[" + idProduto + "]   " + nomeProduto.toUpperCase() + "    R$" + valorProduto + "      " + descricaoProduto; 
+        return "[" + idProduto + "]   " + nomeProduto.toUpperCase() + "    R$" + valorProduto + "      " + descricaoProduto;
     }
 
 }

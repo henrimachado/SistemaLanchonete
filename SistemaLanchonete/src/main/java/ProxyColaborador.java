@@ -8,8 +8,11 @@ import java.time.format.*;
 import java.util.*;
 
 /**
+ * Classe intermediária para funcionalidades geralmente disponíveis ao
+ * Colaborador
  *
- * @author henri
+ * @author Mateus Henrique Machado
+ * @author Iago Mateus Ávila Fernandes
  */
 public class ProxyColaborador {
 
@@ -20,6 +23,10 @@ public class ProxyColaborador {
     //PEDIDOS
     private static ArrayList<String> extratosPedidos = new ArrayList();
 
+    /**
+     * Função padrão para cadastro de novos pedidos a um cliente já cadastrado
+     * no sistema
+     */
     public void cadastroPedido() {
         System.out.printf("CPF do cliente: ");
         Scanner input = new Scanner(System.in);
@@ -85,14 +92,29 @@ public class ProxyColaborador {
 
     }
 
+    /**
+     *
+     * @return Lista de Extratos de todos os pedidos cadastrados no sistema
+     */
     public static ArrayList<String> getExtratosPedidos() {
         return extratosPedidos;
     }
 
+    /**
+     * Cadastro da lista de Extrados de todos os pedidos
+     *
+     * @param extratosPedidos Lista de Extratos de Pedidos
+     */
     public static void setExtratosPedidos(ArrayList<String> extratosPedidos) {
         ProxyColaborador.extratosPedidos = extratosPedidos;
     }
 
+    /**
+     * Função de construção dos extratos de todos os pedidos cadastrados no
+     * sistema
+     *
+     * @return Lista de extratos de pedidos cadastrados no sistema
+     */
     public ArrayList<String> extratosPedidos() {
         ArrayList<String> extratos = new ArrayList();
         for (Cliente cl : ProxyAdministrador.getClientes()) {
@@ -109,7 +131,9 @@ public class ProxyColaborador {
     }
 
     /**
-     *
+     * Função padrão para o acesso às opções de exibição de pedidos realizados
+     * no sistema Fornece as opções de listagem por um intervalo de datas ou
+     * intervalo de data e hora
      */
     public void listarPedidos() {
         boolean encerrarLista = false;
@@ -346,9 +370,13 @@ public class ProxyColaborador {
     }
 
     /**
+     * Função padrão de acesso às opções de modificação de pedidos cadastrados
+     * no sistema
      *
-     * @param idPedido
-     * @param Cl
+     * @param idPedido Chave de busca de pedidos na lista de pedidos associados
+     * a um cliente
+     * @param Cl Objeto cliente o qual possui uma lista de pedidos associada a
+     * ele
      */
     public void modificarPedido(int idPedido, Cliente Cl) {
         Scanner input = new Scanner(System.in);
@@ -443,10 +471,14 @@ public class ProxyColaborador {
     }
 
     /**
+     * Função padrão de consulta a um objeto do tipo Pedido associado a um
+     * cliente
      *
-     * @param idPedido
-     * @param Cl
-     * @return
+     * @param idPedido Chave de busca do objeto pedido na base de pedidos de um
+     * cliente
+     * @param Cl Objeto cliente utilizado para acesso à lista de pedidos
+     * @return Objeto do tipo pedido se a chave tiver sido previamente
+     * cadastrada
      */
     public Pedido consultarPedido(int idPedido, Cliente Cl) {
         Pedido attPedido = new Pedido();
@@ -460,6 +492,10 @@ public class ProxyColaborador {
         return attPedido;
     }
 
+    /**
+     * Função padrão de exclusão de pedidos do sistema Obs.: Função destinada à
+     * correção de cadastros realizados indevidamente no sistema
+     */
     public void excluirPedido() {
         System.out.printf("CPF: ");
         Scanner input = new Scanner(System.in);
@@ -489,7 +525,10 @@ public class ProxyColaborador {
 
     }
 
-    //FUNÇÃO DE ESTATÍSTICA DE VENDAS EM UM INTERVALO DE DATA
+    /**
+     * Função padrão para a exibição das estatísticas de venda em um determinaod
+     * período de tempo
+     */
     public void statsVendas() {
         Scanner input = new Scanner(System.in);
         String diaMin = "";
@@ -594,9 +633,19 @@ public class ProxyColaborador {
     }
 
     /**
+     * Função padrão para identificação de datas válidas
      *
-     * @param strDate
-     * @return
+     * @see <a href="https://www.youtube.com/watch?v=9wL1a987BWo/"> Feltex -
+     * Trabalho com data e hora em JAVA </a>
+     *
+     * @see
+     * <a href="https://pt.stackoverflow.com/questions/187272/como-verificar-se-a-data-é-válida-ou-inválida)">
+     * User28595 - Resposta à "Como verificar se a data é válida ou inválida?"
+     * (StackOverflow) </a>
+     *
+     * @param strDate Recebe uma data em formato string para validação
+     * @return Estado da validação: true para datas válidas e false para datas
+     * inválidas
      */
     public static boolean isDateValid(String strDate) {
         //Formatter de data
@@ -613,9 +662,19 @@ public class ProxyColaborador {
     }
 
     /**
+     * Função padrão de validação de horas
      *
-     * @param strHour
-     * @return
+     * @see <a href="https://www.youtube.com/watch?v=9wL1a987BWo/"> Feltex -
+     * Trabalho com data e hora em JAVA </a>
+     *
+     * @see
+     * <a href="https://pt.stackoverflow.com/questions/187272/como-verificar-se-a-data-é-válida-ou-inválida)">
+     * User28595 - Resposta à "Como verificar se a data é válida ou inválida?"
+     * (StackOverflow) </a>
+     *
+     * @param strHour Recebe uma hora em formato string para validação
+     * @return Estado da validação: true para horas válidas e false para horas
+     * inválidas
      */
     public static boolean isHourValid(String strHour) {
         //Formatter de hora
@@ -631,8 +690,9 @@ public class ProxyColaborador {
     }
 
     /**
+     * Função padrão para acesso à modificação de senha do Colaborador
      *
-     * @param Colab
+     * @param Colab Objeto do tipo Colaborador que deve estar logado no sistema
      */
     public void modificarColaborador(Colaborador Colab) {
         String senhaAnt;
@@ -658,6 +718,11 @@ public class ProxyColaborador {
         }
     }
 
+    /**
+     *
+     * @return Representação em String da classe intermediária de
+     * funcionalidades geralmente disponíveis ao colaborador
+     */
     @Override
     public String toString() {
         return "ProxyColaborador";

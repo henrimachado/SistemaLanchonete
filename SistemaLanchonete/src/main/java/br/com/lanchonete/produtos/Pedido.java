@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 /**
  * Classe representativa dos pedidos cadastrados no sistema
- * @author Mateus Henrique Machado 
- * @author Iago Mateus Ávila Fernandes 
+ *
+ * @author Mateus Henrique Machado
+ * @author Iago Mateus Ávila Fernandes
  */
 public class Pedido {
 
@@ -19,12 +20,13 @@ public class Pedido {
 
     private ArrayList<Integer> listaProdutos = new ArrayList<>();
 
-
     /**
      * Construtor parametrizado
-     * @param dataPedido Define uma data para o pedido 
+     *
+     * @param dataPedido Define uma data para o pedido
      * @param horaPedido Define uma hora para o pedido
-     * @param horaEntregaPedido Define uma hora estimada para a entrega do pedido
+     * @param horaEntregaPedido Define uma hora estimada para a entrega do
+     * pedido
      */
     public Pedido(String dataPedido, String horaPedido, String horaEntregaPedido) {
         this.dataPedido = dataPedido;
@@ -127,7 +129,7 @@ public class Pedido {
 
     /**
      *
-     * @param horaEntregaPedido Define a hora esperada de entrega para o pedido 
+     * @param horaEntregaPedido Define a hora esperada de entrega para o pedido
      */
     public void setHoraEntregaPedido(String horaEntregaPedido) {
         this.horaEntregaPedido = horaEntregaPedido;
@@ -135,7 +137,7 @@ public class Pedido {
 
     /**
      *
-     * @return Identificador associado ao status do pedido 
+     * @return Identificador associado ao status do pedido
      */
     public int getStatusPedido() {
         return statusPedido;

@@ -2,8 +2,9 @@ package br.com.lanchonete.pessoas;
 
 /**
  * Classe abstrata para representação da entidade Pessoa no Sistema
- * @author Mateus Henrique Machado 
- * @author Iago Mateus Ávila Fernandes 
+ *
+ * @author Mateus Henrique Machado
+ * @author Iago Mateus Ávila Fernandes
  */
 public abstract class Pessoa {
 
@@ -13,6 +14,7 @@ public abstract class Pessoa {
 
     /**
      * Construtor parametrizado
+     *
      * @param nomePessoa Define um nome para a pessoa
      * @param sobrenomePessoa Define um sobrenome para a pessoa
      * @param CPF Define um número de CPF para a pessoa
@@ -25,7 +27,7 @@ public abstract class Pessoa {
 
     /**
      * Construtor padrão
-     */ 
+     */
     public Pessoa() {
 
     }
@@ -80,9 +82,8 @@ public abstract class Pessoa {
 
     /**
      *
-     * @return Representação String do objeto pessoa 
+     * @return Representação String do objeto pessoa
      */
-
     @Override
     public String toString() {
         return CPF + "    " + nomePessoa.toUpperCase() + " " + sobrenomePessoa.toUpperCase();
