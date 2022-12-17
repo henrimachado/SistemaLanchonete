@@ -4,6 +4,10 @@ import br.com.lanchonete.produtos.Produto;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author henri
+ */
 public class ProxyAdministrador {
 
     //Construtor
@@ -15,11 +19,19 @@ public class ProxyAdministrador {
     private static Colaborador Colaboradores[] = new Colaborador[15];
 
     //GETTER DO ARRAY DE COLABORADORES
+    /**
+     *
+     * @return
+     */
     public static Colaborador[] getColaboradores() {
         return Colaboradores;
     }
 
     //FUNÇÃO PARA CADASTRO DE COLABORADORES
+    /**
+     *
+     * @param C
+     */
     public static void addColaboradores(Colaborador C) {
         /*
         int i = 0;
@@ -47,6 +59,10 @@ public class ProxyAdministrador {
     }
 
     //SETTER DE ARRAY DE COLABORADORES
+    /**
+     *
+     * @param Colaboradores
+     */
     public static void setColaboradores(Colaborador[] Colaboradores) {
         ProxyAdministrador.Colaboradores = Colaboradores;
 
@@ -86,7 +102,12 @@ public class ProxyAdministrador {
         ProxyAdministrador.addColaboradores(C);
     }
 
-    //CONSULTA O COLABORADOR NO BANCO DE COLABORADORES
+    //CONSULTA O COLABORADOR NO BANCO DE COLABORADORS
+    /**
+     *
+     * @param CPF
+     * @return
+     */
     public Colaborador consultaColaborador(String CPF) {
 
         String CPFColaborador = CPF;
@@ -103,7 +124,11 @@ public class ProxyAdministrador {
         return attColaborador;
     }
 
-    //FUNÇÃO PARA MODIFICAÇÃO DE DADOS DO COLABORADOR
+    //FUNÇÃO PARA MODIFICAÇÃO DE DADOS DO COLABORADOR   
+    /**
+     *
+     * @param CPF
+     */
     public void modificarColaborador(String CPF) {
 
         Scanner inputSwitch = new Scanner(System.in);
@@ -162,22 +187,21 @@ public class ProxyAdministrador {
                     case 4 -> {
                         String novoLogin;
                         String confirmLogin;
-                        do{
+                        do {
                             System.out.printf("Digite o novo login: ");
                             novoLogin = inputDado.nextLine();
                             System.out.printf("Digite a confirmação do novo login: ");
                             confirmLogin = inputDado.nextLine();
-                            
-                            if(novoLogin.equals(confirmLogin)){
+
+                            if (novoLogin.equals(confirmLogin)) {
                                 modColab.setLoginUsuario(confirmLogin);
                                 System.out.println("\nAlteração realizada com sucesso!");
-                            }
-                            else{
+                            } else {
                                 System.out.println("\nDados não conferem. Tente novamente!\n");
                             }
-                            
-                        }while(!novoLogin.equals(confirmLogin));
-                        
+
+                        } while (!novoLogin.equals(confirmLogin));
+
                     }
 
                     case 5 -> {
@@ -197,6 +221,10 @@ public class ProxyAdministrador {
     }
 
     //FUNÇÃO PARA EXCLUSÃO DE COLABORADORES
+    /**
+     *
+     * @param CPF
+     */
     public void excluirColaborador(String CPF) {
         String CPFColaborador = CPF;
 
@@ -212,12 +240,16 @@ public class ProxyAdministrador {
     public void printColaboradores() {
         for (int i = 0; i < 15; i++) {
             if (ProxyAdministrador.Colaboradores[i] != null) {
-                System.out.println("\n" + ProxyAdministrador.Colaboradores[i]);
+                System.out.println(ProxyAdministrador.Colaboradores[i]);
             }
         }
     }
 
     //ACESSAR INFORMAÇÕES DE UM COLABORADOR ESPECÍFICO
+    /**
+     *
+     * @param CPF
+     */
     public void printColaborador(String CPF) {
         if (consultaColaborador(CPF) != null) {
             System.out.println(consultaColaborador(CPF));
@@ -231,6 +263,10 @@ public class ProxyAdministrador {
     private static ArrayList<Cliente> Clientes = new ArrayList<>();
 
     //Getter
+    /**
+     *
+     * @return
+     */
     public static ArrayList<Cliente> getClientes() {
         return Clientes;
     }
@@ -238,23 +274,43 @@ public class ProxyAdministrador {
     private static int qntClientesPrivate;
     protected static int qntClientesProtected;
 
+    /**
+     *
+     * @return
+     */
     public static int getQntClientesPrivate() {
         return qntClientesPrivate;
     }
 
     public static void setQntClientesPrivate() {
-        ProxyAdministrador.qntClientesPrivate = qntClientesPrivate + 1;
+        int qnt = 0;
+        for (Cliente cl : ProxyAdministrador.getClientes()){
+            qnt++;
+        }
+        ProxyAdministrador.qntClientesPrivate = qnt;
     }
 
+    /**
+     *
+     * @return
+     */
     public static int getQntClientesProtected() {
         return qntClientesProtected;
     }
 
     public static void setQntClientesProtected() {
-        qntClientesProtected++;
+        int qnt = 0;
+        for (Cliente cl : ProxyAdministrador.getClientes()){
+            qnt++;
+        }
+        qntClientesProtected = qnt;
     }
 
     //Setter
+    /**
+     *
+     * @param Clientes
+     */
     public static void setClientes(ArrayList<Cliente> Clientes) {
         ProxyAdministrador.Clientes = Clientes;
     }
@@ -298,6 +354,11 @@ public class ProxyAdministrador {
     }
 
     //CONSULTA DE CLIENTES NO BANCO DE CLIENTES
+    /**
+     *
+     * @param CPF
+     * @return
+     */
     public static Cliente consultaCliente(String CPF) {
 
         String CPFCliente = CPF;
@@ -315,6 +376,10 @@ public class ProxyAdministrador {
     }
 
     //FUNÇÃO DE EXCLUSÃO DE DADOS DE UM CLIENTE
+    /**
+     *
+     * @param CPF
+     */
     public void excluirCliente(String CPF) {
         String CPFCliente = CPF;
         for (int i = 0; i <= ProxyAdministrador.Clientes.size(); i++) {
@@ -326,6 +391,10 @@ public class ProxyAdministrador {
     }
 
     //FUNÇÃO DE MODIFICAÇÃO DE DADOS DE UM CLIENTE
+    /**
+     *
+     * @param CPF
+     */
     public void modificarCliente(String CPF) {
 
         Scanner inputSwitch = new Scanner(System.in);
@@ -429,6 +498,10 @@ public class ProxyAdministrador {
     }
 
     //ACESSO A UM ÚNICO CLIENTE
+    /**
+     *
+     * @param CPF
+     */
     public void printCliente(String CPF) {
         if (consultaCliente(CPF) != null) {
             System.out.println(consultaCliente(CPF));
@@ -442,20 +515,36 @@ public class ProxyAdministrador {
     //Controle da id dos produtos
     private static int numProdutos = 0;
 
+    /**
+     *
+     * @return
+     */
     public static int getNumProdutos() {
         return numProdutos;
     }
 
+    /**
+     *
+     * @param numProdutos
+     */
     public static void setNumProdutos(int numProdutos) {
         ProxyAdministrador.numProdutos = numProdutos + 1;
     }
 
     //getter da lista de produtos
+    /**
+     *
+     * @return
+     */
     public static ArrayList<Produto> getListaProdutos() {
         return listaProdutos;
     }
 
     //Setter de produtos na lista
+    /**
+     *
+     * @param listaProdutos
+     */
     public static void setListaProdutos(ArrayList<Produto> listaProdutos) {
         ProxyAdministrador.listaProdutos = listaProdutos;
     }
@@ -507,6 +596,11 @@ public class ProxyAdministrador {
     }
 
     //CONSULTA PRODUTO
+    /**
+     *
+     * @param idProduto
+     * @return
+     */
     public static Produto consultaProduto(int idProduto) {
         Produto attProduto = new Produto();
         attProduto = null;
@@ -520,6 +614,10 @@ public class ProxyAdministrador {
         return attProduto;
     }
 
+    /**
+     *
+     * @param idProduto
+     */
     public void modificarProduto(int idProduto) {
 
         Scanner inputSwitch = new Scanner(System.in);
@@ -612,11 +710,19 @@ public class ProxyAdministrador {
 
     //ADMINISTRADORES
     //Acessar Administrador
+    /**
+     *
+     * @param Adm
+     */
     public void consultaAdm(Administrador Adm) {
         System.out.println(Adm);
     }
 
     //Modificar admnistrador 
+    /**
+     *
+     * @param Adm
+     */
     public void modificarAdm(Administrador Adm) {
 
         boolean menuAnterior = false;
@@ -712,6 +818,11 @@ public class ProxyAdministrador {
 
     }
 
+    /**
+     *
+     * @param cpf
+     * @return
+     */
     public static boolean ValidaCPF(String cpf) {
         // importar a java.util.InputMismatchException
 
@@ -791,4 +902,11 @@ public class ProxyAdministrador {
             return (false);
         }
     }
+
+    @Override
+    public String toString() {
+        return "ProxyAdministrador";
+    }
+    
+    
 }

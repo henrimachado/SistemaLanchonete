@@ -1,11 +1,16 @@
 
 import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.Pedido;
+import br.com.lanchonete.produtos.Produto;
 import java.util.Scanner;
 import java.time.*;
 import java.time.format.*;
 import java.util.*;
 
+/**
+ *
+ * @author henri
+ */
 public class ProxyColaborador {
 
     /*Colaborador
@@ -21,6 +26,8 @@ public class ProxyColaborador {
     DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
     DateTimeFormatter localHourFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
+    private static ArrayList<String> extratosPedidos = new ArrayList(); 
+    
     public void cadastroPedido() {
         System.out.printf("Digite o CPF do cliente: ");
         Scanner input = new Scanner(System.in);
@@ -49,6 +56,7 @@ public class ProxyColaborador {
                 int i = input.nextInt();
                 switch (i) {
                     case 1 -> {
+                        System.out.println("Digite o ID do adicional: ");
                         Integer idAdicional = input.nextInt();
                         novoPedido.setListaProdutos(idAdicional);
                         break;
@@ -56,6 +64,7 @@ public class ProxyColaborador {
 
                     case 2 -> {
                         finalizarPedido = true;
+                        System.out.println("estamos aqui");
                         break;
                     }
 
@@ -71,10 +80,12 @@ public class ProxyColaborador {
             novoPedido.setHoraEntregaPedido(LocalTime.now().plusMinutes(50).toString());
 
             float valorTotal = 0;
-            for (int k = 0; k < novoPedido.getListaProdutos().size(); k++) {
-                for (int j = 0; j < ProxyAdministrador.getListaProdutos().size(); k++) {
-                    if (novoPedido.getListaProdutos().get(k).equals(ProxyAdministrador.getListaProdutos().get(j).getIdProduto())) {
-                        valorTotal += ProxyAdministrador.getListaProdutos().get(j).getValorProduto();
+            for (Integer i : novoPedido.getListaProdutos()) {
+                for (Produto po : ProxyAdministrador.getListaProdutos()) {
+                    if (po.getIdProduto() == i){
+                        valorTotal += po.getValorProduto();
+                            /*novoPedido.getListaProdutos().get(k).equals(ProxyAdministrador.getListaProdutos().get(j).getIdProduto())) {
+                        valorTotal += ProxyAdministrador.getListaProdutos().get(j).getValorProduto();*/
                     }
                 }
             }
@@ -83,6 +94,30 @@ public class ProxyColaborador {
             Cl.setPedidosCliente(novoPedido);
         }
 
+    }
+
+    public static ArrayList<String> getExtratosPedidos() {
+        return extratosPedidos;
+    }
+
+
+    public static void setExtratosPedidos(ArrayList<String> extratosPedidos) {
+        ProxyColaborador.extratosPedidos = extratosPedidos; 
+    }
+
+    public ArrayList<String> extratosPedidos (){
+        ArrayList<String> extratosPedidos = new ArrayList();
+        for(Cliente cl : ProxyAdministrador.getClientes()){
+            for(Pedido pedido : cl.getPedidosCliente()){
+                LocalTime horaPedido = LocalTime.parse(pedido.getHoraPedido());
+                LocalDate dataPedido = LocalDate.parse(pedido.getDataPedido());
+                extratosPedidos.add(cl.getCPF() + "    " + cl.getNomePessoa().toUpperCase() + " " + cl.getSobrenomePessoa().toUpperCase() +
+                        "    [" + pedido.getIdPedido() + "]    R$" + pedido.getValorTotalPedido() +
+                        "    " + dataPedido.format(localDateFormatter) + "    " +  horaPedido.format(localHourFormatter) +  "    ITENS: " + pedido.getListaProdutos());
+            }
+        }
+        ProxyColaborador.setExtratosPedidos(extratosPedidos);
+        return ProxyColaborador.getExtratosPedidos();
     }
 
     /*
@@ -326,6 +361,11 @@ public class ProxyColaborador {
         } while (encerrarLista == false);
     }
 
+    /**
+     *
+     * @param idPedido
+     * @param Cl
+     */
     public void modificarPedido(int idPedido, Cliente Cl) {
         Scanner input = new Scanner(System.in);
         boolean menuAnterior = false;
@@ -414,6 +454,12 @@ public class ProxyColaborador {
 
     }
 
+    /**
+     *
+     * @param idPedido
+     * @param Cl
+     * @return
+     */
     public Pedido consultarPedido(int idPedido, Cliente Cl) {
         Pedido attPedido = new Pedido();
         attPedido = null;
@@ -524,7 +570,6 @@ public class ProxyColaborador {
                                    |                                       RELATÓRIO DE VENDAS                                                |     
                                    |                                   PEDIDOS CADASTRADOS NO SISTEMA                                         |
                                    ------------------------------------------------------------------------------------------------------------
-                                   \n
                                    """);
 
         for (int k = 0; k < listaClientes.size(); k++) {
@@ -561,6 +606,11 @@ public class ProxyColaborador {
 
     }
 
+    /**
+     *
+     * @param strDate
+     * @return
+     */
     public static boolean isDateValid(String strDate) {
         //Formatter de data
         String dateFormat = "uuuuMMdd";
@@ -575,6 +625,11 @@ public class ProxyColaborador {
 
     }
 
+    /**
+     *
+     * @param strHour
+     * @return
+     */
     public static boolean isHourValid(String strHour) {
         //Formatter de hora
         String hourFormat = "HH:mm";
@@ -588,6 +643,10 @@ public class ProxyColaborador {
         }
     }
 
+    /**
+     *
+     * @param Colab
+     */
     public void modificarColaborador(Colaborador Colab) {
         String senhaAnt;
         String novaSenha;
@@ -611,4 +670,11 @@ public class ProxyColaborador {
             System.out.println("Senha antiga não confere. Tente novamente.\n");
         }
     }
+
+    @Override
+    public String toString() {
+        return "ProxyColaborador";
+    }
+    
+    
 }

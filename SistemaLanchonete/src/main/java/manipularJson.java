@@ -1,3 +1,4 @@
+
 import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.*;
 import com.google.gson.*;
@@ -9,12 +10,21 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author henri
+ */
 public class manipularJson {
 
     public manipularJson() {
     }
-    
-    public  void dumpColaborador(Colaborador[] Co) throws IOException {
+
+    /**
+     *
+     * @param Co
+     * @throws IOException
+     */
+    public void dumpColaborador(Colaborador[] Co) throws IOException {
         Gson jsonObject = new Gson();
         File colaboradorFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Colaboradores.json");
 
@@ -31,6 +41,10 @@ public class manipularJson {
         }
     }
 
+    /**
+     *
+     * @return @throws IOException
+     */
     public Colaborador[] assimilateColaborador() throws IOException {
         Gson jsonObject = new Gson();
         File colabFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Colaboradores.json");
@@ -47,6 +61,11 @@ public class manipularJson {
         return null;
     }
 
+    /**
+     *
+     * @param Cl
+     * @throws IOException
+     */
     public void dumpCliente(ArrayList<Cliente> Cl) throws IOException {
         Gson jsonObject = new Gson();
         File clienteFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Clientes.json");
@@ -64,7 +83,11 @@ public class manipularJson {
 
     }
 
-    public  ArrayList<Cliente> assimilateCliente() throws IOException {
+    /**
+     *
+     * @return @throws IOException
+     */
+    public ArrayList<Cliente> assimilateCliente() throws IOException {
         Gson jsonObject = new Gson();
         File clienteFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Clientes.json");
 
@@ -80,11 +103,16 @@ public class manipularJson {
         return null;
     }
 
-    public  void dumpPedidos(Pedido Pe) throws IOException {
+    /**
+     * 
+     * @param extratosPedidos
+     * @throws IOException 
+     */
+    public void dumpExtratosPedidos(ArrayList<String> extratosPedidos) throws IOException {
         Gson jsonObject = new Gson();
         File pedidoFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Pedidos.json");
         FileWriter pedidoWriter = null;
-        String dadosPedidos = jsonObject.toJson(Pe);
+        String dadosPedidos = jsonObject.toJson(extratosPedidos);
 
         try {
             pedidoWriter = new FileWriter("src\\main\\java\\SistemaLanchoneteArquivos\\Pedidos.json");
@@ -95,8 +123,35 @@ public class manipularJson {
             pedidoWriter.close();
         }
     }
+    
+    /**
+     * 
+     * @return
+     * @throws IOException 
+     */
+    public ArrayList<String> assimilateExtratosPedidos() throws IOException {
+        Gson jsonObject = new Gson();
+        File clienteFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Pedidos.json");
 
-    public void dumpProdutos(ArrayList<Produto>  Po) throws IOException {
+        try {
+            String dadosCliente = new String(Files.readAllBytes(Paths.get(clienteFile.toURI())));
+            ArrayList<String> extratosPedidos = jsonObject.fromJson(dadosCliente, new TypeToken<ArrayList<String>>() {
+            }.getType());
+            return extratosPedidos;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    
+    
+    /**
+     *
+     * @param Po
+     * @throws IOException
+     */
+    public void dumpProdutos(ArrayList<Produto> Po) throws IOException {
         Gson jsonObject = new Gson();
         File produtoFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Produtos.json");
         FileWriter produtoWriter = null;
@@ -112,13 +167,17 @@ public class manipularJson {
 
     }
 
+    /**
+     *
+     * @return @throws IOException
+     */
     public ArrayList<Produto> assimilateProduto() throws IOException {
         Gson jsonObject = new Gson();
         File produtoFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Produtos.json");
 
         try {
             String dadosProduto = new String(Files.readAllBytes(Paths.get(produtoFile.toURI())));
-            ArrayList<Produto>  ProdutoP = jsonObject.fromJson(dadosProduto, new TypeToken<ArrayList<Produto>>() {
+            ArrayList<Produto> ProdutoP = jsonObject.fromJson(dadosProduto, new TypeToken<ArrayList<Produto>>() {
             }.getType());
             return ProdutoP;
         } catch (IOException e) {
@@ -128,6 +187,11 @@ public class manipularJson {
         return null;
     }
 
+    /**
+     *
+     * @param Adm
+     * @throws IOException
+     */
     public void dumpAdministrador(Administrador Adm) throws IOException {
         Gson jsonObject = new Gson();
         File admFile = new File("src\\main\\java\\SistemaLanchoneteArquivos\\Administrador.json");
@@ -143,6 +207,10 @@ public class manipularJson {
         }
     }
 
+    /**
+     *
+     * @return @throws IOException
+     */
     public Administrador assimilateAdministrador() throws IOException {
 
         Gson jsonObject = new Gson();
@@ -158,17 +226,34 @@ public class manipularJson {
 
         return null;
     }
-    
-    public void assimilateAll() throws IOException{
+
+    /**
+     *
+     * @throws IOException
+     */
+    public void assimilateAll() throws IOException {
         ProxyAdministrador.setColaboradores(assimilateColaborador());
         ProxyAdministrador.setClientes(assimilateCliente());
         ProxyAdministrador.setListaProdutos(assimilateProduto());
-        
+
     }
-    
-    public void dumpAll() throws IOException{
+
+    /**
+     *
+     * @param menuColab
+     * @throws IOException
+     */
+    public void dumpAll(ProxyColaborador menuColab) throws IOException {
         dumpColaborador(ProxyAdministrador.getColaboradores());
         dumpCliente(ProxyAdministrador.getClientes());
         dumpProdutos(ProxyAdministrador.getListaProdutos());
+        dumpExtratosPedidos(menuColab.extratosPedidos());
     }
+
+    @Override
+    public String toString() {
+        return "Manipulação de Arquivos JSON";
+    }
+    
+    
 }

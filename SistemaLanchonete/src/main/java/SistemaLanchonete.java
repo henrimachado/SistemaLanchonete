@@ -4,6 +4,10 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.util.Locale;
 
+/**
+ *
+ * @author henri
+ */
 public class SistemaLanchonete {
 
     public static void main(String[] args) throws IOException {
@@ -11,10 +15,6 @@ public class SistemaLanchonete {
         Locale locale = new Locale("pt", "BR");
         Locale.setDefault(locale);
 
-        //Inicializando o sistema
-        //manipularJson mJson = new manipularJson();
-        //mJson.assimilateAll();
-        //ProxyAdministrador.getColaboradores();
         SistemaLanchonete.startSistema();
 
         //ANTES DE ENVIAR, USAR ISSO DAQUI PRA PODER INICIALIZAR COM NULO PRA DAR BOM
@@ -25,37 +25,38 @@ public class SistemaLanchonete {
     }
 
     //Função login
+    /**
+     *
+     * @param mJson
+     * @return
+     * @throws IOException
+     */
     public static Usuario loginSistema(manipularJson mJson) throws IOException {
         Administrador adm = mJson.assimilateAdministrador();
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Digite seu login: ");
+        System.out.printf("E- mail: ");
         String loginUsuario = input.nextLine();
-        System.out.println("Digite sua senha: ");
+        System.out.printf("Senha: ");
         {
             String senhaUsuario = input.nextLine();
 
             Usuario usuarioAtual = null;
 
             if (loginUsuario.equals(adm.getLoginUsuario()) && senhaUsuario.equals(adm.getSenhaUsuario())) {
-
                 usuarioAtual = adm;
 
             } else {
                 for (Colaborador colab : ProxyAdministrador.getColaboradores()) {
-                    if (loginUsuario.equals(colab.getLoginUsuario()) && senhaUsuario.equals(colab.getSenhaUsuario())) {
-                        usuarioAtual = colab;
-                        break;
+                    if (colab != null) {
+                        if (loginUsuario.equals(colab.getLoginUsuario()) && senhaUsuario.equals(colab.getSenhaUsuario())) {
+                            usuarioAtual = colab;
+                            break;
+                        }
+
                     }
 
                 }
-                /*for (int i = 0; i < 15; i++) {
-                    if (loginUsuario.equals(ProxyAdministrador.getColaboradores()[i].getLoginUsuario())) {
-                        if (senhaUsuario.equals(ProxyAdministrador.getColaboradores()[i].getSenhaUsuario())) {
-                            usuarioAtual = ProxyAdministrador.getColaboradores()[i];
-                        }
-                    }
-                }*/
             }
 
             if (usuarioAtual == null) {
@@ -67,6 +68,10 @@ public class SistemaLanchonete {
 
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     public static void startSistema() throws IOException {
         //Uso de json
         manipularJson mJson = new manipularJson();
@@ -77,6 +82,7 @@ public class SistemaLanchonete {
         //Inicializando sistema
         ProxyAdministrador menuAdm = new ProxyAdministrador();
         ProxyColaborador menuColab = new ProxyColaborador();
+        ProxyColaborador.setExtratosPedidos(mJson.assimilateExtratosPedidos());
         MenuSistema menuSistema = new MenuSistema();
 
         //Login
@@ -107,7 +113,7 @@ public class SistemaLanchonete {
                     break;
                 }
                 case 2 -> {
-                    mJson.dumpAll();
+                    mJson.dumpAll(menuColab);
                     sairSistema = true;
                     break;
                 }
@@ -117,4 +123,10 @@ public class SistemaLanchonete {
             }
         } while (sairSistema == false);
     }
+
+    @Override
+    public String toString() {
+        return "SistemaLanchonete";
+    }
+
 }
