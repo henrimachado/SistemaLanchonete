@@ -1,8 +1,9 @@
 package br.com.lanchonete.pessoas;
 
 /**
- *
- * @author henri
+ * Classe abstrata para representação da entidade Pessoa no Sistema
+ * @author Mateus Henrique Machado 
+ * @author Iago Mateus Ávila Fernandes 
  */
 public abstract class Pessoa {
 
@@ -11,26 +12,27 @@ public abstract class Pessoa {
     private String CPF;
 
     /**
-     *
-     * @param nomePessoa
-     * @param sobrenomePessoa
-     * @param CPF
+     * Construtor parametrizado
+     * @param nomePessoa Define um nome para a pessoa
+     * @param sobrenomePessoa Define um sobrenome para a pessoa
+     * @param CPF Define um número de CPF para a pessoa
      */
-    //Construtor com parâmetros
     public Pessoa(String nomePessoa, String sobrenomePessoa, String CPF) {
         this.nomePessoa = nomePessoa;
         this.sobrenomePessoa = sobrenomePessoa;
         this.CPF = CPF;
     }
 
-    //Construtor padrão 
+    /**
+     * Construtor padrão
+     */ 
     public Pessoa() {
 
     }
 
     /**
      *
-     * @return
+     * @return Nome associado à pessoa
      */
     public String getNomePessoa() {
         return nomePessoa;
@@ -38,7 +40,7 @@ public abstract class Pessoa {
 
     /**
      *
-     * @param nomePessoa
+     * @param nomePessoa Define um nome para a pessoa
      */
     public void setNomePessoa(String nomePessoa) {
         this.nomePessoa = nomePessoa;
@@ -46,7 +48,7 @@ public abstract class Pessoa {
 
     /**
      *
-     * @return
+     * @return Sobrenome associado à pessoa
      */
     public String getSobrenomePessoa() {
         return sobrenomePessoa;
@@ -54,7 +56,7 @@ public abstract class Pessoa {
 
     /**
      *
-     * @param sobrenomePessoa
+     * @param sobrenomePessoa Define um sobrenome para a pessoa
      */
     public void setSobrenomePessoa(String sobrenomePessoa) {
         this.sobrenomePessoa = sobrenomePessoa;
@@ -62,7 +64,7 @@ public abstract class Pessoa {
 
     /**
      *
-     * @return
+     * @return Número de CPF associado à pessoa
      */
     public String getCPF() {
         return CPF;
@@ -70,7 +72,7 @@ public abstract class Pessoa {
 
     /**
      *
-     * @param CPF
+     * @param CPF Define um número de CPF para a pessoa
      */
     public void setCPF(String CPF) {
         this.CPF = CPF;
@@ -78,7 +80,7 @@ public abstract class Pessoa {
 
     /**
      *
-     * @return
+     * @return Representação String do objeto pessoa 
      */
 
     @Override

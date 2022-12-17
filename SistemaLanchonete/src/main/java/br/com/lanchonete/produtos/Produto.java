@@ -1,8 +1,9 @@
 package br.com.lanchonete.produtos;
 
 /**
- *
- * @author henri
+ * Classe representativa dos produtos no sistema
+ * @author Mateus Henrique Machado 
+ * @author Iago Mateus Ávila Fernandes 
  */
 public class Produto {
 
@@ -12,13 +13,13 @@ public class Produto {
     private String descricaoProduto;
 
     /**
-     *
-     * @param nomeProduto
-     * @param valorProduto
-     * @param idProduto
-     * @param descricaoProduto
+     * Construtor com inicialização de atributos
+     * @param nomeProduto Define o nome do produto
+     * @param valorProduto Define o valor (float) do produto
+     * @param idProduto Define um identificador para o produto
+     * @param descricaoProduto Define uma descrição em texto para o produto
      */
-    //Construtor parametrizado
+
     public Produto(String nomeProduto, float valorProduto, int idProduto, String descricaoProduto) {
         this.nomeProduto = nomeProduto;
         this.valorProduto = valorProduto;
@@ -26,13 +27,16 @@ public class Produto {
         this.descricaoProduto = descricaoProduto;
     }
 
-    //Construtor Padrão
+
+    /**
+     * Construtor Padrão
+     */
     public Produto() {
     }
 
     /**
-     *
-     * @return
+     * 
+     * @return Nome associado ao produto
      */
     public String getNomeProduto() {
         return nomeProduto;
@@ -40,7 +44,7 @@ public class Produto {
 
     /**
      *
-     * @param nomeProduto
+     * @param nomeProduto Define o nome para o produto
      */
     public void setNomeProduto(String nomeProduto) {
         this.nomeProduto = nomeProduto;
@@ -48,7 +52,7 @@ public class Produto {
 
     /**
      *
-     * @return
+     * @return Valor associado ao produto
      */
     public float getValorProduto() {
         return valorProduto;
@@ -56,7 +60,7 @@ public class Produto {
 
     /**
      *
-     * @param valorProduto
+     * @param valorProduto Define um valor para o produto
      */
     public void setValorProduto(float valorProduto) {
         this.valorProduto = valorProduto;
@@ -64,7 +68,7 @@ public class Produto {
 
     /**
      *
-     * @return
+     * @return Identificador associado ao produto
      */
     public int getIdProduto() {
         return idProduto;
@@ -72,7 +76,7 @@ public class Produto {
 
     /**
      *
-     * @param idProduto
+     * @param idProduto Define um valor para o identificador do produto
      */
     public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
@@ -80,7 +84,7 @@ public class Produto {
 
     /**
      *
-     * @return
+     * @return Descrição textual associada ao produto
      */
     public String getDescricaoProduto() {
         return descricaoProduto;
@@ -88,7 +92,7 @@ public class Produto {
 
     /**
      *
-     * @param descricaoProduto
+     * @param descricaoProduto Define uma descrição textual para o produto
      */
     public void setDescricaoProduto(String descricaoProduto) {
         this.descricaoProduto = descricaoProduto;
@@ -96,7 +100,7 @@ public class Produto {
 
     /**
      *
-     * @return
+     * @return Representação em String do objeto produto
      */
     @Override
     public String toString() {

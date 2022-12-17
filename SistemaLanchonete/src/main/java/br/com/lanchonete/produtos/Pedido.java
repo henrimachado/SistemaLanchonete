@@ -3,8 +3,9 @@ package br.com.lanchonete.produtos;
 import java.util.ArrayList;
 
 /**
- *
- * @author henri
+ * Classe representativa dos pedidos cadastrados no sistema
+ * @author Mateus Henrique Machado 
+ * @author Iago Mateus Ávila Fernandes 
  */
 public class Pedido {
 
@@ -18,12 +19,12 @@ public class Pedido {
 
     private ArrayList<Integer> listaProdutos = new ArrayList<>();
 
-    //Construtor Parametrizado 
+
     /**
-     *
-     * @param dataPedido
-     * @param horaPedido
-     * @param horaEntregaPedido
+     * Construtor parametrizado
+     * @param dataPedido Define uma data para o pedido 
+     * @param horaPedido Define uma hora para o pedido
+     * @param horaEntregaPedido Define uma hora estimada para a entrega do pedido
      */
     public Pedido(String dataPedido, String horaPedido, String horaEntregaPedido) {
         this.dataPedido = dataPedido;
@@ -32,20 +33,22 @@ public class Pedido {
 
     }
 
-    //Construtor Padrão
+    /**
+     * Construtor padrão
+     */
     public Pedido() {
     }
 
     /**
      *
-     * @return
+     * @return Quantidade de pedidos cadastrados no sistema
      */
     public static int getNumPedido() {
         return numPedido;
     }
 
     /**
-     *
+     * Incrementa a quantidade de pedidos cadastrados no sistema
      */
     public static void setNumPedido() {
         Pedido.numPedido = numPedido + 1;
@@ -53,14 +56,14 @@ public class Pedido {
 
     /**
      *
-     * @return
+     * @return Número de identificação associado ao pedido
      */
     public int getIdPedido() {
         return idPedido;
     }
 
     /**
-     *
+     * Define o identificador para o pedido
      */
     public void setIdPedido() {
         this.idPedido = Pedido.getNumPedido();
@@ -68,7 +71,7 @@ public class Pedido {
 
     /**
      *
-     * @return
+     * @return Lista de itens associado ao pedido
      */
     public ArrayList<Integer> getListaProdutos() {
         return listaProdutos;
@@ -76,7 +79,7 @@ public class Pedido {
 
     /**
      *
-     * @param idProduto
+     * @param idProduto Adiciona um item ao pedido através do seu ID
      */
     public void setListaProdutos(Integer idProduto) {
         this.listaProdutos.add(idProduto);
@@ -84,7 +87,7 @@ public class Pedido {
 
     /**
      *
-     * @return
+     * @return Data de cadastro do pedido no sistema
      */
     public String getDataPedido() {
         return dataPedido;
@@ -92,7 +95,7 @@ public class Pedido {
 
     /**
      *
-     * @param dataPedido
+     * @param dataPedido Define uma data para o pedido no momento do cadastro
      */
     public void setDataPedido(String dataPedido) {
         this.dataPedido = dataPedido;
@@ -100,7 +103,7 @@ public class Pedido {
 
     /**
      *
-     * @return
+     * @return Hora do cadastro do pedido no sistema
      */
     public String getHoraPedido() {
         return horaPedido;
@@ -108,7 +111,7 @@ public class Pedido {
 
     /**
      *
-     * @param horaPedido
+     * @param horaPedido Define uma hora para o pedido no momento do cadastro
      */
     public void setHoraPedido(String horaPedido) {
         this.horaPedido = horaPedido;
@@ -116,7 +119,7 @@ public class Pedido {
 
     /**
      *
-     * @return
+     * @return Hora estimada de entrega para o pedido
      */
     public String getHoraEntregaPedido() {
         return horaEntregaPedido;
@@ -124,7 +127,7 @@ public class Pedido {
 
     /**
      *
-     * @param horaEntregaPedido
+     * @param horaEntregaPedido Define a hora esperada de entrega para o pedido 
      */
     public void setHoraEntregaPedido(String horaEntregaPedido) {
         this.horaEntregaPedido = horaEntregaPedido;
@@ -132,7 +135,7 @@ public class Pedido {
 
     /**
      *
-     * @return
+     * @return Identificador associado ao status do pedido 
      */
     public int getStatusPedido() {
         return statusPedido;
@@ -140,7 +143,7 @@ public class Pedido {
 
     /**
      *
-     * @param statusPedido
+     * @param statusPedido Define um identificador de status para o pedido
      */
     public void setStatusPedido(int statusPedido) {
         this.statusPedido = statusPedido;
@@ -148,7 +151,7 @@ public class Pedido {
 
     /**
      *
-     * @return
+     * @return Valor total associado ao pedido
      */
     public float getValorTotalPedido() {
         return valorTotalPedido;
@@ -156,7 +159,7 @@ public class Pedido {
 
     /**
      *
-     * @param valorTotalPedido
+     * @param valorTotalPedido Define um valor total para o pedido
      */
     public void setValorTotalPedido(float valorTotalPedido) {
         this.valorTotalPedido = valorTotalPedido;
@@ -164,7 +167,7 @@ public class Pedido {
 
     /**
      *
-     * @return
+     * @return Representação String de um objeto pedido
      */
     @Override
     public String toString() {

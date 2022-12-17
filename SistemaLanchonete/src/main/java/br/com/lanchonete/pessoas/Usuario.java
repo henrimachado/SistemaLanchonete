@@ -1,8 +1,9 @@
 package br.com.lanchonete.pessoas;
 
 /**
- *
- * @author henri
+ * Classe representativa da entidade Usuário do Sistema
+ * @author Mateus Henrique Machado 
+ * @author Iago Mateus Ávila Fernandes 
  */
 public class Usuario extends Pessoa {
 
@@ -10,29 +11,31 @@ public class Usuario extends Pessoa {
     private String senhaUsuario;
 
     /**
-     *
-     * @param nomePessoa
-     * @param sobrenomePessoa
-     * @param CPF
-     * @param loginUsuario
-     * @param senhaUsuario
+     * Construtor Parametrizado
+     * Realiza uma chamada ao construtor da classe pai (Pessoa)
+     * @param nomePessoa Define um nome para o usuário
+     * @param sobrenomePessoa Define um sobrenome para o usuário
+     * @param CPF Define um número de CPF para o usuário
+     * @param loginUsuario Define um login (e-mail) de acesso para o usuário
+     * @param senhaUsuario Define uma senha de acesso para o usuário
      */
-    //Construtor Padrão
     public Usuario(String nomePessoa, String sobrenomePessoa, String CPF, String loginUsuario, String senhaUsuario) {
         super(nomePessoa, sobrenomePessoa, CPF);
-
         this.loginUsuario = loginUsuario;
         this.senhaUsuario = senhaUsuario;
     }
 
-    //Construtor padrão
+    /**
+     * Construtor Padrão 
+     * Realiza uma chamada ao construtor padrão da classe pai (Pessoa)
+     */
     public Usuario() {
         super();
     }
 
     /**
      *
-     * @return
+     * @return Login de acesso associado ao usuário 
      */
     public String getLoginUsuario() {
         return loginUsuario;
@@ -40,7 +43,7 @@ public class Usuario extends Pessoa {
 
     /**
      *
-     * @param loginUsuario
+     * @param loginUsuario Define um login de acesso para o usuário
      */
     public void setLoginUsuario(String loginUsuario) {
         this.loginUsuario = loginUsuario;
@@ -48,7 +51,7 @@ public class Usuario extends Pessoa {
 
     /**
      *
-     * @return
+     * @return Senha de acesso associado ao usuário
      */
     public String getSenhaUsuario() {
         return senhaUsuario;
@@ -56,7 +59,7 @@ public class Usuario extends Pessoa {
 
     /**
      *
-     * @param senhaUsuario
+     * @param senhaUsuario Define uma senha de acesso para o usuário
      */
     public void setSenhaUsuario(String senhaUsuario) {
         this.senhaUsuario = senhaUsuario;
@@ -64,7 +67,7 @@ public class Usuario extends Pessoa {
 
     /**
      * 
-     * @return 
+     * @return Representação String do objeto Usuario
      */
     @Override
     public String toString() {
