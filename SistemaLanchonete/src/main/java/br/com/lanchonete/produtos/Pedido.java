@@ -1,5 +1,7 @@
 package br.com.lanchonete.produtos;
 
+import java.time.*;
+import java.time.format.*;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
-public class Pedido {
+public class Pedido implements Comparable<Pedido> {
 
     private String dataPedido;
     private String horaPedido;
@@ -51,9 +53,11 @@ public class Pedido {
 
     /**
      * Incrementa a quantidade de pedidos cadastrados no sistema
+     *
+     * @param numPedido numero de pedidos realizados
      */
-    public static void setNumPedido() {
-        Pedido.numPedido = numPedido + 1;
+    public static void setNumPedido(int numPedido) {
+        Pedido.numPedido = numPedido;
     }
 
     /**
@@ -173,6 +177,9 @@ public class Pedido {
      */
     @Override
     public String toString() {
+        DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        DateTimeFormatter localHourFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        
         String status = " ";
 
         switch (statusPedido) {
@@ -200,11 +207,32 @@ public class Pedido {
 
             }
         }
+        
+        LocalTime printHoraPedido = LocalTime.parse(this.horaPedido);
+        LocalDate printDataPedido = LocalDate.parse(this.dataPedido);
+        LocalTime printHoraEntrega = LocalTime.parse(this.horaEntregaPedido);
 
-        return "[" + idPedido + "]    FEITO EM: " + dataPedido + " às " + horaPedido
+        return "[" + idPedido + "]    FEITO EM: " + printDataPedido.format(localDateFormatter) + " às " + printHoraPedido.format(localHourFormatter)
                 + "    ITENS (ID): " + listaProdutos + "    R$" + valorTotalPedido
                 + "    STATUS: " + status.toUpperCase()
-                + "    HORA ESPERADA DE ENTREGA: " + horaEntregaPedido;
+                + "    HORA ESPERADA DE ENTREGA: " + printHoraEntrega.format(localHourFormatter);
+    }
+
+    /**
+     * Função de comparação entre pedidos
+     *
+     * @param o Objeto do tipo pedido
+     * @return Resultado da comparação
+     */
+    @Override
+    public int compareTo(Pedido o) {
+        if (this.idPedido > o.getIdPedido()) {
+            return 1;
+        } else if (this.idPedido < o.getIdPedido()) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 
 }

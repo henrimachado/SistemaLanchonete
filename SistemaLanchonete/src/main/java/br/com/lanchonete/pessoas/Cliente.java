@@ -9,7 +9,7 @@ import br.com.lanchonete.produtos.*;
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
  */
-public class Cliente extends Pessoa {
+public class Cliente extends Pessoa implements Comparable<Cliente> {
 
     private String enderecoCliente;
     private String telefoneCliente;
@@ -95,5 +95,15 @@ public class Cliente extends Pessoa {
     public String toString() {
         return getCPF() + "    " + getNomePessoa().toUpperCase() + " " + getSobrenomePessoa().toUpperCase() + "    "
                 + getTelefoneCliente() + "    " + getEnderecoCliente().toUpperCase();
+    }
+
+    /**
+     * Método de comparação entre objetos da classe cliente
+     * @param o Objeto do tipo cliente
+     * @return Valores de comparação 
+     */
+    @Override
+    public int compareTo(Cliente o) {
+        return this.getCPF().compareTo(o.getCPF());
     }
 }

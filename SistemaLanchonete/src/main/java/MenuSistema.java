@@ -3,6 +3,7 @@ import br.com.lanchonete.pessoas.Colaborador;
 import br.com.lanchonete.pessoas.Usuario;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Collections;
 
 /**
  * Classe representativa do Menu de Opções do Sistema 
@@ -67,6 +68,8 @@ public class MenuSistema {
                 }
                 case 6 -> {
                     System.out.println("O sistema foi finalizado.");
+                    manipularJson mJson = new manipularJson();
+                    mJson.dumpAll(menuColab);
                     sairSistema = true;
                     break;
                 }
@@ -117,6 +120,8 @@ public class MenuSistema {
                 }
                 case 4 -> {
                     System.out.println("\nO sistema foi finalizado.\n");
+                    manipularJson mJson = new manipularJson();
+                    mJson.dumpAll(menuColab);
                     sairSistema = true;
                     break;
                 }
@@ -546,6 +551,7 @@ public class MenuSistema {
                     System.out.println("CPF do cliente: ");
                     CPF = input.nextLine();
                     System.out.println("Lista de pedidos do Cliente: ");
+                    Collections.sort(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente());
                     for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
                         System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
                     }

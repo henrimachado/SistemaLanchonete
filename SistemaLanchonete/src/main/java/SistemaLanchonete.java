@@ -6,9 +6,10 @@ import java.util.Locale;
 
 /**
  * Classe principal para o Sistema da Lanchonete contendo o método main()
+ *
  * @author Mateus Henrique Machado
  * @author Iago Mateus Ávila Fernandes
- * @version 1.0
+ * @version 1.1
  */
 public class SistemaLanchonete {
 
@@ -26,11 +27,12 @@ public class SistemaLanchonete {
         mJson.dumpProdutos(ProxyAdministrador.getListaProdutos());*/
     }
 
-
     /**
      * Função padrão para login no sistema
-     * @param mJson Objeto da classe manipularJson para assimilação de dados 
-     * @return Usuario logado no sistema desde que as credenciais estejam cadastradas
+     *
+     * @param mJson Objeto da classe manipularJson para assimilação de dados
+     * @return Usuario logado no sistema desde que as credenciais estejam
+     * cadastradas
      * @throws IOException Exceção associada à manipulação de arquivos Json
      */
     public static Usuario loginSistema(manipularJson mJson) throws IOException {
@@ -72,6 +74,7 @@ public class SistemaLanchonete {
 
     /**
      * Função padrão de inicialização do sistema como um todo
+     *
      * @throws IOException Exceção associada à manipulação de dados Json
      */
     public static void startSistema() throws IOException {
@@ -91,8 +94,8 @@ public class SistemaLanchonete {
         Scanner inputSistema = new Scanner(System.in);
         int i;
         boolean sairSistema = false;
-        do {
-            System.out.printf("""
+
+        System.out.printf("""
                            
                            Escolha uma opção:
                            _________________________________________
@@ -100,36 +103,37 @@ public class SistemaLanchonete {
                            2 -  Sair
                            _________________________________________
                                """);
-            i = inputSistema.nextInt();
-            switch (i) {
-                case 1 -> {
-                    while (usuarioAtual == null) {
-                        usuarioAtual = SistemaLanchonete.loginSistema(mJson);
-                    }
+        inputSistema = new Scanner(System.in);
+        i = inputSistema.nextInt();
+        switch (i) {
+            case 1 -> {
+                while (usuarioAtual == null) {
+                    usuarioAtual = SistemaLanchonete.loginSistema(mJson);
+                }
 
-                    if (usuarioAtual instanceof Administrador) {
-                        menuSistema.menuAdministrador(menuAdm, menuColab, usuarioAtual);
-                        mJson.dumpAdministrador((Administrador) usuarioAtual);
+                if (usuarioAtual instanceof Administrador) {
+                    menuSistema.menuAdministrador(menuAdm, menuColab, usuarioAtual);
+                    mJson.dumpAdministrador((Administrador) usuarioAtual);
 
-                    } else if (usuarioAtual instanceof Colaborador) {
-                        menuSistema.menuColaborador(menuAdm, menuColab, usuarioAtual);
-                    }
-                    break;
+                } else if (usuarioAtual instanceof Colaborador) {
+                    menuSistema.menuColaborador(menuAdm, menuColab, usuarioAtual);
                 }
-                case 2 -> {
-                    mJson.dumpAll(menuColab);
-                    sairSistema = true;
-                    break;
-                }
-                default -> {
-                    System.out.println("Opção inválida. Tente novamente.");
-                }
+                break;
             }
-        } while (sairSistema == false);
+            case 2 -> {
+                mJson.dumpAll(menuColab);
+                sairSistema = true;
+                break;
+            }
+            default -> {
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+
     }
 
     /**
-     * 
+     *
      * @return Representação String do Sistema da Lanchonete
      */
     @Override

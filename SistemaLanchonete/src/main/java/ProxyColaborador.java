@@ -31,14 +31,22 @@ public class ProxyColaborador {
         System.out.printf("CPF do cliente: ");
         Scanner input = new Scanner(System.in);
         String CPFCliente = input.nextLine();
-
+        int numPedidos = 0;
         Cliente Cl = ProxyAdministrador.consultaCliente(CPFCliente);
 
         if (Cl != null) {
 
             Pedido novoPedido = new Pedido();
+            
+            for (Cliente cliente : ProxyAdministrador.getClientes()){
+                for (Pedido pe : Cl.getPedidosCliente()){
+                    numPedidos = numPedidos +1;
+                }
+                
+            }
+            Pedido.setNumPedido(numPedidos);
             novoPedido.setIdPedido();
-            Pedido.setNumPedido();
+            
 
             System.out.print("ID do Produto: ");
             Integer idProduto = input.nextInt();
@@ -55,7 +63,7 @@ public class ProxyColaborador {
                 int i = input.nextInt();
                 switch (i) {
                     case 1 -> {
-                        System.out.println("ID do adicional: ");
+                        System.out.printf("ID do adicional: ");
                         Integer idAdicional = input.nextInt();
                         novoPedido.setListaProdutos(idAdicional);
                         break;
@@ -699,11 +707,11 @@ public class ProxyColaborador {
         String novaSenha;
         String senhaConf;
         Scanner input = new Scanner(System.in);
-        System.out.println("Senha anterior: ");
+        System.out.printf("Senha anterior: ");
         senhaAnt = input.nextLine();
-        System.out.println("Nova senha: ");
+        System.out.printf("Nova senha: ");
         novaSenha = input.nextLine();
-        System.out.println("Confirmar nova senha: ");
+        System.out.printf("Confirmar nova senha: ");
         senhaConf = input.nextLine();
 
         if (Colab.getSenhaUsuario().equals(senhaAnt)) {

@@ -3,7 +3,7 @@ import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.Produto;
 import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.util.Collections;
 /**
  * Classe intermediária para funcionalidades geralmente disponíveis ao
  * Administrador
@@ -75,7 +75,11 @@ public class ProxyAdministrador {
         do {
             System.out.printf("CPF: ");
             CPF = input.nextLine();
-        } while (ProxyAdministrador.ValidaCPF(CPF) == false);
+            
+            if(ValidaCPF(CPF) == false || consultaColaborador(CPF) != null){
+                System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
+            }
+        } while (ProxyAdministrador.ValidaCPF(CPF) == false || consultaColaborador(CPF) != null);
 
         System.out.printf("E-mail: ");
         loginColaborador = input.nextLine();
@@ -162,7 +166,10 @@ public class ProxyAdministrador {
                         do {
                             System.out.printf("Novo CPF: ");
                             dado = inputDado.nextLine();
-                        } while (ProxyAdministrador.ValidaCPF(dado) == false);
+                            if(ProxyAdministrador.ValidaCPF(dado) == false || consultaColaborador(CPF)!=null){
+                                System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
+                            }
+                        } while (ProxyAdministrador.ValidaCPF(dado) == false || consultaColaborador(CPF)!=null);
                         modColab.setCPF(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         CPFColab = dado;
@@ -327,7 +334,10 @@ public class ProxyAdministrador {
         do {
             System.out.printf("CPF: ");
             CPF = input.nextLine();
-        } while (ProxyAdministrador.ValidaCPF(CPF) == false);
+            if(ProxyAdministrador.ValidaCPF(CPF) == false || consultaCliente(CPF)!= null){
+                System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
+            }
+        } while (ProxyAdministrador.ValidaCPF(CPF) == false || consultaCliente(CPF)!= null);
 
         System.out.printf("Endereço: ");
         enderecoCliente = input.nextLine();
@@ -438,7 +448,10 @@ public class ProxyAdministrador {
                         do {
                             System.out.printf("Novo CPF: ");
                             dado = inputDado.nextLine();
-                        } while (ProxyAdministrador.ValidaCPF(dado) == false);
+                            if(ProxyAdministrador.ValidaCPF(dado) == false || consultaCliente(CPF) != null){
+                                System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
+                            }
+                        } while (ProxyAdministrador.ValidaCPF(dado) == false || consultaCliente(CPF) != null);
                         modCliente.setCPF(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         CPFCli = dado;
@@ -480,6 +493,7 @@ public class ProxyAdministrador {
      * sistema
      */
     public void printClientes() {
+        Collections.sort(ProxyAdministrador.getClientes());
         for (Cliente cliente : ProxyAdministrador.getClientes()) {
             if (cliente != null) {
                 System.out.println(cliente);
@@ -797,9 +811,12 @@ public class ProxyAdministrador {
 
                     String novoCPF;
                     do {
-                        System.out.println("Novo CPF: ");
+                        System.out.printf("Novo CPF: ");
                         novoCPF = input.nextLine();
-                    } while (ProxyAdministrador.ValidaCPF(novoCPF) == false);
+                        if(ProxyAdministrador.ValidaCPF(novoCPF) == false || consultaColaborador(novoCPF) != null){
+                            System.out.println("Número de CPF inválido ou já cadastrado. Tente novamente!");
+                        }
+                    } while (ProxyAdministrador.ValidaCPF(novoCPF) == false || consultaColaborador(novoCPF) != null);
                     Adm.setCPF(novoCPF);
                     System.out.println("Alteração realizada com sucesso!");
                     break;
