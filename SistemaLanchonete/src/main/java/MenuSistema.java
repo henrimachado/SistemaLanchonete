@@ -30,13 +30,15 @@ public class MenuSistema {
         do {
             System.out.println("""
                            
-                           Escolha uma opções do menu: 
+                           Escolha uma opção do menu: 
+                           _________________________________________
                            1 -  Colaboradores          
                            2 -  Cliente                
                            3 -  Produtos               
-                           4 -  Relatorios             
-                           5 -  Administrador          
-                           6 -  Finalizar Sistema
+                           4 -  Relatórios             
+                           5 -  Perfil         
+                           6 -  Encerrar
+                           _________________________________________
                                """);
 
             int j = inputSwitch.nextInt();
@@ -71,7 +73,6 @@ public class MenuSistema {
                 }
             }
         } while (sairSistema == false);
-        System.out.println("Estamos aqui!");
     }
 
     /**
@@ -89,11 +90,13 @@ public class MenuSistema {
         do {
             System.out.println("""
                            
-                           Escolha uma opções do menu: 
+                           Escolha uma opção do menu: 
+                           _________________________________________ 
                            1 -  Perfil                 
                            2 -  Pedidos                
                            3 -  Relatórios             
-                           4 -  Finalizar Sistema
+                           4 -  Encerrar
+                           _________________________________________
                                """);
 
             int i = inputSwitch.nextInt();
@@ -139,12 +142,14 @@ public class MenuSistema {
         do {
             System.out.println("""
                            
-                           Digite  o número da opção: 
-                           1 - Cadastrar colaborador   
-                           2 - Editar    colaborador   
-                           3 - Consultar colaboradores   
-                           4 - Remover   colaborador   
-                           5 - Menu princial
+                           Escolha uma opção: 
+                           _________________________________________
+                           1 - Cadastrar  
+                           2 - Editar     
+                           3 - Consultar 
+                           4 - Remover      
+                           5 - Voltar
+                           _________________________________________
                                     """);
 
             int i = inputSwitch.nextInt();
@@ -202,10 +207,12 @@ public class MenuSistema {
                     + "-------------------------------------------------------\n");
             System.out.println("""
                            
-                           Digite  o número da opção: 
+                           Escolha uma opção:
+                           _________________________________________
                            1 - Alterar senha           
-                           2 - Menu princial
-                                    """);
+                           2 - Voltar
+                           _________________________________________
+                           """);
 
             int i = inputSwitch.nextInt();
             switch (i) {
@@ -240,12 +247,15 @@ public class MenuSistema {
         do {
             System.out.println("""
                            
-                           Digite  o número da opção: 
-                           1 - Cadastrar Produto       
-                           2 - Editar    Produto       
-                           3 - Consultar Produto       
-                           4 - Remover   Produto       
-                           5 - Menu princial
+                           Escolha uma opção:
+                           _________________________________________
+                               
+                           1 - Cadastrar      
+                           2 - Editar       
+                           3 - Consultar       
+                           4 - Remover          
+                           5 - Voltar
+                           _________________________________________
                                     """);
 
             int i = inputSwitch.nextInt();
@@ -296,24 +306,26 @@ public class MenuSistema {
 
         do {
             System.out.println("""
-                           Insira a opção desejada:          
-                           
-                           1 -   Relatorio de clientes      
-                           2 -   Relatorio de colaboradores 
-                           3 -   Relatorio de produtos      
-                           4 -   Relatorio de pedido        
-                           5 -   Estatistica de venda       
-                           6 -   Menu princial
+                               
+                           Escolha uma opção:          
+                           _________________________________________
+                               
+                           1 -   Clientes     
+                           2 -   Colaboradores
+                           3 -   Produtos     
+                           4 -   Pedido      
+                           5 -   Estatística de venda     
+                           6 -   Voltar
+                           _________________________________________
                                        """);
 
             int i = inputSwitch.nextInt();
             switch (i) {
                 case 1 -> {
                     System.out.println("""
-                                                   -------------------------------------------------------------------------------------------------------------------------
-                                                   |                                         CLIENTES CADASTRADOS NO SISTEMA                                               |
-                                                   -------------------------------------------------------------------------------------------------------------------------
-                                                   """);
+                                         CLIENTES CADASTRADOS NO SISTEMA
+                                         ______________________________________
+                                        """);
                     menuAdm.printClientes();
                     ProxyAdministrador.setQntClientesProtected();
                     ProxyAdministrador.setQntClientesPrivate();
@@ -321,18 +333,16 @@ public class MenuSistema {
                 }
                 case 2 -> {
                     System.out.printf("""
-                                                   -------------------------------------------------------------------------------------------------------------------------
-                                                   |                                       COLABORADORES CADASTRADOS NO SISTEMA                                             |
-                                                   -------------------------------------------------------------------------------------------------------------------------
-                                                   """);
+                                            COLABORADORES CADASTRADOS NO SISTEMA
+                                            _________________________________________
+                                            """);
                     menuAdm.printColaboradores();
                 }
                 case 3 -> {
                     System.out.printf("""
-                                                   -------------------------------------------------------------------------------------------------------------------------
-                                                   |                                          PRODUTOS CADASTRADOS NO SISTEMA                                               |
-                                                   -------------------------------------------------------------------------------------------------------------------------
-                                                   """);
+                                            PRODUTOS CADASTRADOS NO SISTEMA
+                                            _________________________________________
+                                            """);
                     menuAdm.consultaListaProdutos();
                 }
                 case 4 -> {
@@ -375,10 +385,12 @@ public class MenuSistema {
         do {
             System.out.println("""
                            
-                           Digite  o número da opção: 
-                           1 - Dados admin             
-                           2 - Alterar dados admin     
-                           3 - Menu princial
+                           Escolha uma opção: 
+                           _________________________________________
+                           1 - Exibir dados           
+                           2 - Alterar dados   
+                           3 - Voltar
+                           _________________________________________
                                     """);
 
             int i = inputSwitch.nextInt();
@@ -422,13 +434,15 @@ public class MenuSistema {
         do {
             System.out.println("""
                            
-                           Digite  o número da opção: 
-                           1 - Cadastrar pedido        
-                           2 - Editar    pedido        
-                           3 - Consultar pedido        
-                           4 - Remover   pedido        
-                           5 - Extratos  pedidos  
-                           6 - Menu princial
+                           Escolha uma opção: 
+                           _________________________________________
+                           1 - Cadastrar       
+                           2 - Editar           
+                           3 - Consultar        
+                           4 - Remover          
+                           5 - Extratos    
+                           6 - Voltar
+                           _________________________________________
                                     """);
 
             int i = inputSwitch.nextInt();
@@ -440,27 +454,27 @@ public class MenuSistema {
                     break;
                 }
                 case 2 -> {
-                    System.out.println("Insira o CPF do cliente: ");
+                    System.out.println("CPF: ");
                     CPF = input.nextLine();
                     System.out.println("Lista de pedidos do Cliente: ");
                     for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
                         System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
                     }
 
-                    System.out.println("Digite o ID do pedido que deseja modificar: ");
+                    System.out.println("ID do Pedido: ");
                     idPedido = input.nextInt();
                     menuColab.modificarPedido(idPedido, ProxyAdministrador.consultaCliente(CPF));
                     break;
                 }
                 case 3 -> {
-                    System.out.println("Insira o CPF do cliente: ");
+                    System.out.println("CPF do Cliente: ");
                     CPF = input.nextLine();
                     System.out.println("Lista de pedidos do Cliente: ");
                     for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
                         System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
                     }
 
-                    System.out.println("Digite o ID do pedido que deseja acessar: ");
+                    System.out.println("ID do Pedido: ");
                     idPedido = input.nextInt();
                     System.out.println(menuColab.consultarPedido(idPedido, ProxyAdministrador.consultaCliente(CPF)));
                     break;
@@ -473,10 +487,10 @@ public class MenuSistema {
                     manipularJson mJson = new manipularJson();
                     mJson.dumpExtratosPedidos(menuColab.extratosPedidos());
                     ProxyColaborador.setExtratosPedidos(mJson.assimilateExtratosPedidos());
-                    for(String extratoPedido : ProxyColaborador.getExtratosPedidos()){
+                    for (String extratoPedido : ProxyColaborador.getExtratosPedidos()) {
                         System.out.println(extratoPedido);
                     }
-                    break; 
+                    break;
                 }
                 case 6 -> {
                     menuAnterior = true;
@@ -504,13 +518,15 @@ public class MenuSistema {
         do {
             System.out.println("""
                            
-                           Digite  o número da opção: 
-                           1 - Cadastrar cliente       
-                           2 - Editar    cliente       
-                           3 - Consultar cliente       
-                           4 - Remover   cliente 
+                           Escolha uma opção: 
+                           _________________________________________
+                           1 - Cadastrar      
+                           2 - Editar      
+                           3 - Consultar       
+                           4 - Remover 
                            5 - Listar pedidos  
-                           6 - Menu princial
+                           6 - Voltar
+                           _________________________________________
                                     """);
 
             int i = inputSwitch.nextInt();
@@ -520,22 +536,22 @@ public class MenuSistema {
                     menuAdm.cadastroCliente();
                 }
                 case 2 -> {
-                    System.out.printf("Insira o CPF do cliente: ");
+                    System.out.printf("CPF do cliente: ");
                     CPF = input.nextLine();
                     menuAdm.modificarCliente(CPF);
                 }
                 case 3 -> {
-                    System.out.printf("Insira o CPF do cliente: ");
+                    System.out.printf("CPF do cliente: ");
                     CPF = input.nextLine();
                     System.out.println(ProxyAdministrador.consultaCliente(CPF));
                 }
                 case 4 -> {
-                    System.out.printf("Insira o CPF do cliente: ");
+                    System.out.printf("CPF do cliente: ");
                     CPF = input.nextLine();
                     menuAdm.excluirCliente(CPF);
                 }
                 case 5 -> {
-                    System.out.println("Insira o CPF do cliente: ");
+                    System.out.println("CPF do cliente: ");
                     CPF = input.nextLine();
                     System.out.println("Lista de pedidos do Cliente: ");
                     for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
@@ -543,7 +559,7 @@ public class MenuSistema {
                     }
                     break;
                 }
-                case 6 ->{
+                case 6 -> {
                     menuAnterior = true;
                 }
                 default -> {
@@ -557,6 +573,5 @@ public class MenuSistema {
     public String toString() {
         return "Menu do Sistema";
     }
-    
-    
+
 }

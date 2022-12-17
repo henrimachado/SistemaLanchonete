@@ -1,7 +1,6 @@
 package br.com.lanchonete.produtos;
 
 import java.util.ArrayList;
-import java.time.*;
 
 /**
  *
@@ -170,7 +169,7 @@ public class Pedido {
     @Override
     public String toString() {
         String status = " ";
-        
+
         switch (statusPedido) {
             case 1 -> {
                 status = "ACEITO";
@@ -188,19 +187,19 @@ public class Pedido {
                 status = "ENTREGUE";
                 break;
             }
-            case 5 ->{
+            case 5 -> {
                 status = "CANCELADO";
                 break;
             }
             default -> {
-                
+
             }
         }
 
-        return "[" + idPedido + "]    FEITO EM: " + dataPedido + " às " + horaPedido +
-                "    ITENS (ID): " + listaProdutos + "    R$" + valorTotalPedido 
-                + "    STATUS: " + status.toUpperCase() 
-                + "    HORA ESPERADA DE ENTREGA: " + horaEntregaPedido;  
+        return "[" + idPedido + "]    FEITO EM: " + dataPedido + " às " + horaPedido
+                + "    ITENS (ID): " + listaProdutos + "    R$" + valorTotalPedido
+                + "    STATUS: " + status.toUpperCase()
+                + "    HORA ESPERADA DE ENTREGA: " + horaEntregaPedido;
     }
 
 }

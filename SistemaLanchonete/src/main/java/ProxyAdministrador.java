@@ -10,7 +10,9 @@ import java.util.ArrayList;
  */
 public class ProxyAdministrador {
 
-    //Construtor
+    /**
+     *
+     */
     public ProxyAdministrador() {
     }
 
@@ -32,23 +34,7 @@ public class ProxyAdministrador {
      *
      * @param C
      */
-    public static void addColaboradores(Colaborador C) {
-        /*
-        int i = 0;
-        if (ProxyAdministrador.Colaboradores != null) {
-            while (ProxyAdministrador.Colaboradores[i] != null & i <= 15) {
-                i = i + 1;
-            }
-            if (i < 15) {
-                ProxyAdministrador.Colaboradores[i] = C;
-            } else {
-                System.out.println("Vagas preenchidas. Não foi possível cadastrar novos colaboradores.");
-            }
-        }
-        else{
-            ProxyAdministrador.Colaboradores[i] = C;
-        }
-         */
+    public void addColaboradores(Colaborador C) {
         for (int i = 0; i < 15; i++) {
             if (ProxyAdministrador.Colaboradores[i] == null) {
                 ProxyAdministrador.Colaboradores[i] = C;
@@ -71,11 +57,7 @@ public class ProxyAdministrador {
     //FUNÇÃO DE CADASTRO DE COLABORADORES
     public void cadastroColaborador() {
 
-        String nomeColaborador;
-        String sobrenomeColaborador;
-        String CPF;
-        String loginColaborador;
-        String senhaColaborador;
+        String nomeColaborador, sobrenomeColaborador, CPF, loginColaborador, senhaColaborador;
 
         Scanner input = new Scanner(System.in);
 
@@ -99,7 +81,8 @@ public class ProxyAdministrador {
 
         //Cadastro
         Colaborador C = new Colaborador(nomeColaborador, sobrenomeColaborador, CPF, loginColaborador, senhaColaborador);
-        ProxyAdministrador.addColaboradores(C);
+        addColaboradores(C);
+        System.out.println("Cadastro realizado com sucesso!");
     }
 
     //CONSULTA O COLABORADOR NO BANCO DE COLABORADORS
@@ -111,8 +94,8 @@ public class ProxyAdministrador {
     public Colaborador consultaColaborador(String CPF) {
 
         String CPFColaborador = CPF;
-        Colaborador attColaborador = new Colaborador();
-        attColaborador = null;
+        //Colaborador attColaborador = new Colaborador();
+        Colaborador attColaborador = null;
 
         for (Colaborador colab : ProxyAdministrador.getColaboradores()) {
             if (CPFColaborador.equals(colab.getCPF())) {
@@ -130,17 +113,15 @@ public class ProxyAdministrador {
      * @param CPF
      */
     public void modificarColaborador(String CPF) {
-
         Scanner inputSwitch = new Scanner(System.in);
 
         boolean menuAnterior = false;
-
         do {
             String CPFColab = CPF;
             if (consultaColaborador(CPFColab) != null) {
                 Colaborador modColab = consultaColaborador(CPFColab);
-                System.out.println("\nDADOS COLABORADOR\n----------------------------------------------------\n");
-                System.out.println(modColab + "\n---------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.println("DADOS COLABORADOR");
+                System.out.println(modColab + "________________________________");
                 System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome 
@@ -155,18 +136,16 @@ public class ProxyAdministrador {
 
                 switch (i) {
                     case 1 -> {
-                        System.out.printf("Digite o novo nome: ");
+                        System.out.printf("Novo nome: ");
                         String dado = inputDado.nextLine();
-
                         modColab.setNomePessoa(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         break;
                     }
 
                     case 2 -> {
-                        System.out.printf("Digite o novo sobrenome: ");
+                        System.out.printf("Novo sobrenome: ");
                         String dado = inputDado.nextLine();
-
                         modColab.setSobrenomePessoa(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         break;
@@ -175,7 +154,7 @@ public class ProxyAdministrador {
                     case 3 -> {
                         String dado;
                         do {
-                            System.out.printf("Digite o novo CPF: ");
+                            System.out.printf("Novo CPF: ");
                             dado = inputDado.nextLine();
                         } while (ProxyAdministrador.ValidaCPF(dado) == false);
                         modColab.setCPF(dado);
@@ -188,16 +167,16 @@ public class ProxyAdministrador {
                         String novoLogin;
                         String confirmLogin;
                         do {
-                            System.out.printf("Digite o novo login: ");
+                            System.out.printf("Novo login: ");
                             novoLogin = inputDado.nextLine();
-                            System.out.printf("Digite a confirmação do novo login: ");
+                            System.out.printf("Confirmar novo login: ");
                             confirmLogin = inputDado.nextLine();
 
                             if (novoLogin.equals(confirmLogin)) {
                                 modColab.setLoginUsuario(confirmLogin);
-                                System.out.println("\nAlteração realizada com sucesso!");
+                                System.out.println("Alteração realizada com sucesso!");
                             } else {
-                                System.out.println("\nDados não conferem. Tente novamente!\n");
+                                System.out.println("Dados não conferem. Tente novamente!\n");
                             }
 
                         } while (!novoLogin.equals(confirmLogin));
@@ -228,19 +207,22 @@ public class ProxyAdministrador {
     public void excluirColaborador(String CPF) {
         String CPFColaborador = CPF;
 
-        for (int i = 0; i < 15; i++) {
-            if (CPFColaborador.equals(ProxyAdministrador.Colaboradores[i].getCPF())) {
-                ProxyAdministrador.Colaboradores[i] = null;
+        for (Colaborador colab : ProxyAdministrador.getColaboradores()) {
+            if (colab != null && colab.getCPF().equals(CPFColaborador)) {
+                colab = null;
+                break;
             }
         }
+        System.out.println("Alteração realizada com sucesso!");
+
     }
 
     //Acessar informação colaborador 
     //IMPRIMIR COLABORADORES NA TELA
     public void printColaboradores() {
-        for (int i = 0; i < 15; i++) {
-            if (ProxyAdministrador.Colaboradores[i] != null) {
-                System.out.println(ProxyAdministrador.Colaboradores[i]);
+        for (Colaborador colab : ProxyAdministrador.getColaboradores()) {
+            if (colab != null) {
+                System.out.println(colab);
             }
         }
     }
@@ -282,9 +264,12 @@ public class ProxyAdministrador {
         return qntClientesPrivate;
     }
 
+    /**
+     *
+     */
     public static void setQntClientesPrivate() {
         int qnt = 0;
-        for (Cliente cl : ProxyAdministrador.getClientes()){
+        for (Cliente cl : ProxyAdministrador.getClientes()) {
             qnt++;
         }
         ProxyAdministrador.qntClientesPrivate = qnt;
@@ -300,7 +285,7 @@ public class ProxyAdministrador {
 
     public static void setQntClientesProtected() {
         int qnt = 0;
-        for (Cliente cl : ProxyAdministrador.getClientes()){
+        for (Cliente cl : ProxyAdministrador.getClientes()) {
             qnt++;
         }
         qntClientesProtected = qnt;
@@ -316,19 +301,17 @@ public class ProxyAdministrador {
     }
 
     //CADASTRO DE NOVOS CLIENTES
+    /**
+     *
+     */
     public void cadastroCliente() {
-        String nomeCliente;
-        String sobrenomeCliente;
-        String CPF;
-        String enderecoCliente;
-        String telefoneCliente;
+        String nomeCliente, sobrenomeCliente, CPF, enderecoCliente, telefoneCliente;
 
         Scanner input = new Scanner(System.in);
 
         //Input de dados 
         System.out.printf("Nome: ");
         nomeCliente = input.nextLine();
-
         System.out.printf("Sobrenome: ");
         sobrenomeCliente = input.nextLine();
 
@@ -339,13 +322,12 @@ public class ProxyAdministrador {
 
         System.out.printf("Endereço: ");
         enderecoCliente = input.nextLine();
-
         System.out.printf("Telefone: ");
         telefoneCliente = input.nextLine();
 
         Cliente cl = new Cliente(nomeCliente, sobrenomeCliente, CPF, enderecoCliente, telefoneCliente);
         ProxyAdministrador.Clientes.add(cl);
-
+        System.out.println("Cadastro realizado com sucesso!");
         //Manipulação com membro devidamente encapsulado, requer o uso de um método para tanto
         setQntClientesPrivate();
 
@@ -365,12 +347,11 @@ public class ProxyAdministrador {
         Cliente attCliente = new Cliente();
         attCliente = null;
 
-        for (int i = 0; i <= ProxyAdministrador.Clientes.size(); i++) {
-            if (CPFCliente.equals(ProxyAdministrador.Clientes.get(i).getCPF())) {
-                attCliente = ProxyAdministrador.Clientes.get(i);
+        for (Cliente cliente : ProxyAdministrador.getClientes()) {
+            if (CPFCliente.equals(cliente.getCPF())) {
+                attCliente = cliente;
                 break;
             }
-
         }
         return attCliente;
     }
@@ -382,12 +363,14 @@ public class ProxyAdministrador {
      */
     public void excluirCliente(String CPF) {
         String CPFCliente = CPF;
-        for (int i = 0; i <= ProxyAdministrador.Clientes.size(); i++) {
-            if (CPFCliente.equals(ProxyAdministrador.Clientes.get(i).getCPF())) {
-                ProxyAdministrador.Clientes.remove(i);
+
+        for (Cliente cliente : ProxyAdministrador.getClientes()) {
+            if (CPFCliente.equals(cliente.getCPF())) {
+                ProxyAdministrador.getClientes().remove(cliente);
                 break;
             }
         }
+        System.out.println("Alteração realizada com sucesso!");
     }
 
     //FUNÇÃO DE MODIFICAÇÃO DE DADOS DE UM CLIENTE
@@ -405,8 +388,8 @@ public class ProxyAdministrador {
         do {
             if (consultaCliente(CPFCli) != null) {
                 Cliente modCliente = consultaCliente(CPFCli);
-                System.out.println("DADOS CLIENTE\n--------------------------------\n");
-                System.out.println(modCliente + "\n------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.println("DADOS CLIENTE");
+                System.out.println(modCliente + "______________________________");
                 System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome 
@@ -422,18 +405,16 @@ public class ProxyAdministrador {
 
                 switch (i) {
                     case 1 -> {
-                        System.out.printf("Digite o novo nome: ");
+                        System.out.printf("Novo nome: ");
                         String dado = inputDado.nextLine();
-
                         modCliente.setNomePessoa(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         break;
                     }
 
                     case 2 -> {
-                        System.out.printf("Digite o novo sobrenome: ");
+                        System.out.printf("Novo sobrenome: ");
                         String dado = inputDado.nextLine();
-
                         modCliente.setSobrenomePessoa(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         break;
@@ -442,29 +423,24 @@ public class ProxyAdministrador {
                     case 3 -> {
                         String dado;
                         do {
-                            System.out.printf("Digite o novo CPF: ");
-
-                            System.out.printf("CPF: ");
+                            System.out.printf("Novo CPF: ");
                             dado = inputDado.nextLine();
                         } while (ProxyAdministrador.ValidaCPF(dado) == false);
-
                         modCliente.setCPF(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         CPFCli = dado;
                         break;
                     }
                     case 4 -> {
-                        System.out.printf("Digite o novo endereço: ");
+                        System.out.printf("Novo endereço: ");
                         String dado = inputDado.nextLine();
-
                         modCliente.setEnderecoCliente(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         break;
                     }
                     case 5 -> {
-                        System.out.printf("Digite o novo telefone: ");
+                        System.out.printf("Novo telefone: ");
                         String dado = inputDado.nextLine();
-
                         modCliente.setTelefoneCliente(dado);
                         System.out.printf("Alteração realizada com sucesso!");
                         break;
@@ -489,12 +465,12 @@ public class ProxyAdministrador {
     //Acessar informações cliente 
     //ACESSO A TODOS OS CLIENTES DE UMA VEZ SÓ
     public void printClientes() {
-        for (int i = 0; i < ProxyAdministrador.Clientes.size(); i++) {
-            if (ProxyAdministrador.Clientes.get(i) != null) {
-                System.out.println(ProxyAdministrador.Clientes.get(i));
-                System.out.println("\n");
+        for (Cliente cliente : ProxyAdministrador.getClientes()) {
+            if (cliente != null) {
+                System.out.println(cliente);
             }
         }
+
     }
 
     //ACESSO A UM ÚNICO CLIENTE
@@ -551,21 +527,20 @@ public class ProxyAdministrador {
 
     //Cadastro produto 
     public void cadastroProduto() {
-        String nomeProduto;
+        String nomeProduto, descricaoProduto;
         float valorProduto;
-        String descricaoProduto;
         int idProduto;
 
         Scanner input = new Scanner(System.in);
 
         //INPUT DE DADOS
-        System.out.printf("Digite o nome do produto: ");
+        System.out.printf("Nome: ");
         nomeProduto = input.nextLine();
 
-        System.out.printf("Digite a descrição do produto: ");
+        System.out.printf("Descrição: ");
         descricaoProduto = input.nextLine();
 
-        System.out.printf("Digite o valor do produto: ");
+        System.out.printf("Valor: ");
         valorProduto = input.nextFloat();
 
         idProduto = ProxyAdministrador.getNumProdutos();
@@ -578,18 +553,24 @@ public class ProxyAdministrador {
 
     //FUNÇÃO DE EXCLUSÃO DE PRODUTO
     public void excluirProduto() {
-        System.out.println("\nPRODUTOS CADASTRADOS\n-----------------------------");
-        for (int i = 0; i < ProxyAdministrador.listaProdutos.size(); i++) {
-            System.out.println("Id: " + ProxyAdministrador.listaProdutos.get(i).getIdProduto()
-                    + "\t|\t Nome: " + ProxyAdministrador.listaProdutos.get(i).getNomeProduto());
+        System.out.println("PRODUTOS CADASTRADOS\n___________________________");
+        
+        for(Produto produto : ProxyAdministrador.listaProdutos){
+            System.out.println("[" + produto.getIdProduto() + "]   " + produto.getNomeProduto());
         }
-        System.out.printf("\nDigite o ID do produto que deseja remover: ");
+        
+        System.out.println("""
+                           _________________________________________________
+                           Exclusão de produtos
+                           """);
+        System.out.printf("Id do Produto: ");
         Scanner input = new Scanner(System.in);
         int idProduto = input.nextInt();
 
-        for (int i = 0; i < ProxyAdministrador.listaProdutos.size(); i++) {
-            if (ProxyAdministrador.listaProdutos.get(i).getIdProduto() == idProduto) {
-                ProxyAdministrador.listaProdutos.remove(i);
+        for (Produto produto : ProxyAdministrador.getListaProdutos()) {
+            if (idProduto == produto.getIdProduto()) {
+                ProxyAdministrador.listaProdutos.remove(produto);
+                break;
             }
         }
         System.out.println("Produto removido com sucesso.");
@@ -605,12 +586,13 @@ public class ProxyAdministrador {
         Produto attProduto = new Produto();
         attProduto = null;
 
-        for (int i = 0; i < ProxyAdministrador.listaProdutos.size(); i++) {
-            if (ProxyAdministrador.listaProdutos.get(i).getIdProduto() == idProduto) {
-                attProduto = ProxyAdministrador.listaProdutos.get(i);
+        for (Produto produto : ProxyAdministrador.listaProdutos) {
+            if (idProduto == produto.getIdProduto()) {
+                attProduto = produto;
                 break;
             }
         }
+
         return attProduto;
     }
 
@@ -626,8 +608,8 @@ public class ProxyAdministrador {
         do {
             if (consultaProduto(idProduto) != null) {
                 Produto modProduto = consultaProduto(idProduto);
-                System.out.println("DADOS DO PEDIDO\n------------------------\n");
-                System.out.println(modProduto + "\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+                System.out.println("DADOS DO PEDIDO");
+                System.out.println(modProduto + "_____________________________________");
                 System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome 
@@ -641,7 +623,7 @@ public class ProxyAdministrador {
 
                 switch (i) {
                     case 1 -> {
-                        System.out.printf("Digite o novo nome: ");
+                        System.out.printf("Novo nome: ");
                         String dado = inputDado.nextLine();
 
                         modProduto.setNomeProduto(dado);
@@ -650,7 +632,7 @@ public class ProxyAdministrador {
                     }
 
                     case 2 -> {
-                        System.out.printf("Digite a nova descrição: ");
+                        System.out.printf("Nova descrição: ");
                         String dado = inputDado.nextLine();
 
                         modProduto.setDescricaoProduto(dado);
@@ -659,7 +641,7 @@ public class ProxyAdministrador {
                     }
 
                     case 3 -> {
-                        System.out.printf("Digite o novo CPF: ");
+                        System.out.printf("Novo CPF: ");
                         float dado = inputDado.nextFloat();
 
                         modProduto.setValorProduto(dado);
@@ -684,7 +666,7 @@ public class ProxyAdministrador {
     }
 
     public void consultaListaProdutos() {
-        System.out.println("\nPRODUTOS CADASTRADOS\n-----------------------------");
+        System.out.println("PRODUTOS CADASTRADOS\n___________________________");
         for (int i = 0; i < ProxyAdministrador.listaProdutos.size(); i++) {
             System.out.println("Id: " + ProxyAdministrador.listaProdutos.get(i).getIdProduto()
                     + "\t|\t Nome: " + ProxyAdministrador.listaProdutos.get(i).getNomeProduto());
@@ -693,13 +675,12 @@ public class ProxyAdministrador {
 
     //Acessar produto 
     public void printProduto() {
-        System.out.println("\nPRODUTOS CADASTRADOS\n-----------------------------");
-        for (int i = 0; i < ProxyAdministrador.listaProdutos.size(); i++) {
-            System.out.println("Id: " + ProxyAdministrador.listaProdutos.get(i).getIdProduto()
-                    + "\t|\t Nome: " + ProxyAdministrador.listaProdutos.get(i).getNomeProduto());
+        System.out.println("PRODUTOS CADASTRADOS\n___________________________");
+        for(Produto produto : ProxyAdministrador.listaProdutos){
+            System.out.println("[" + produto.getIdProduto() + "]   " + produto.getNomeProduto());
         }
-
-        System.out.printf("\nDigite o ID do produto que deseja verificar: ");
+        System.out.println("CONSULTA\n_______________________");
+        System.out.printf("Id do Produto: ");
         Scanner input = new Scanner(System.in);
         int idProduto = input.nextInt();
 
@@ -727,7 +708,7 @@ public class ProxyAdministrador {
 
         boolean menuAnterior = false;
         do {
-            System.out.println("---------------------------------------------------------------\n" + Adm + "\n---------------------------------------------------------------\n");
+            System.out.println(Adm + "\n____________________________________________");
             Scanner input = new Scanner(System.in);
             System.out.println("""
                            Escolha uma opção:
@@ -740,9 +721,9 @@ public class ProxyAdministrador {
             int i = input.nextInt();
             switch (i) {
                 case 1 -> {
-                    System.out.printf("Digite o novo login: ");
+                    System.out.printf("Novo login: ");
                     String novoLogin = input.nextLine();
-                    System.out.println("Confirme o login: ");
+                    System.out.printf("Confirme o login: ");
                     String confirLogin = input.nextLine();
 
                     if (novoLogin.equals(confirLogin)) {
@@ -755,11 +736,11 @@ public class ProxyAdministrador {
                 }
                 case 2 -> {
                     input = new Scanner(System.in);
-                    System.out.println("Digite a sua senha anterior: ");
+                    System.out.printf("Senha anterior: ");
                     String senhaAnt = input.nextLine();
-                    System.out.println("Digite a nova senha: ");
+                    System.out.printf("Nova senha: ");
                     String novaSenha = input.nextLine();
-                    System.out.println("Confirme a nova senha: ");
+                    System.out.printf("Nova senha: ");
                     String confirmSenha = input.nextLine();
 
                     if (Adm.getSenhaUsuario().equals(senhaAnt)) {
@@ -781,7 +762,7 @@ public class ProxyAdministrador {
 
                     String novoCPF;
                     do {
-                        System.out.println("Digite o novo CPF: ");
+                        System.out.println("Novo CPF: ");
                         novoCPF = input.nextLine();
                     } while (ProxyAdministrador.ValidaCPF(novoCPF) == false);
                     Adm.setCPF(novoCPF);
@@ -790,11 +771,11 @@ public class ProxyAdministrador {
                 }
 
                 case 4 -> {
-                    System.out.printf("Digite o novo nome: ");
+                    System.out.printf("Novo nome: ");
                     String novoNome = input.nextLine();
                     Adm.setNomePessoa(novoNome);
 
-                    System.out.printf("Digite o novo sobrenome: ");
+                    System.out.printf("Novo sobrenome: ");
                     String novoSobrenome = input.nextLine();
                     Adm.setSobrenomePessoa(novoSobrenome);
 
@@ -836,8 +817,9 @@ public class ProxyAdministrador {
                 || cpf.equals("66666666666")
                 || cpf.equals("77777777777")
                 || cpf.equals("88888888888")
-                || cpf.equals("99999999999") || (cpf.length() != 11)) {
-            System.out.println("\nCPF inválido. Digite novamente.\n");
+                || cpf.equals("99999999999")
+                || (cpf.length() != 11)) {
+            System.out.println("CPF inválido. Digite novamente.");
             return false;
         }
 
@@ -894,7 +876,7 @@ public class ProxyAdministrador {
                     && (digito11 == cpf.charAt(10))) {
                 return (true);
             } else {
-                System.out.println("\nCPF inválido. Digite novamente.\n");
+                System.out.println("CPF inválido. Digite novamente.");
                 return (false);
             }
         } catch (Exception e) {
@@ -907,6 +889,5 @@ public class ProxyAdministrador {
     public String toString() {
         return "ProxyAdministrador";
     }
-    
-    
+
 }

@@ -1,4 +1,3 @@
-
 import br.com.lanchonete.pessoas.*;
 import java.util.Scanner;
 import java.io.IOException;
@@ -90,11 +89,13 @@ public class SistemaLanchonete {
         int i;
         boolean sairSistema = false;
         do {
-            System.out.println("""
+            System.out.printf("""
                            
-                           Escolha uma opções do menu: 
+                           Escolha uma opção:
+                           _________________________________________
                            1 -  Login          
-                           2 -  Encerrar
+                           2 -  Sair
+                           _________________________________________
                                """);
             i = inputSistema.nextInt();
             switch (i) {
@@ -118,7 +119,7 @@ public class SistemaLanchonete {
                     break;
                 }
                 default -> {
-                    System.out.println("Opção inválida, reinicie o programa");
+                    System.out.println("Opção inválida. Tente novamente.");
                 }
             }
         } while (sairSistema == false);
