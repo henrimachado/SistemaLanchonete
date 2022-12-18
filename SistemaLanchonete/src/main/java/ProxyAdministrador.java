@@ -422,7 +422,7 @@ public class ProxyAdministrador {
             if (consultaCliente(CPFCli) != null) {
                 Cliente modCliente = consultaCliente(CPFCli);
                 System.out.println("DADOS CLIENTE");
-                System.out.println(modCliente + "______________________________");
+                System.out.println(modCliente + "\n______________________________");
                 System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome
@@ -655,7 +655,7 @@ public class ProxyAdministrador {
             if (consultaProduto(idProduto) != null) {
                 Produto modProduto = consultaProduto(idProduto);
                 System.out.println("DADOS DO PRODUTO");
-                System.out.println(modProduto + "_____________________________________");
+                System.out.println(modProduto + "\n_____________________________________");
                 System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome 

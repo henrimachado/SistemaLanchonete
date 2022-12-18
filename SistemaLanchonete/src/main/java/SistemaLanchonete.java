@@ -21,11 +21,8 @@ public class SistemaLanchonete {
 
         SistemaLanchonete.startSistema();
 
-        //ANTES DE ENVIAR, USAR ISSO DAQUI PRA PODER INICIALIZAR COM NULO PRA DAR BOM
-        /*manipularJson mJson = new manipularJson();
-        mJson.dumpColaborador(ProxyAdministrador.getColaboradores());
-        mJson.dumpCliente(ProxyAdministrador.getClientes());
-        mJson.dumpProdutos(ProxyAdministrador.getListaProdutos());*/
+        
+        
     }
 
     /**

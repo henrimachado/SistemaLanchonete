@@ -385,10 +385,7 @@ public class MenuSistema {
                     menuAdm.printColaboradores();
                 }
                 case 3 -> {
-                    System.out.printf("""
-                                            PRODUTOS CADASTRADOS NO SISTEMA
-                                            _________________________________________
-                                            """);
+                    
                     menuAdm.consultaListaProdutos();
                 }
                 case 4 -> {
@@ -603,11 +600,18 @@ public class MenuSistema {
                     menuAdm.modificarCliente(CPF);
                 }
                 case 3 -> {
-                    //ESTAMOS AQUI
-                    //FAZER TRATAMENTO PARA CASO A CONSULTA RETORNE NULL
+ 
                     System.out.printf("CPF do cliente: ");
                     CPF = input.nextLine();
-                    System.out.println(ProxyAdministrador.consultaCliente(CPF));
+                    if (ProxyAdministrador.consultaCliente(CPF) == null){
+                        System.out.println("Cliente não cadastrado. Tente novamente!");
+                        break;
+                    }
+                    else{
+                        System.out.println(ProxyAdministrador.consultaCliente(CPF));
+                        break;
+                    }
+                    
                 }
                 case 4 -> {
                     do {

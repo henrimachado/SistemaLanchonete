@@ -1,4 +1,3 @@
-
 import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.Pedido;
 import br.com.lanchonete.produtos.Produto;
@@ -48,7 +47,8 @@ public class ProxyColaborador {
             Pedido.setNumPedido(numPedidos);
             novoPedido.setIdPedido();
             
-
+            //CORREÇÃO DE BUG
+            //INSERIR TRATAMENTO DE VERIFICAÇÃO SE O ID DO PRODUTO ESTÁ CADASTRADO
             System.out.print("ID do Produto: ");
             Integer idProduto = input.nextInt();
             novoPedido.setListaProdutos(idProduto);
@@ -64,6 +64,8 @@ public class ProxyColaborador {
                 int i = input.nextInt();
                 switch (i) {
                     case 1 -> {
+                        //CORREÇÃO DE BUG
+                        //INSERIR TRATAMENTO DE VERIFICAÇÃO SE O ID DO PRODUTO ESTÁ CADASTRADO
                         System.out.printf("ID do adicional: ");
                         Integer idAdicional = input.nextInt();
                         novoPedido.setListaProdutos(idAdicional);
@@ -239,7 +241,7 @@ public class ProxyColaborador {
                                         + "\nHORA ESTIMADA DE ENTREGA: " + horaEntregaPrint.format(localHourFormatter)
                                         + "\nVALOR: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getValorTotalPedido()
                                         + "\nSTATUS: " + ProxyAdministrador.getClientes().get(k).getPedidosCliente().get(j).getStatusPedido()
-                                        + "___________________________________");
+                                        + "\n___________________________________");
                             }
                         }
                     }
@@ -625,9 +627,8 @@ public class ProxyColaborador {
                             + "    STATUS: " + listaClientes.get(k).getPedidosCliente().get(j).getStatusPedido()
                             + "    " + listaClientes.get(k).getPedidosCliente().get(j).getValorTotalPedido()
                             + "\n_____________________________________________________________");
+                    qntAceitos++;
                     switch (listaClientes.get(k).getPedidosCliente().get(j).getStatusPedido()) {
-                        case 1 ->
-                            qntAceitos++;
                         case 4 -> {
                             qntEntregues++;
                             receitaTotal += listaClientes.get(k).getPedidosCliente().get(j).getValorTotalPedido();
@@ -642,7 +643,7 @@ public class ProxyColaborador {
         }
 
         System.out.println("Estatísticas de venda para o intervalo de " + dataMin.format(localDateFormatter) + " à " + dataMax.format(localDateFormatter));
-        System.out.println("Qnt. Pedidos Aceitos [1]: " + qntAceitos + "      Qnt. Pedidos Cancelados [5]: " + qntCancelados + "      Qnt. Pedidos Entregues[4]: " + qntEntregues + "      Receita total arrecadada: " + receitaTotal
+        System.out.println("Qnt. Pedidos Aceitos: " + qntAceitos + "      Qnt. Pedidos Cancelados [5]: " + qntCancelados + "      Qnt. Pedidos Entregues[4]: " + qntEntregues + "      Receita total arrecadada: " + receitaTotal
                 + "\n_________________________________________________________________");
 
     }
