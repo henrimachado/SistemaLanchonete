@@ -110,9 +110,11 @@ public class ProxyAdministrador {
         Colaborador attColaborador = null;
 
         for (Colaborador colab : ProxyAdministrador.getColaboradores()) {
-            if (CPFColaborador.equals(colab.getCPF())) {
-                attColaborador = colab;
-                break;
+            if (colab != null) {
+                if (CPFColaborador.equals(colab.getCPF())) {
+                    attColaborador = colab;
+                    break;
+                }
             }
 
         }
@@ -283,7 +285,7 @@ public class ProxyAdministrador {
      *
      * @return Quantidade de clientes cadastrados no sistema
      */
-     //Questão 10a - Uma delas usando o enfoque em encapsulamento
+    //Questão 10a - Uma delas usando o enfoque em encapsulamento
     //Questão 11 - Criar um método de classe que deve retornar quantas instâncias foram criadas do tipo cliente
     public static int getQntClientesPrivate() {
         return qntClientesPrivate;
@@ -292,7 +294,7 @@ public class ProxyAdministrador {
     /**
      * Incremento da quantidade de clientes cadastrados no sistema
      */
-     //Questão 10a - Uma delas usando o enfoque em encapsulamento
+    //Questão 10a - Uma delas usando o enfoque em encapsulamento
     public static void setQntClientesPrivate() {
         int qnt = 0;
         for (Cliente cl : ProxyAdministrador.getClientes()) {
@@ -784,6 +786,7 @@ public class ProxyAdministrador {
             int i = input.nextInt();
             switch (i) {
                 case 1 -> {
+                    input = new Scanner(System.in);
                     System.out.printf("Novo login: ");
                     String novoLogin = input.nextLine();
                     System.out.printf("Confirme o login: ");
@@ -803,7 +806,7 @@ public class ProxyAdministrador {
                     String senhaAnt = input.nextLine();
                     System.out.printf("Nova senha: ");
                     String novaSenha = input.nextLine();
-                    System.out.printf("Nova senha: ");
+                    System.out.printf("Confirmar nova senha: ");
                     String confirmSenha = input.nextLine();
 
                     if (Adm.getSenhaUsuario().equals(senhaAnt)) {
@@ -824,6 +827,7 @@ public class ProxyAdministrador {
                 case 3 -> {
 
                     String novoCPF;
+                    input = new Scanner(System.in);
                     do {
                         System.out.printf("Novo CPF: ");
                         novoCPF = input.nextLine();
