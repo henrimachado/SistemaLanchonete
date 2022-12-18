@@ -141,10 +141,9 @@ public class ProxyAdministrador {
                 System.out.println("""
                                Escolha uma opção: 
                                1 - Alterar Nome 
-                               2 - Alterar Sobrenome 
-                               3 - Alterar CPF
-                               4 - Alterar login
-                               5 - Fechar
+                               2 - Alterar CPF
+                               3 - Alterar login
+                               4 - Fechar
                                 """);
 
                 int i = inputSwitch.nextInt();
@@ -152,22 +151,19 @@ public class ProxyAdministrador {
 
                 switch (i) {
                     case 1 -> {
+                        inputDado = new Scanner (System.in);
                         System.out.printf("Novo nome: ");
                         String dado = inputDado.nextLine();
                         modColab.setNomePessoa(dado);
-                        System.out.println("Alteração realizada com sucesso!");
-                        break;
-                    }
-
-                    case 2 -> {
+                        
                         System.out.printf("Novo sobrenome: ");
-                        String dado = inputDado.nextLine();
+                        dado = inputDado.nextLine();
                         modColab.setSobrenomePessoa(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         break;
                     }
 
-                    case 3 -> {
+                    case 2 -> {
                         String dado;
                         do {
                             System.out.printf("Novo CPF: ");
@@ -182,7 +178,7 @@ public class ProxyAdministrador {
                         break;
                     }
 
-                    case 4 -> {
+                    case 3 -> {
                         String novoLogin;
                         String confirmLogin;
                         do {
@@ -202,7 +198,7 @@ public class ProxyAdministrador {
 
                     }
 
-                    case 5 -> {
+                    case 4 -> {
                         menuAnterior = true;
                         break;
                     }
@@ -429,12 +425,11 @@ public class ProxyAdministrador {
                 System.out.println(modCliente + "______________________________");
                 System.out.println("""
                                Escolha uma opção: 
-                               1 - Alterar Nome 
-                               2 - Alterar Sobrenome 
-                               3 - Alterar CPF
-                               4 - Alterar Endereço
-                               5 - Alterar Telefone
-                               6 - Fechar
+                               1 - Alterar Nome
+                               2 - Alterar CPF
+                               3 - Alterar Endereço
+                               4 - Alterar Telefone
+                               5 - Fechar
                                 """);
 
                 int i = inputSwitch.nextInt();
@@ -442,22 +437,19 @@ public class ProxyAdministrador {
 
                 switch (i) {
                     case 1 -> {
+                        inputDado = new Scanner (System.in);
                         System.out.printf("Novo nome: ");
                         String dado = inputDado.nextLine();
                         modCliente.setNomePessoa(dado);
-                        System.out.println("Alteração realizada com sucesso!");
-                        break;
-                    }
-
-                    case 2 -> {
+                        
                         System.out.printf("Novo sobrenome: ");
-                        String dado = inputDado.nextLine();
+                        dado = inputDado.nextLine();
                         modCliente.setSobrenomePessoa(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         break;
                     }
 
-                    case 3 -> {
+                    case 2 -> {
                         String dado;
                         do {
                             System.out.printf("Novo CPF: ");
@@ -471,14 +463,14 @@ public class ProxyAdministrador {
                         CPFCli = dado;
                         break;
                     }
-                    case 4 -> {
+                    case 3 -> {
                         System.out.printf("Novo endereço: ");
                         String dado = inputDado.nextLine();
                         modCliente.setEnderecoCliente(dado);
                         System.out.println("Alteração realizada com sucesso!");
                         break;
                     }
-                    case 5 -> {
+                    case 4 -> {
                         System.out.printf("Novo telefone: ");
                         String dado = inputDado.nextLine();
                         modCliente.setTelefoneCliente(dado);
@@ -486,7 +478,7 @@ public class ProxyAdministrador {
                         break;
                     }
 
-                    case 6 -> {
+                    case 5 -> {
                         menuAnterior = true;
                         break;
                     }
@@ -662,7 +654,7 @@ public class ProxyAdministrador {
         do {
             if (consultaProduto(idProduto) != null) {
                 Produto modProduto = consultaProduto(idProduto);
-                System.out.println("DADOS DO PEDIDO");
+                System.out.println("DADOS DO PRODUTO");
                 System.out.println(modProduto + "_____________________________________");
                 System.out.println("""
                                Escolha uma opção: 
@@ -714,6 +706,7 @@ public class ProxyAdministrador {
                 }
             } else {
                 System.out.println("Identificador de produto inválido!");
+                break;
             }
         } while (menuAnterior == false);
 

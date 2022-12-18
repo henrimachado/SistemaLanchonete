@@ -289,7 +289,8 @@ public class MenuSistema {
                            2 - Editar       
                            3 - Consultar       
                            4 - Remover          
-                           5 - Voltar
+                           5 - Listar produtos cadastrados
+                           6 - Voltar
                            _________________________________________
                                     """);
 
@@ -307,7 +308,7 @@ public class MenuSistema {
                     break;
                 }
                 case 3 -> {
-                    System.out.printf("Digite o ID do produto que deseja alterar: ");
+                    System.out.printf("Digite o ID do produto que deseja consultar: ");
                     idProduto = input.nextInt();
                     System.out.println(ProxyAdministrador.consultaProduto(idProduto));
                     break;
@@ -317,6 +318,10 @@ public class MenuSistema {
                     break;
                 }
                 case 5 -> {
+                    menuAdm.consultaListaProdutos();
+                    break;
+                }
+                case 6 -> {
                     menuAnterior = true;
                     break;
                 }
@@ -500,15 +505,23 @@ public class MenuSistema {
                 case 2 -> {
                     System.out.println("CPF: ");
                     CPF = input.nextLine();
-                    System.out.println("Lista de pedidos do Cliente: ");
-                    for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
-                        System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
+
+                    if (ProxyAdministrador.consultaCliente(CPF) != null) {
+                        System.out.println("Lista de pedidos do Cliente: ");
+                        for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
+                            System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
+                        }
+
+                        System.out.println("ID do Pedido: ");
+                        idPedido = input.nextInt();
+                        menuColab.modificarPedido(idPedido, ProxyAdministrador.consultaCliente(CPF));
+                        break;
+                    }
+                    else{
+                        System.out.println("Cliente não cadastrado. Tente novamente!");
+                        break;
                     }
 
-                    System.out.println("ID do Pedido: ");
-                    idPedido = input.nextInt();
-                    menuColab.modificarPedido(idPedido, ProxyAdministrador.consultaCliente(CPF));
-                    break;
                 }
                 case 3 -> {
                     System.out.println("CPF do Cliente: ");

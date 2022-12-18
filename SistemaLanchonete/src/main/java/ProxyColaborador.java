@@ -430,7 +430,7 @@ public class ProxyColaborador {
                         System.out.println("""
                                Insira o código do novo status do pedido:  
                                1 - Aceito 
-                               2 - Em andamento
+                               2 - Em preparo
                                3 - Saiu para entrega
                                4 - Entregue 
                                5 - Cancelado
