@@ -1,6 +1,7 @@
 
 import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.Produto;
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -151,11 +152,11 @@ public class ProxyAdministrador {
 
                 switch (i) {
                     case 1 -> {
-                        inputDado = new Scanner (System.in);
+                        inputDado = new Scanner(System.in);
                         System.out.printf("Novo nome: ");
                         String dado = inputDado.nextLine();
                         modColab.setNomePessoa(dado);
-                        
+
                         System.out.printf("Novo sobrenome: ");
                         dado = inputDado.nextLine();
                         modColab.setSobrenomePessoa(dado);
@@ -437,11 +438,11 @@ public class ProxyAdministrador {
 
                 switch (i) {
                     case 1 -> {
-                        inputDado = new Scanner (System.in);
+                        inputDado = new Scanner(System.in);
                         System.out.printf("Novo nome: ");
                         String dado = inputDado.nextLine();
                         modCliente.setNomePessoa(dado);
-                        
+
                         System.out.printf("Novo sobrenome: ");
                         dado = inputDado.nextLine();
                         modCliente.setSobrenomePessoa(dado);
@@ -539,10 +540,13 @@ public class ProxyAdministrador {
     /**
      * Incremento da quantidade de produtos cadastrados no sistema
      *
-     * @param numProdutos Define a quantidade de produtos cadastrados no sistema
      */
-    public static void setNumProdutos(int numProdutos) {
-        ProxyAdministrador.numProdutos = numProdutos + 1;
+    public static void setNumProdutos() {
+        for (Produto Pr : getListaProdutos()) {
+            if (Pr != null) {
+                numProdutos++;
+            }
+        }
     }
 
     /**
@@ -567,9 +571,9 @@ public class ProxyAdministrador {
      */
     public void cadastroProduto() {
         String nomeProduto, descricaoProduto;
-        float valorProduto;
+        float valorProduto = 0;
         int idProduto;
-
+        boolean valorValido = false;
         Scanner input = new Scanner(System.in);
 
         //INPUT DE DADOS
@@ -579,14 +583,24 @@ public class ProxyAdministrador {
         System.out.printf("Descrição: ");
         descricaoProduto = input.nextLine();
 
-        System.out.printf("Valor: ");
-        valorProduto = input.nextFloat();
+        do {
+            try {
+                System.out.printf("Valor (Ex.: 13,3): ");
+                valorProduto = input.nextFloat();
+                valorValido = true;
+            } catch (Exception e) {
+                System.out.println("Entrada inválida. Tente novamente!\n");
+                input = new Scanner(System.in);
+                valorProduto = 0;
+                valorValido = false;
+            }
 
+        } while (valorValido == false);
+        ProxyAdministrador.setNumProdutos();
         idProduto = ProxyAdministrador.getNumProdutos();
 
         Produto Pr = new Produto(nomeProduto, valorProduto, idProduto, descricaoProduto);
         ProxyAdministrador.getListaProdutos().add(Pr);
-        ProxyAdministrador.setNumProdutos(numProdutos);
 
     }
 

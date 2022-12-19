@@ -1,3 +1,4 @@
+
 import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.Pedido;
 import br.com.lanchonete.produtos.Produto;
@@ -37,21 +38,64 @@ public class ProxyColaborador {
         if (Cl != null) {
 
             Pedido novoPedido = new Pedido();
-            
-            for (Cliente cliente : ProxyAdministrador.getClientes()){
-                for (Pedido pe : Cl.getPedidosCliente()){
-                    numPedidos = numPedidos +1;
+
+            for (Cliente cliente : ProxyAdministrador.getClientes()) {
+                for (Pedido pe : cliente.getPedidosCliente()) {
+                    numPedidos = numPedidos + 1;
                 }
-                
+
             }
             Pedido.setNumPedido(numPedidos);
             novoPedido.setIdPedido();
-            
-            //CORREÇÃO DE BUG
-            //INSERIR TRATAMENTO DE VERIFICAÇÃO SE O ID DO PRODUTO ESTÁ CADASTRADO
-            System.out.print("ID do Produto: ");
-            Integer idProduto = input.nextInt();
-            novoPedido.setListaProdutos(idProduto);
+
+
+            boolean produtoCadastrado = false;
+
+            do {
+                int switchCadastro;
+                System.out.println("""
+                                   Escolha uma opção:
+                                   1 - Inserir item
+                                   2 - Listar produtos cadastrados
+                                   """);
+                switchCadastro = input.nextInt();
+
+                switch (switchCadastro) {
+                    case 1 -> {
+                        System.out.printf("ID do Produto: ");
+                        Integer idProduto = input.nextInt();
+
+                        for (Produto Pr : ProxyAdministrador.getListaProdutos()) {
+                            if (Pr != null) {
+                                if (Pr.getIdProduto() == idProduto) {
+                                    novoPedido.setListaProdutos(idProduto);
+                                    produtoCadastrado = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (produtoCadastrado == false) {
+                            System.out.println("Produto não encontrado. Tente novamente!");
+                        }
+                        break;
+                    }
+                    case 2 -> {
+                        for (Produto Pr : ProxyAdministrador.getListaProdutos()) {
+                            if (Pr != null) {
+                                System.out.println("[" + Pr.getIdProduto() + "]" + "     " + Pr.getNomeProduto());
+                            }
+                        }
+                        System.out.println("\n");
+                        produtoCadastrado = false;
+                        break;
+                    }
+                    default -> {
+                        System.out.println("Opção inválida. Tente novamente.");
+                        produtoCadastrado = false;
+                    }
+                }
+
+            } while (produtoCadastrado == false);
 
             boolean finalizarPedido = false;
             do {
@@ -64,11 +108,56 @@ public class ProxyColaborador {
                 int i = input.nextInt();
                 switch (i) {
                     case 1 -> {
-                        //CORREÇÃO DE BUG
-                        //INSERIR TRATAMENTO DE VERIFICAÇÃO SE O ID DO PRODUTO ESTÁ CADASTRADO
-                        System.out.printf("ID do adicional: ");
-                        Integer idAdicional = input.nextInt();
-                        novoPedido.setListaProdutos(idAdicional);
+
+                        boolean prCadastrado = false;
+
+                        do {
+                            int switchCadastro;
+                            System.out.println("""
+                                   Escolha uma opção:
+                                   1 - Inserir item
+                                   2 - Listar produtos cadastrados
+                                   """);
+                            switchCadastro = input.nextInt();
+
+                            switch (switchCadastro) {
+                                case 1 -> {
+                                    
+                                    System.out.printf("ID do Produto: ");
+                                    Integer idAdicional = input.nextInt();
+
+                                    for (Produto Pr : ProxyAdministrador.getListaProdutos()) {
+                                        if (Pr != null) {
+                                            if (Pr.getIdProduto() == idAdicional) {
+                                                novoPedido.setListaProdutos(idAdicional);
+                                                prCadastrado = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (prCadastrado == false) {
+                                        System.out.println("Produto não encontrado. Tente novamente!");
+                                    }
+                                    break;
+                                }
+                                case 2 -> {
+                                    for (Produto Pr : ProxyAdministrador.getListaProdutos()) {
+                                        if (Pr != null) {
+                                            System.out.println("[" + Pr.getIdProduto() + "]" + "     " + Pr.getNomeProduto());
+                                        }
+                                    }
+                                    System.out.println("\n");
+                                    prCadastrado = false;
+                                    break;
+                                }
+                                default -> {
+                                    System.out.println("Opção inválida. Tente novamente.");
+                                    prCadastrado = false;
+                                }
+                            }
+
+                        } while (prCadastrado == false);
+
                         break;
                     }
 
@@ -99,6 +188,9 @@ public class ProxyColaborador {
             novoPedido.setValorTotalPedido(valorTotal);
             novoPedido.setStatusPedido(1);
             Cl.setPedidosCliente(novoPedido);
+        }
+        else{
+            System.out.println("CPF inválido ou cliente não cadastrado. Tente novamente!");
         }
 
     }

@@ -79,7 +79,7 @@ public class Produto {
      *
      * @param idProduto Define um valor para o identificador do produto
      */
-    public void setIdProduto(int idProduto) {
+    public void setIdProduto(int idProduto) {    
         this.idProduto = idProduto;
     }
 
