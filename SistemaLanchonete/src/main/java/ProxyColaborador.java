@@ -189,6 +189,8 @@ public class ProxyColaborador {
             novoPedido.setStatusPedido(1);
             Cl.setPedidosCliente(novoPedido);
             
+            System.out.println("EXTRATO:\n__________________________\n" +
+                    Cl.getCPF() + "     " + Cl.getNomePessoa().toUpperCase() + " " + Cl.getSobrenomePessoa().toUpperCase() + "\n" + novoPedido);
             
         }
         else{
