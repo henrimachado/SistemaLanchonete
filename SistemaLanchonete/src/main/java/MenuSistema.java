@@ -1,8 +1,9 @@
 
 import br.com.lanchonete.pessoas.*;
 import br.com.lanchonete.produtos.*;
-
 import java.io.IOException;
+import java.time.*;
+import java.time.format.*;
 import java.util.Scanner;
 import java.util.Collections;
 
@@ -385,7 +386,7 @@ public class MenuSistema {
                     menuAdm.printColaboradores();
                 }
                 case 3 -> {
-                    
+
                     menuAdm.consultaListaProdutos();
                 }
                 case 4 -> {
@@ -513,8 +514,7 @@ public class MenuSistema {
                         idPedido = input.nextInt();
                         menuColab.modificarPedido(idPedido, ProxyAdministrador.consultaCliente(CPF));
                         break;
-                    }
-                    else{
+                    } else {
                         System.out.println("Cliente não cadastrado. Tente novamente!");
                         break;
                     }
@@ -523,15 +523,38 @@ public class MenuSistema {
                 case 3 -> {
                     System.out.println("CPF do Cliente: ");
                     CPF = input.nextLine();
-                    System.out.println("Lista de pedidos do Cliente: ");
-                    for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
-                        System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
+
+                    if (ProxyAdministrador.consultaCliente(CPF) != null) {
+                        if (ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size() >= 1) {
+                            System.out.println("Lista de pedidos do Cliente: ");
+                            DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+                            DateTimeFormatter localHourFormatter = DateTimeFormatter.ofPattern("HH:mm");
+                            for (Pedido Pe : ProxyAdministrador.consultaCliente(CPF).getPedidosCliente()) {
+                                LocalDate dataPe = LocalDate.parse(Pe.getDataPedido());
+                                LocalTime horaPe = LocalTime.parse(Pe.getHoraPedido());
+                                        System.out.println("[" + Pe.getIdPedido() + "]    FEITO EM " + dataPe.format(localDateFormatter) +" ÀS " + horaPe.format(localHourFormatter) + "     VALOR: R$" + Pe.getValorTotalPedido());
+                            }
+
+                            System.out.println("ID do Pedido: ");
+                            idPedido = input.nextInt();
+                            Pedido consultaPedido = menuColab.consultarPedido(idPedido, ProxyAdministrador.consultaCliente(CPF));
+                            if (consultaPedido != null) {
+                                System.out.println(consultaPedido);
+                                break;
+                            } else {
+                                System.out.println("Pedido não encontrado. Tente novamente.");
+                                break;
+                            }
+                        } else {
+                            System.out.println("Não há pedidos associados a esse cliente.");
+                            break;
+                        }
+
+                    } else {
+                        System.out.println("CPF inválido ou cliente não cadastrado. Tente novamente.");
+                        break;
                     }
 
-                    System.out.println("ID do Pedido: ");
-                    idPedido = input.nextInt();
-                    System.out.println(menuColab.consultarPedido(idPedido, ProxyAdministrador.consultaCliente(CPF)));
-                    break;
                 }
                 case 4 -> {
                     menuColab.excluirPedido();
@@ -600,18 +623,17 @@ public class MenuSistema {
                     menuAdm.modificarCliente(CPF);
                 }
                 case 3 -> {
- 
+
                     System.out.printf("CPF do cliente: ");
                     CPF = input.nextLine();
-                    if (ProxyAdministrador.consultaCliente(CPF) == null){
+                    if (ProxyAdministrador.consultaCliente(CPF) == null) {
                         System.out.println("Cliente não cadastrado. Tente novamente!");
                         break;
-                    }
-                    else{
+                    } else {
                         System.out.println(ProxyAdministrador.consultaCliente(CPF));
                         break;
                     }
-                    
+
                 }
                 case 4 -> {
                     do {
@@ -624,13 +646,25 @@ public class MenuSistema {
                     //Questão 7 - Verificar e imprimir dados dos pedidos dos clientes tal como o status
                     System.out.println("CPF do cliente: ");
                     CPF = input.nextLine();
-                    System.out.println("Lista de pedidos do Cliente: ");
-                    //Questão 12 - Implementar a interface Comparator para as classes Cliente e Pedido
-                    Collections.sort(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente(), new PedidoComparator());
-                    for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
-                        System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
+                    if (ProxyAdministrador.consultaCliente(CPF) != null) {
+                        if (ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size() >= 1) {
+                            //Questão 12 - Implementar a interface Comparator para as classes Cliente e Pedido
+                            System.out.println("Lista de pedidos do Cliente: ");
+                            Collections.sort(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente(), new PedidoComparator());
+                            for (int k = 0; k < ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().size(); k++) {
+                                System.out.println(ProxyAdministrador.consultaCliente(CPF).getPedidosCliente().get(k));
+                            }
+                            break;
+                        } else {
+                            System.out.println("Não há pedidos cadastrados para este cliente.");
+                            break;
+                        }
+
+                    } else {
+                        System.out.println("CPF inválido ou cliente não cadastrado.");
+                        break;
                     }
-                    break;
+
                 }
                 case 6 -> {
                     menuAnterior = true;
