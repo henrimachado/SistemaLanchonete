@@ -1,4 +1,3 @@
-
 import br.com.lanchonete.pessoas.*;
 import java.util.Scanner;
 import java.io.IOException;
@@ -18,9 +17,77 @@ public class SistemaLanchonete {
 
         Locale locale = new Locale("pt", "BR");
         Locale.setDefault(locale);
+        
+        /*
+        TESTES DE FUNÇÕES 
+        As chamadas a seguir representam testes de funções conforme as questões que poderiam ser identificadas
+        pelo uso de funções. Questões como salvamento dinâmico podem ser conferidas usando CTRL+SHIFT+F e buscando
+        pela chave da questão (Ex.: Questão 1), uma vez que dizem mais da estrutura que está associada na declaração
+        das variáveis. 
+        
+        Ainda, tenha em mente que essas funções foram pensadas para serem executadas enquanto um sistema completo
+        e cujos diferentes componentes interagem entre si. Assim, as chamadas individuais das funções podem não apresentar 
+        o mesmo comportamento que aconteceria se estivessem sido chamadas pelo sistema (função startSistema que será a última
+        a ser chamada nessa lista. 
+        
+        QUESTÃO X
+        */
+        
+        System.out.println("""
+                           TESTE DE CHAMADAS INDIVIDUAIS DE FUNÇÕES
+                           Obs.: Chamadas individuais podem levar a comportamentos um pouco diferentes daqueles objetivados 
+                           com o funcionamento do programa como um sistema completo.\n""");
+        
 
+        /*
+        FUNCIONAMENTO DO SISTEMA (FUNÇÃO STARTSISTEMA)
+        Devido à modularização do sistema em classes que agrupam funções semelhantes ou correlatas, 
+        as chamadas de função foram 'ocultadas' nas funções correspondentes que fazem o tratamento. 
+        Dessa forma, o teste do sistema depende da execução do mesmo, no qual será possível executar todas 
+        as funções propostas. 
+        
+        Para tanto, deixamos um administrador e um colaborador já cadastrados que permitem o login no sistema. 
+        Seus dados são: 
+        
+        ADMINISTRADOR:
+            login: admin
+            senha: admin
+        
+        COLABORADOR
+            login: colab1
+            senha: colab1
+        
+        Por sua vez, quanto as identificações das questões, estas estão feitas nas funções que contemplam 
+        as soluções propostas. Assim, podem ser encontradas no código através do comando CTRL+SHIT+F com as chaves de busca:
+        
+        Questão 1
+        Questão 2
+        Questão 3
+        Questão 4
+        Questão 5
+        Questão 6
+        Questão 7
+        Questão 8
+        Questão 9
+        Questão 10a 
+        Questão 10b
+        Questão 11
+        Questão 12 
+        Questão 13
+  
+        Assim, para que o programa seja testado, basta que seja executado. 
+        Esperamos que tenha uma boa experiência!
+        */
+        
+        System.out.println("""
+                           TESTE DE FUNCIONAMENTO DO SISTEMA - FUNÇÃO STARTSISTEMA()
+                           Esse teste se baseia no funcionamento do programa como um sistema completo
+                           cujos elementos interagem entre si para produzir funcinalidades. 
+                           Dessa forma, determinadas funcionalidades podem apresentar comportamentos 
+                           levemente diferentes daqueles observados em chamadas individuais às funções\n
+                           """);
         SistemaLanchonete.startSistema();
-
+        
         
         
     }

@@ -188,6 +188,8 @@ public class ProxyColaborador {
             novoPedido.setValorTotalPedido(valorTotal);
             novoPedido.setStatusPedido(1);
             Cl.setPedidosCliente(novoPedido);
+            
+            
         }
         else{
             System.out.println("CPF inválido ou cliente não cadastrado. Tente novamente!");
