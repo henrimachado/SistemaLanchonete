@@ -20,7 +20,7 @@ public class SistemaLanchonete {
 
         Locale locale = new Locale("pt", "BR");
         Locale.setDefault(locale);
-            SistemaLanchonete.startSistema();
+
 
         /*
         TESTES DE FUNÇÕES 
@@ -59,7 +59,6 @@ public class SistemaLanchonete {
 
         ProxyAdministrador menuAdm = new ProxyAdministrador();
         ProxyColaborador menuColab = new ProxyColaborador();
-        MenuSistema menuSistema = new MenuSistema();
 
         Usuario usuarioAtual = new Usuario();
 
